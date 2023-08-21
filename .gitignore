@@ -1,0 +1,5 @@
+*.o
+minishell
+libraries
+objs
+.make_output.txt

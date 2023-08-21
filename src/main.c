@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 15:55:14 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/21 16:33:54 by cwenz            ###   ########.fr       */
+/*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
+/*   Updated: 2023/08/21 16:29:28 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "minitalk.h"
 
-# include "../libraries/c-library/c_library.h"
-
-#endif /* MINITALK_H */
+int main(void)
+{
+	ft_printf("Hello World!");
+	return (0);
+}

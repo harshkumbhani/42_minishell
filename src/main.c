@@ -6,11 +6,11 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/21 16:29:28 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/08/22 13:22:59 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minishell.h"
 
 int main(void)
 {

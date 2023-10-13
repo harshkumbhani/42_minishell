@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:14 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/21 16:33:54 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/13 15:05:09 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "../libraries/c-library/c_library.h"
 
-#endif /* MINITALK_H */
+#endif /* MINISHELL_H */

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:14 by cwenz             #+#    #+#             */
-/*   Updated: 2023/08/21 16:33:54 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/15 13:30:54 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
+/* -------------------------------- Includes -------------------------------- */
 # include "../libraries/c-library/c_library.h"
+# include <signal.h>
+# include <stdio.h>
 
-#endif /* MINITALK_H */
+/* --------------------------------- Signals -------------------------------- */
+
+void    setup_signals();
+
+#endif /* MINISHELL_H */

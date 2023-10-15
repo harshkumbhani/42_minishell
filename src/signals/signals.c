@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/15 13:31:35 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/15 15:09:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void    setup_signals()
 	sigemptyset(&sa_quit.sa_mask); // Don't block any signals during this signals handling, probably have to change
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
-
 
 /**
  * @brief 

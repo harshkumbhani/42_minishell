@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/15 17:07:31 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 08:24:08 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ int main(void)
 		printf("%s> ", path);
 		if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
 			break;
-		}
-		size_t len = ft_strlen(buffer);
-		if (len > 0 && buffer[len - 1] == '\n') {
-			buffer[len - 1] = '\0';
 		}
 		if (ft_strncmp(buffer, "cd ", 3) == SUCCESS)
 			cd(buffer + 3);

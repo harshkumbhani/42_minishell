@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:37:59 by cwenz            ###   ########.fr       */
+/*   Created: 2023/10/15 16:35:53 by cwenz             #+#    #+#             */
+/*   Updated: 2023/10/16 12:38:09 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+int	cd(char *path)
 {
-	setup_signals();
-	// Mock shell to check if signal functions actually get called
-	pwd();
-	while (1)
+	int	len;
+	
+	if (!path)
+		return (1);
+	len = ft_strlen(path);
+	if (len > 0 && path[len - 1] == '\n')
+		path[len - 1] = '\0';
+	if (chdir(path) != SUCCESS)
 	{
-		char buffer[256];
-		char path[256];
-
-		getcwd(path, sizeof(path));
-
-		printf("%s> ", path);
-		if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
-			break;
-		}
-		if (ft_strncmp(buffer, "cd ", 3) == SUCCESS)
-			cd(buffer + 3);
-		else
-			return (1);
-		// printf("\nRead: %s\n\n", buffer);
+		perror("Chdir() failed!\n");
+		return (1);
 	}
-	return (0);
+	return (SUCCESS);
 }

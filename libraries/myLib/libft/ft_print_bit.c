@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_print_bit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/04/19 07:50:26 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/07/11 10:28:49 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libft.h"
 
-int	pwd()
+void	print_bits(int nb)
 {
-	char cwd[256];
+	int	i;
+	int	res;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	res = 0;
+	i = 7;
+	while (i >= 0)
 	{
-		perror("getcwd() failed!\n");
-		return (1);
+		res = (nb >> i) & 1;
+		res += '0';
+		write(1, &res, 1);
+		--i;
 	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
 }
+
+//int main(void)
+//{
+//	int	nb;
+
+//	nb = 25;
+//	print_bits(nb);
+//	return (0);
+//}

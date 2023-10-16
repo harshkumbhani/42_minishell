@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/03/17 18:10:40 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/04/03 10:54:09 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
-
-int	pwd()
+/// @brief Checks if c is printable character
+/// @param c test character
+/// @return 1 of c is printable else 0
+int	ft_isprint(int c)
 {
-	char cwd[256];
-
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd() failed!\n");
+	if (c >= ' ' && c <= '~')
 		return (1);
-	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
+	return (0);
 }

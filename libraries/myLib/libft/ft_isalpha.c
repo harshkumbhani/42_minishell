@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/03/17 15:26:12 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/04/03 10:53:56 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
-
-int	pwd()
+/// @brief Checks if c is an alphabet
+/// @param c character to be checked
+/// @return 1 if c is an alpahbet else returns 0
+int	ft_isalpha(int c)
 {
-	char cwd[256];
-
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd() failed!\n");
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
-	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
+	return (0);
 }

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/03/21 11:34:50 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/04/03 10:57:41 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
-
-int	pwd()
+/// @brief Capitialises lower case alphabet
+/// @param c the character to capitalise
+/// @return Decimal value of the corresponding uppercase character
+int	ft_toupper(int c)
 {
-	char cwd[256];
-
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd() failed!\n");
-		return (1);
-	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

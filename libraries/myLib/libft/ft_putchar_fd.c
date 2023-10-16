@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/03/29 16:42:57 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/04/02 22:41:14 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libft.h"
 
-int	pwd()
+/// @brief Prints the character c to the given file descriptor  
+/// @param c The character to output
+/// @param fd the file descriptor
+void	ft_putchar_fd(char c, int fd)
 {
-	char cwd[256];
-
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd() failed!\n");
-		return (1);
-	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
+	write (fd, &c, 1);
 }

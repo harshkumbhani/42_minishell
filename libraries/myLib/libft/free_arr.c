@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   free_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/09/14 14:56:38 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/09/14 14:56:49 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libft.h"
 
-int	pwd()
+void	free_arr(char	**arr)
 {
-	char cwd[256];
+	int	i;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	i = 0;
+	if (arr == NULL)
+		return ;
+	while (arr[i] != NULL)
 	{
-		perror("getcwd() failed!\n");
-		return (1);
+		free(arr[i]);
+		i++;
 	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
+	free(arr);
 }

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   library.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/03/30 19:36:18 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/07/19 10:47:37 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#ifndef LIBRARY_H
+# define LIBRARY_H
 
-int	pwd()
-{
-	char cwd[256];
+# include "../gnl/get_next_line.h"
+# include "../printf/ft_printf.h"
+# include "../libft/libft.h"
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd() failed!\n");
-		return (1);
-	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
-}
+#endif

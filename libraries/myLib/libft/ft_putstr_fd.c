@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Created: 2023/03/29 16:58:58 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/04/02 22:42:12 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libft.h"
 
-int	pwd()
+/// @brief Outputs the string s
+/// @param s the string to be output
+/// @param fd File descritor for write function 
+void	ft_putstr_fd(char *s, int fd)
 {
-	char cwd[256];
+	int	slen;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		perror("getcwd() failed!\n");
-		return (1);
-	}
-	printf("%s\n", cwd);
-	return (SUCCESS);
+	slen = ft_strlen(s);
+	write(fd, s, slen);
 }

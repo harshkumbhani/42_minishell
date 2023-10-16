@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 08:24:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 12:37:59 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int main(void)
 	{
 		char buffer[256];
 		char path[256];
+
 		getcwd(path, sizeof(path));
+
 		printf("%s> ", path);
 		if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
 			break;
@@ -29,7 +31,7 @@ int main(void)
 		if (ft_strncmp(buffer, "cd ", 3) == SUCCESS)
 			cd(buffer + 3);
 		else
-			return (ERROR);
+			return (1);
 		// printf("\nRead: %s\n\n", buffer);
 	}
 	return (0);

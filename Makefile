@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/15 17:05:28 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/16 12:40:21 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,24 +25,26 @@ LIBFT_LIB           := $(LIBFT_DIR)/libft.a
 ################################################################################
 
 OBJDIR              := ./objs
-VPATH               := .:./src/:./src/signals/:./src/builtins/
+VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/
 
 SRC                 := main.c
 SRC_SIGNALS         := signals.c
 SRC_BUILTINS		:= cd.c pwd.c
+SRC_EXECUTOR		:= executor.c pipex_bonus.c utils_bonus.c handle_pipe.c handle_error_bonus.c \
+						execute_bonus.c init.c
 
 ################################################################################
 #                                  Makefile  objs                              #
 ################################################################################
 
-SRCS                := $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS)
+SRCS                := $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR)
 OBJS                := $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
 ################################################################################
 #                                 Makefile rules                               #
 ################################################################################
 
-all: init-submodule $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
@@ -51,12 +53,6 @@ $(NAME): $(OBJS)
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ 
-
-init-submodule:
-	@if [ -z "$(shell ls -A $(LIBFT_DIR))" ]; then \
-		git submodule init $(LIBFT_DIR); \
-		git submodule update $(LIBFT_DIR); \
-	fi
 
 clean:
 	@rm -rf objs

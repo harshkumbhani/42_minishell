@@ -1,3 +1,0 @@
-[submodule "libraries/c-library"]
-	path = libraries/c-library
-	url = https://github.com/RealConrad/42c-library.git

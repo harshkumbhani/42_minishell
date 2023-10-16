@@ -6,13 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 10:50:36 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 10:58:32 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 13:00:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-int	executor()
+int	executor(char **tokens)
 {
 	
 	return (SUCCESS);

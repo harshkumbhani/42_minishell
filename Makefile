@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/16 12:46:05 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/16 13:01:51 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/
 SRC                 := main.c
 SRC_SIGNALS         := signals.c
 SRC_BUILTINS		:= cd.c pwd.c
-SRC_EXECUTOR		:= executor.c pipex_bonus.c utils_bonus.c handle_pipe.c handle_error_bonus.c \
-						execute_bonus.c init.c
+SRC_EXECUTOR		:= executor.c pipex.c utils.c handle_pipe.c handle_error.c \
+						execute.c init.c
 
 ################################################################################
 #                                  Makefile  objs                              #

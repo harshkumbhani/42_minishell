@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/16 12:40:21 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/16 12:46:05 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME                := minishell
 CC                  := cc
 CFLAGS              := -Wall -Wextra -Werror -MMD -MP -I./includes -g
-LIBFT_DIR           := libraries/c-library
+LIBFT_DIR           := libraries/myLib
 LIBFT_LIB           := $(LIBFT_DIR)/libft.a
 
 ################################################################################

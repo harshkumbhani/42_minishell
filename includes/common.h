@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:33:16 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:37:04 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:10:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@
 # include <errno.h>
 //# include <wait.h>
 
+/* --------------------------------- Macro's -------------------------------- */
+# define SUCCESS 0
+# define ERROR 0
+
 /* -------------------------------- Typedefs -------------------------------- */
 typedef enum e_errors
 {
-	SUCCESS = 0,
 	ERR_ARG,
 	ERR_INFILE,
 	ERR_OUTFILE,

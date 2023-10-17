@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/16 13:01:51 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/17 09:57:14 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/
 
 SRC                 := main.c
 SRC_SIGNALS         := signals.c
-SRC_BUILTINS		:= cd.c pwd.c
+SRC_BUILTINS		:= cd.c pwd.c env.c echo.c
 SRC_EXECUTOR		:= executor.c pipex.c utils.c handle_pipe.c handle_error.c \
 						execute.c init.c
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
+#    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/16 13:01:51 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/17 08:57:01 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -lreadline -o $@
 
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
@@ -66,4 +66,4 @@ norm: $(SRCS)
 
 re: fclean all
 
-.PHONY: all clean fclean re $(LIBFT) init-submodule
+.PHONY: all clean fclean re $(LIBFT)

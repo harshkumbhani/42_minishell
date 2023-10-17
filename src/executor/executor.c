@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 10:50:36 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 13:00:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/17 08:50:58 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	executor(char **tokens)
 {
-	
+	(void)tokens;
 	return (SUCCESS);
 }

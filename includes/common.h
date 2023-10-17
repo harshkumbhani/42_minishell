@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:33:16 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:37:04 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/17 08:47:08 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <errno.h>
+
 //# include <wait.h>
 
 /* -------------------------------- Typedefs -------------------------------- */

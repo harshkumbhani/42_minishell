@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:14 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:36:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/17 11:05:30 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@
 # include "common.h"
 # include "pipex_bonus.h"
 
+/* -------------------------------- Typedefs -------------------------------- */
+
+typedef struct s_minilist
+{
+	
+}	t_minilist;
+
+typedef struct s_lexer
+{
+	
+}	t_lexer;
+
+typedef enum s_token
+{
+	WORD,
+	ARG
+}	t_token;
 
 /* --------------------------------- Signals -------------------------------- */
 

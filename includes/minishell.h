@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:14 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/17 11:05:30 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:34:19 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,14 @@ typedef enum s_token
 
 void	setup_signals();
 
+/* -------------------------------- Executor -------------------------------- */
+void	executor(char **env);
+
 /* -------------------------------- Built-ins ------------------------------- */
 
 int		cd(char *path);
 int		pwd();
+int		env(char **env);
+void	echo(char *str);
 
 #endif /* MINISHELL_H */

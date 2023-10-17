@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 16:35:53 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:09 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/17 09:08:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ int	cd(char *path)
 {
 	int	len;
 	
-	if (!path)
-		return (1);
+	if (!path || !*path)
+	{
+		path = getenv("HOME");
+		if (!path)
+			return (1);
+	}
 	len = ft_strlen(path);
 	if (len > 0 && path[len - 1] == '\n')
 		path[len - 1] = '\0';

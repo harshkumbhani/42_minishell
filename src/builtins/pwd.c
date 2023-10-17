@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 12:38:12 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:07:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	pwd()
 {
-	char cwd[256];
+	char	*cwd;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	cwd = getcwd(NULL, sizeof(cwd));
+	if (!cwd)
 	{
 		perror("getcwd() failed!\n");
 		return (1);

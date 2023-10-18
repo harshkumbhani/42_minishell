@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:55:14 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/17 13:34:19 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:26:20 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,20 @@
 
 /* -------------------------------- Typedefs -------------------------------- */
 
-typedef struct s_minilist
-{
-	
-}	t_minilist;
-
-typedef struct s_lexer
-{
-	
-}	t_lexer;
-
 typedef enum s_token
 {
 	WORD,
 	ARG
 }	t_token;
+
+typedef struct s_lexer
+{
+	char			*start;
+	t_token			token;
+	int				strlen;
+	struct s_lexer	*next;
+}	t_lexer;
+
 
 /* --------------------------------- Signals -------------------------------- */
 

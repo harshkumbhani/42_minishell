@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/17 09:57:14 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/17 15:11:48 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -lreadline -o $@
 
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)

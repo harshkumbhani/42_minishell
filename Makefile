@@ -6,7 +6,7 @@
 #    By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/17 13:33:46 by hkumbhan         ###   ########.fr        #
+#    Updated: 2023/10/18 13:30:13 by hkumbhan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -lreadline -o $@
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -lreadline -o $@
 
 $(OBJDIR)/%.o: %.c

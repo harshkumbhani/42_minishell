@@ -6,61 +6,63 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/15 15:09:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/18 12:48:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void handle_sigint(int signo, siginfo_t *siginfo, void *context);
-static void handle_sigquit(int signo, siginfo_t *siginfo, void *context);
+static void handle_sigint(int signo);
+static void handle_sigquit(int signo);
+static void	setup_termios_config();
 
 /**
  * @brief  Sets up signal handling for SIGINT (Ctrl-C) and SIGQUIT (Ctrl-\\).
  * 
- *  This function initializes the given signals with the respective signal
+ *  This function initializes the given signals with the respective signal.
+ *  It also sets up the termios settings (terminal config) and how it should
+ * 	behave.
  *  handlers for SIGINT and SIGQUIT.
  */
-void    setup_signals()
+void	setup_signals()
 {
-	struct sigaction sa_int;
-	struct sigaction sa_quit;
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
 	
-	sa_int.sa_sigaction = handle_sigint;
-	sa_int.sa_flags = SA_SIGINFO; // Probably these flags are not needed, will change most likely
-	sigemptyset(&sa_int.sa_mask); // Don't block any signals during this signals handling, probably have to change
+
+	setup_termios_config();
+	sa_int.sa_handler = handle_sigint;
+	sa_int.sa_flags = 0;
+	sigemptyset(&sa_int.sa_mask);
 	sigaction(SIGINT, &sa_int, NULL);
 
-	sa_quit.sa_sigaction = handle_sigquit;
-	sa_quit.sa_flags = SA_SIGINFO; // Probably these flags are not needed, will change most likely
-	sigemptyset(&sa_quit.sa_mask); // Don't block any signals during this signals handling, probably have to change
+	sa_quit.sa_handler = handle_sigquit;
+	sa_quit.sa_flags = 0;
+	sigemptyset(&sa_quit.sa_mask);
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
 
-/**
- * @brief 
- * @param signo 
- * @param siginfo 
- * @param context 
- */
-static void handle_sigint(int signo, siginfo_t *siginfo, void *context)
+static void handle_sigint(int signo)
 {
-	printf("\nSIGINT executed! Ctrl-C pressed!\n");
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 	(void)signo;
-	(void)siginfo;
-	(void)context;
 }
 
-/**
- * @brief 
- * @param signo 
- * @param siginfo 
- * @param context 
- */
-static void handle_sigquit(int signo, siginfo_t *siginfo, void *context)
+static void handle_sigquit(int signo)
 {
 	printf("\nSIGQUIT executed! Ctrl-\\ pressed!\n");
+	exit(0);
 	(void)signo;
-	(void)siginfo;
-	(void)context;
+}
+
+static void	setup_termios_config()
+{
+	struct termios	termios_config;
+	
+	tcgetattr(0, &termios_config);
+	termios_config.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, 0, &termios_config);
 }

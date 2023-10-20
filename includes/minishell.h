@@ -13,6 +13,13 @@
 
 int	g_signal_received;
 
+typedef struct s_env {
+	char			*key;
+	char			*value;
+	char			*full_string;
+	struct s_env	*next;
+}	t_env;
+
 /* --------------------------------- Signals -------------------------------- */
 
 void	setup_signals();
@@ -20,11 +27,21 @@ void	setup_signals();
 /* -------------------------------- Executor -------------------------------- */
 void	executor(char **env);
 
+/* ---------------------------------- Free ---------------------------------- */
+void	free_env_linked_list(t_env	*head);
+
 /* -------------------------------- Built-ins ------------------------------- */
 
 int		cd(char *path);
 int		pwd();
-int		env(char **env);
+void	env(t_env *head);
 void	echo(char *str);
+void	unset(t_env *head, char *key);
+
+/* ---------------------------------- Utils --------------------------------- */
+
+char	*ft_strndup(const char *str, size_t n);
+t_env	*add_env_row(t_env *head, char *str);
+t_env	*copy_env_to_linked_list(char **envp, t_env *head);
 
 #endif /* MINISHELL_H */

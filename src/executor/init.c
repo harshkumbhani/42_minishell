@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:34:59 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/16 12:37:30 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 15:57:33 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ void	init(t_pip_bonus *pipex, int ac, char **av, char **ep)
 	pipex->here_doc_flag = FALSE;
 	get_envp_path(pipex);
 	if (ft_strncmp(av[1], "here_doc", 8) == 0)
-	{
 		pipex->here_doc_flag = TRUE;
-		pipex->outfile_fd = open_file(av[ac - 1], 2);
-	}
-	else
-		pipex->outfile_fd = open_file(av[ac - 1], 1);
 }
 
 void	get_envp_path(t_pip_bonus *pipex)

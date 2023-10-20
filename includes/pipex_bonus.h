@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:01:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/16 12:35:40 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 14:42:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	get_envp_path(t_pip_bonus *pipex);
 int		open_file(char *file, int i);
 void	close_fds_bonus(t_pip_bonus *pipex);
 char	*strjoin_pipex(char *s1, char *s2);
+char	*find_cmd_path(t_pip_bonus *pipex, char *cmd);
 
 /* -------------------- Multipe pipe handle function def -------------------- */
 

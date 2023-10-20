@@ -6,36 +6,33 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/16 14:06:18 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/17 17:21:12 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
-	char tokens[][2] = {
-		{"ls", "-la"},
-		{"sort", "r"}
-	};
-	executor(tokens);
-	// setup_signals();
-	// // Mock shell to check if signal functions actually get called
-	// pwd();
-	// while (1)
-	// {
-	// 	char buffer[256];
-	// 	char *path;
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	// executor(envp);
 
-	// 	path = getcwd(NULL, 0);
-
-	// 	printf("%s> ", path);
-	// 	if (fgets(buffer, sizeof(buffer), stdin) == NULL) {
-	// 		break;
-	// 	}
-	// 	if (ft_strncmp(buffer, "cd ", 3) == SUCCESS)
-	// 		cd(buffer + 3);
-	// 	// printf("\nRead: %s\n\n", buffer);
-	// }
+	setup_signals();
+	// Mock shell to check if signal functions actually get called
+	while (1)
+	{
+		char *input = readline("minishell> ");
+		if (!input)
+		{
+			printf("Ctrl+D was pressed!\n");
+			free(input);
+			break;
+		}
+		if (input && input[0] != '\0' && input[0] != '\n')
+			add_history(input);
+		free(input);
+	}
 	return (0);
 }

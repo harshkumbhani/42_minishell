@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:26:37 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/16 12:37:33 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 15:59:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ int	create_pipes(t_pip_bonus *pipex, int i)
 	int	status;
 
 	status = EXIT_SUCCESS;
+	if (pipex->here_doc_flag)
+		pipex->outfile_fd = open_file(pipex->argv[pipex->argc - 1], 2);
+	else
+		pipex->outfile_fd = open_file(pipex->argv[pipex->argc - 1], 1);
 	first_child(pipex, i);
 	i++;
 	while (i < pipex->argc - 2)

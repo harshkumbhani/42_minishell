@@ -1,33 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:28:03 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/18 09:39:16 by hkumbhan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-int	main(void)
+int main(int argc, char **argv, char **envp)
 {
-	char	*str;
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	// executor(envp);
 
+	setup_signals();
+	// Mock shell to check if signal functions actually get called
 	while (1)
 	{
-		str = readline(NULL);
-		if (str == NULL)
-			break ;
-		if (history_tok)
-		add_history(str);
-		free(str);
+		char *input = readline("minishell> ");
+		if (!input)
+		{
+			printf("Ctrl+D was pressed!\n");
+			free(input);
+			break;
+		}
+		if (input && input[0] != '\0' && input[0] != '\n')
+			add_history(input);
+		free(input);
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }

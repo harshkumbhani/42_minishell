@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error_bonus.c                               :+:      :+:    :+:   */
+/*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 05:32:25 by harsh             #+#    #+#             */
-/*   Updated: 2023/10/16 12:37:37 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/16 16:36:13 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	error_bonus(t_errors err, char *cmd_or_file, t_pip_bonus *pipex)
 	{
 		ft_putstr_fd("zsh: command not found: ", 2);
 		ft_putendl_fd(cmd_or_file, 2);
-	}
+	}        
 	free_bonus(pipex);
 }
 

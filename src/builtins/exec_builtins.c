@@ -9,7 +9,7 @@ void	exec_builtins()
 	char *cmd = NULL; // change this, this is just placeholder for now
 	char *path = NULL; // change this, this is just placeholder for now
 	t_env *head = NULL; // change this, this is just placeholder for now
-	if (ft_strncmp(cmd, "cd ", 3) == EXIT_SUCCESS)
+	if (ft_strncmp(cmd, "cd", 2) == EXIT_SUCCESS)
 		cd(path);
 	else if (ft_strncmp(cmd, "pwd", 3) == EXIT_SUCCESS)
 		pwd();

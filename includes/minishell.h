@@ -37,6 +37,7 @@ int		pwd();
 void	env(t_env *head);
 void	echo(char *str);
 void	unset(t_env **head, const char *key);
+void	builtin_exit();
 
 /* ---------------------------------- Utils --------------------------------- */
 

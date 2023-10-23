@@ -15,7 +15,7 @@ SRC                 := main.c
 SRC_SIGNALS         := signals.c
 SRC_FREE			:= free.c
 SRC_UTILS			:= env_utils.c utils.c
-SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c
+SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c
 SRC_EXECUTOR		:= executor.c pipex.c executor_utils.c handle_pipe.c handle_error.c \
 						execute.c init.c
 

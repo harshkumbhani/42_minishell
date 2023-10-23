@@ -42,6 +42,7 @@ void	builtin_exit();
 /* ---------------------------------- Utils --------------------------------- */
 
 char	*ft_strndup(const char *str, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 t_env	*add_env_row(t_env *head, char *str);
 t_env	*copy_env_to_linked_list(char **envp, t_env *head);
 

@@ -28,6 +28,12 @@ t_env	*copy_env_to_linked_list(char **envp, t_env *head)
 	return (head);
 }
 
+/**
+ * @brief Adds the given string to the env linked list.
+ * @param head The first node of the env linked list.
+ * @param str The string to be added to the end of the linked list
+ * @return The head node if successful, else NULL.
+ */
 t_env	*add_env_row(t_env *head, char *str)
 {
 	char	*key;

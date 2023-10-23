@@ -18,7 +18,7 @@ void	unset(t_env **head, const char *key)
 	prev = NULL;
 	while (temp)
 	{
-		if (ft_strncmp(temp->key, key, ft_strlen(temp->key)) == 0)
+		if (ft_strncmp(temp->key, key, ft_strlen(key)) == 0)
 		{
 			if (!prev)
 				*head = temp->next;

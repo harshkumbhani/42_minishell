@@ -17,7 +17,7 @@ void	exec_builtins()
 	else if (ft_strncmp(cmd, "unset", 5) == EXIT_SUCCESS)
 		unset(&head, "VAR NAME");
 	else if (ft_strncmp(cmd, "echo", 4) == EXIT_SUCCESS)
-		echo("String to echo");
+		echo();
 	else if (ft_strncmp(cmd, "exit", 4) == EXIT_SUCCESS)
 		builtin_exit();
 	else if (strncmp(cmd, "export", 6) == EXIT_SUCCESS)

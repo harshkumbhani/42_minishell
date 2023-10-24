@@ -14,7 +14,14 @@
 typedef enum e_token
 {
 	WORD,
-	ARG
+	PIPE,
+	SQUOTE,
+	DQUOTE,
+	BACKSLASH,
+	LESS,
+	GREATER,
+	DOUBLE_LESS,
+	DOUBLE_GREATER
 }	t_token;
 
 typedef struct s_lexer
@@ -26,6 +33,20 @@ typedef struct s_lexer
 }	t_lexer;
 
 int	g_signal_received;
+
+/* --------------------------------- Lexer -------------------------------- */
+
+t_lexer	*tokenise(char *input);
+
+int		token_word(t_lexer **head, char *str);
+int		token_pipe(t_lexer **head, char *str);
+int		token_squote(t_lexer **head, char *str);
+int		token_dquote(t_lexer **head, char *str);
+int		token_backslash(t_lexer **head, char *str);
+int		create_less(t_lexer **head, char *str);
+int		create_greater(t_lexer **head, char *str);
+int		create_dbless(t_lexer **head, char *str);
+int		create_dbgreater(t_lexer **head, char *str);
 
 /* --------------------------------- Signals -------------------------------- */
 
@@ -40,5 +61,11 @@ int		cd(char *path);
 int		pwd();
 int		env(char **env);
 void	echo(char *str);
+
+/* -------------------------------- Lst-utils ------------------------------- */
+
+void	lst_add_back(t_lexer **head, t_lexer *new_node);
+void	lst_del(t_lexer **head);
+void	print_list(t_lexer **head);
 
 #endif /* MINISHELL_H */

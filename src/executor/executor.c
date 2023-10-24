@@ -23,6 +23,7 @@ int	executor(char **env)
 	else
 		handle_no_pipes(pipex);
 	(void)handle_pipes(pipex);
+	return (0);
 }
 
 static void	handle_no_pipes(t_pip_bonus *pipex)

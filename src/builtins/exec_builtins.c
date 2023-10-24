@@ -22,5 +22,5 @@ void	exec_builtins()
 	else if (ft_strcmp(cmd, "exit") == EXIT_SUCCESS)
 		builtin_exit();
 	else if (ft_strcmp(cmd, "export") == EXIT_SUCCESS)
-		head = add_env_row(head, "VAR TO ADD HERE");
+		export(&head, "VAR TO ADD HERE");
 }

@@ -1,13 +1,12 @@
 
-
 #include "minishell.h"
 
 // TODO: Pass in struct that will hold the cmds and update function parameters!!!
 // TODO: Capture exit code for $?
 void	exec_builtins()
 {
-	char *cmd = NULL; // change this, this is just placeholder for now
-	t_env *head = NULL; // change this, this is just placeholder for now
+	char	*cmd = NULL; // change this, this is just placeholder for now
+	t_env	*head = NULL; // change this, this is just placeholder for now
 	if (ft_strcmp(cmd, "cd") == EXIT_SUCCESS)
 		cd(&head);
 	else if (ft_strcmp(cmd, "pwd") == EXIT_SUCCESS)

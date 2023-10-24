@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:56:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/24 14:59:14 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/24 15:02:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static bool	has_n_flag(char **args);
 void	echo(void)
 {
 	// for testing:
-	char *args[] = {"echo", "b-nnnn", "-n", "-n" , "-n ", "Hello world", NULL};
-	// char *args[] = {"echo", NULL};
+	char	*args[] = {"echo", "b-nnnn", "-n", "-n" , "-n ", "Hello world", NULL};
+	// char	*args[] = {"echo", NULL};
 	// char	*args[] = {"echo", "Hello world", "-n", NULL};
 	// char	*args[] = {"echo", "Helloworld", "something", NULL};
 	if (!args[1])
@@ -50,7 +50,7 @@ static void	print_string(char **arg, int start_index, bool new_line)
 static bool	has_n_flag(char **args)
 {
 	int	i;
-	
+
 	if (args[1][0] != '-')
 		return (false);
 	i = 1;

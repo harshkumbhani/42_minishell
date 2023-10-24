@@ -7,8 +7,8 @@ int	cd(t_env **head)
 {
 	int		len;
 	char	*old_dir;
-	char 	*path = "src"; // remove this variable and use cmd struct later on
-	
+	char	*path = "src"; // remove this variable and use cmd struct later on
+
 	if (!path || !*path)
 	{
 		path = getenv("HOME");

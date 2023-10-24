@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/24 08:01:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/24 15:01:17 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Prints out the current working directory to standard output.
  * @return EXIT_FAILURE if it cannot aquire the `cwd`, else EXIT_SUCCESS.
  */
-int	pwd()
+int	pwd(void)
 {
 	char	*cwd;
 

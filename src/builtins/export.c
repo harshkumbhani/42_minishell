@@ -13,7 +13,7 @@ int	export(t_env **head, char *str)
 	char	*equal_sign;
 	char	*full_string;
 	char	*value;
-	
+
 	full_string = ft_strdup(str);
 	equal_sign = ft_strchr(full_string, '=');
 	key = ft_strndup(full_string, equal_sign - full_string);

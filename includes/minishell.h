@@ -32,7 +32,7 @@ void	free_env_linked_list(t_env	*head);
 
 /* -------------------------------- Built-ins ------------------------------- */
 
-int		cd(char *path);
+int		cd(t_env **head);
 int		pwd();
 void	env(t_env *head);
 void	echo(void);

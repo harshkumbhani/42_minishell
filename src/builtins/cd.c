@@ -1,31 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:35:53 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/17 09:34:27 by cwenz            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief Changes the current working directory.
- * 
- * If no path is provided, it will attempt to change the directory to the
- * specified by the HOME env variable.
- * If a path is given, it will attempt to change it to that directory.
- * 
- * @param path The path to change the directory, if its NULL or empty, it
- * changes to the directory specified in HOME env variable
- * @return EXIT_SUCCESS if the directory was changed, else EXIT_FAILURE.
- */
-int	cd(char *path)
+static void	update_pwd(t_env **head, char *old_dir);
+
+
+int	cd(t_env **head)
 {
-	int	len;
+	int		len;
+	char	*old_dir;
+	char 	*path = "src"; // remove this variable and use cmd struct later on
 	
 	if (!path || !*path)
 	{
@@ -36,10 +19,37 @@ int	cd(char *path)
 	len = ft_strlen(path);
 	if (len > 0 && path[len - 1] == '\n')
 		path[len - 1] = '\0';
+	old_dir = getcwd(NULL, 0);
 	if (chdir(path) != EXIT_SUCCESS)
 	{
 		perror("Chdir() failed!\n");
 		return (EXIT_FAILURE);
 	}
+	update_pwd(head, old_dir);
+	free(old_dir);
 	return (EXIT_SUCCESS);
+}
+
+static void	update_pwd(t_env **head, char *old_dir)
+{
+	char	*new_dir;
+	t_env	*pwd_env;
+	t_env	*oldpwd_env;
+
+	oldpwd_env = find_env_key(*head, "OLDPWD");
+	if (oldpwd_env)
+	{
+		free(oldpwd_env->value);
+		free(oldpwd_env->full_string);
+		oldpwd_env->value = ft_strdup(old_dir);
+		oldpwd_env->full_string = ft_strjoin("OLDPWD=", old_dir);
+	}
+
+	new_dir = getcwd(NULL, 0);
+	pwd_env = find_env_key(*head, "PWD");
+	free(pwd_env->value);
+	free(pwd_env->full_string);
+	pwd_env->value = ft_strdup(new_dir);
+	pwd_env->full_string = ft_strjoin("PWD=", new_dir);
+	free(new_dir);
 }

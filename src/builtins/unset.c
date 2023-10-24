@@ -25,10 +25,7 @@ void	unset(t_env **head, const char *key)
 			else
 				prev->next = temp->next;
 			prev->next = temp->next;
-			free(temp->full_string);
-			free(temp->key);
-			free(temp->value);
-			free(temp);
+			free_env_node(temp);
 			return ;
 		}
 		prev = temp;

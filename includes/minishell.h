@@ -28,7 +28,9 @@ void	setup_signals();
 void	executor(char **env);
 
 /* ---------------------------------- Free ---------------------------------- */
+
 void	free_env_linked_list(t_env	*head);
+void	free_env_node(t_env *node);
 
 /* -------------------------------- Built-ins ------------------------------- */
 

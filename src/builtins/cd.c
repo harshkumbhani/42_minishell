@@ -3,7 +3,6 @@
 
 static void	update_pwd(t_env **head, char *old_dir);
 
-
 int	cd(t_env **head)
 {
 	int		len;
@@ -44,7 +43,6 @@ static void	update_pwd(t_env **head, char *old_dir)
 		oldpwd_env->value = ft_strdup(old_dir);
 		oldpwd_env->full_string = ft_strjoin("OLDPWD=", old_dir);
 	}
-
 	new_dir = getcwd(NULL, 0);
 	pwd_env = find_env_key(*head, "PWD");
 	free(pwd_env->value);

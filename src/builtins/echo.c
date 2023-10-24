@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:56:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/24 14:52:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/24 14:59:14 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	echo(void)
 	char *args[] = {"echo", "b-nnnn", "-n", "-n" , "-n ", "Hello world", NULL};
 	// char *args[] = {"echo", NULL};
 	// char	*args[] = {"echo", "Hello world", "-n", NULL};
-	char	*args[] = {"echo", "Helloworld", "something", NULL};
+	// char	*args[] = {"echo", "Helloworld", "something", NULL};
 	if (!args[1])
 	{
 		printf("\n");

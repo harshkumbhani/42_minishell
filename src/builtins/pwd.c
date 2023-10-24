@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/17 09:39:40 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/24 08:01:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int	pwd()
 		return (EXIT_FAILURE);
 	}
 	printf("%s\n", cwd);
+	free(cwd);
 	return (EXIT_SUCCESS);
 }

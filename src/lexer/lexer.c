@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/24 14:54:26 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:06:30 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@
 /// @return FALSE if open quotes or esc char found else TRUE
 int	check_input(char *input)
 {
-	int	i;
-	int	s_open;
-	int	d_open;
+	char	c;
 
-	i = 0;
-	s_open = 0;
-	d_open = 0;
-	while (input[i] != '\0')
+	c = '\0';
+	while (*input != '\0')
 	{
-		if (input[i] == '\'')
-			s_open = !s_open;
-		if (input[i] == '\"')
-			d_open = !d_open;
-		i++;
+		if (c == '\0' && (*input == '\'' || *input == '\"'))
+			c = *input;
+		else if (c == *input)
+			c = '\0';
+		input++;
 	}
-	if (s_open != 0 || d_open != 0)
-		return (FALSE);
-	return (TRUE);
+	if (c == '\0')
+		return (TRUE);
+	return (FALSE);
 }
 
 int	token_redirect(t_lexer **head, char *str)

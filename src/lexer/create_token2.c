@@ -42,7 +42,7 @@ int	create_dbgreater(t_lexer **head, char *str)
 
 	new = ft_calloc(1, sizeof(t_lexer));
 	new->start = str;
-	new->token = LESS;
+	new->token = DOUBLE_GREATER;
 	new->strlen = 2;
 	lst_add_back(head, new);
 	return (new->strlen);

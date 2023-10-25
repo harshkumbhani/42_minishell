@@ -22,11 +22,11 @@ int main(int argc, char **argv, char **envp)
 			break;
 		}
 		lexer = tokenise(input);
-		if (lexer == NULL)
-		{
-			printf("Invalid input\n");
-			//continue ;
-		}
+		//if (lexer == NULL)
+		//{
+		//	printf("Invalid input\n");
+		//	//continue ;
+		//}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
 		print_list(&lexer);

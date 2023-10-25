@@ -58,6 +58,8 @@ int	token_squote(t_lexer **head, char *str)
 	while (str[i] != '\0' && str[i] != '\'')
 		i++;
 	new->strlen = i++;
+	if (str[i] == '\'' || str[i] == '\"')
+		new->space_flag = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
 }
@@ -78,6 +80,8 @@ int	token_dquote(t_lexer **head, char *str)
 	while (str[i] != '\0' && str[i] != '\"')
 		i++;
 	new->strlen = i++;
+	if (str[i] == '\'' || str[i] == '\"')
+		new->space_flag = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
 }

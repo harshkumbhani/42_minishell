@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/24 10:29:02 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:19:34 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	print_list(t_lexer **head)
 			printf("%c", current->start[i]);
 			i++;
 		}
-		printf("\nToken type: %d\nStr : %s\nToken len: %d\n\n",
-			current->token, current->start, current->strlen);
+		printf("\nToken type: %d\nStr : %s\nToken len: %d\nSpace_Flag: %d\n\n",
+			current->token, current->start, current->strlen, current->space_flag);
 		current = current->next;
 	}
 }

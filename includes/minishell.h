@@ -13,15 +13,15 @@
 
 typedef enum e_token
 {
-	WORD,
-	PIPE,
-	SQUOTE,
-	DQUOTE,
-	BACKSLASH,
-	LESS,
-	GREATER,
-	DOUBLE_LESS,
-	DOUBLE_GREATER
+	WORD			= 0,
+	PIPE			= 1,
+	SQUOTE			= 2,
+	DQUOTE			= 3,
+	BACKSLASH		= 4,
+	LESS			= 5,
+	GREATER			= 6,
+	DOUBLE_LESS 	= 7,
+	DOUBLE_GREATER	= 8
 }	t_token;
 
 typedef struct s_lexer
@@ -29,6 +29,7 @@ typedef struct s_lexer
 	char			*start;
 	t_token			token;
 	int				strlen;
+	bool			space_flag;
 	struct s_lexer	*next;
 }	t_lexer;
 

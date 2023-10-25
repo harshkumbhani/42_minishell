@@ -5,8 +5,11 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	t_env	*head;
+	head = copy_env_to_linked_list(envp, head);
+	env(head);
+	free_env_linked_list(head);
 	// executor(envp);
-	t_lexer	*lexer;
 
 	setup_signals();
 	// Mock shell to check if signal functions actually get called

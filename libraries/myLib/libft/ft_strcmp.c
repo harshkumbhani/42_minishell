@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/24 15:01:17 by cwenz            ###   ########.fr       */
+/*   Created: 2023/10/24 11:24:04 by cwenz             #+#    #+#             */
+/*   Updated: 2023/10/24 11:26:33 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
-
-/**
- * @brief Prints out the current working directory to standard output.
- * @return EXIT_FAILURE if it cannot aquire the `cwd`, else EXIT_SUCCESS.
- */
-int	pwd(void)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*cwd;
+	int	i;
 
-	cwd = getcwd(NULL, sizeof(cwd));
-	if (!cwd)
+	i = 0;
+	while (s1[i] && s2[i])
 	{
-		perror("getcwd() failed!\n");
-		return (EXIT_FAILURE);
+		if (s1[i] > s2[i])
+			return (1);
+		if (s1[i] < s2[i])
+			return (-1);
+		i++;
 	}
-	printf("%s\n", cwd);
-	free(cwd);
-	return (EXIT_SUCCESS);
+	if (s1[i] > s2[i])
+		return (1);
+	if (s1[i] < s2[i])
+		return (-1);
+	return (0);
 }

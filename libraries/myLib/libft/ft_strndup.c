@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 17:01:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/24 15:01:17 by cwenz            ###   ########.fr       */
+/*   Created: 2023/10/24 11:25:31 by cwenz             #+#    #+#             */
+/*   Updated: 2023/10/24 11:25:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "libft.h"
 
-/**
- * @brief Prints out the current working directory to standard output.
- * @return EXIT_FAILURE if it cannot aquire the `cwd`, else EXIT_SUCCESS.
- */
-int	pwd(void)
+char	*ft_strndup(const char *str, size_t n)
 {
-	char	*cwd;
+	char	*dup;
+	size_t	len;
+	size_t	i;
 
-	cwd = getcwd(NULL, sizeof(cwd));
-	if (!cwd)
+	i = 0;
+	len = ft_strlen(str);
+	if (n < len)
+		len = n;
+	dup = ft_calloc(1, len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
 	{
-		perror("getcwd() failed!\n");
-		return (EXIT_FAILURE);
+		dup[i] = str[i];
+		i++;
 	}
-	printf("%s\n", cwd);
-	free(cwd);
-	return (EXIT_SUCCESS);
+	dup[len] = '\0';
+	return (dup);
 }

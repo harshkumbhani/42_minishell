@@ -48,6 +48,12 @@ int		create_less(t_lexer **head, char *str);
 int		create_greater(t_lexer **head, char *str);
 int		create_dbless(t_lexer **head, char *str);
 int		create_dbgreater(t_lexer **head, char *str);
+typedef struct s_env {
+	char			*key;
+	char			*value;
+	char			*full_string;
+	struct s_env	*next;
+}	t_env;
 
 /* --------------------------------- Signals -------------------------------- */
 
@@ -56,12 +62,28 @@ void	setup_signals();
 /* -------------------------------- Executor -------------------------------- */
 int		executor(char **env);
 
+/* ---------------------------------- Free ---------------------------------- */
+
+void	free_env_linked_list(t_env	*head);
+void	free_env_node(t_env *node);
+
 /* -------------------------------- Built-ins ------------------------------- */
 
-int		cd(char *path);
+int		cd(t_env **head);
 int		pwd();
-int		env(char **env);
-void	echo(char *str);
+void	env(t_env *head);
+void	echo(void);
+void	unset(t_env **head, const char *key);
+void	builtin_exit();
+
+/* ---------------------------------- Utils --------------------------------- */
+
+char	*ft_strndup(const char *str, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
+int		export(t_env **head, char *str);
+int		copy_env_to_linked_list(char **envp, t_env **head);
+t_env	*find_env_key(t_env *head, char *key);
+int		add_env_node(t_env **head, char *key, char *full_string, char *value);
 
 /* -------------------------------- Lst-utils ------------------------------- */
 

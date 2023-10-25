@@ -1,49 +1,31 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/17 15:13:53 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/17 15:11:48 by cwenz            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-################################################################################
-#                                     CONFIG                                   #
-################################################################################
 
+# ---------------------------------- Config ---------------------------------- #
 NAME                := minishell
 CC                  := cc
 CFLAGS              := -Wall -Wextra -Werror -MMD -MP -I./includes -g
 LIBFT_DIR           := libraries/myLib
 LIBFT_LIB           := $(LIBFT_DIR)/libft.a
 
-################################################################################
-#                                 PROGRAM'S SRCS                               #
-################################################################################
-
+# --------------------------- Program Source files --------------------------- #
 OBJDIR              := ./objs
-VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/
+VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/:./src/free/:./src/utils/:
 
 SRC                 := main.c
 SRC_SIGNALS         := signals.c
-SRC_BUILTINS		:= cd.c pwd.c env.c echo.c
-SRC_EXECUTOR		:= executor.c pipex.c utils.c handle_pipe.c handle_error.c \
+SRC_FREE			:= env_free.c
+SRC_UTILS			:= env_utils.c
+SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
+SRC_EXECUTOR		:= executor.c pipex.c executor_utils.c handle_pipe.c handle_error.c \
 						execute.c init.c
 
-################################################################################
-#                                  Makefile  objs                              #
-################################################################################
+SRCS                := $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
+						$(SRC_FREE) $(SRC_UTILS)
 
-SRCS                := $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR)
+# ---------------------------------- Objects --------------------------------- #
 OBJS                := $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
-################################################################################
-#                                 Makefile rules                               #
-################################################################################
-
+# ----------------------------------- Rules ---------------------------------- #
 all: $(NAME)
 
 $(NAME): $(OBJS)

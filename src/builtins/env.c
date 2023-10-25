@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:10:53 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/17 09:37:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/23 13:03:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
  * This function iterates over the environment variables provided in `env` and
  * prints each one to standard output.
  * @param env And array of strings where each string is an environment variable.
- * @return EXIT_FAILURE if env is empty or NULL. If all variables were printed
- * it returns EXIT_SUCCESS.
  */
-int	env(char **env)
+void	env(t_env *head)
 {
-	int	i;
-
-	i = 0;
-	if (!env || !*env)
-		return (EXIT_FAILURE);
-	while (env[i])
+	t_env	*temp;
+	
+	temp = head;
+	if (!temp)
 	{
-		printf("%s\n", env[i]);
-		i++;
+		perror("No env to print!\n");
+		return ;
 	}
-	return (EXIT_SUCCESS);
+	while (temp)
+	{
+		printf("%s\n", temp->full_string);
+		temp = temp->next;
+	}
 }

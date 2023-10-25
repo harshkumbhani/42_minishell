@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 19:36:18 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/09/14 14:57:16 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:29:23 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*ft_itoa(int n);
 char	**ft_split(const char *s, char c);
 char	**ft_split_pipex(const char *s, char c);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strndup(const char *str, size_t n);
 
 // Free and Cleanup functions
 

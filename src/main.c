@@ -9,6 +9,7 @@ int main(int argc, char **argv, char **envp)
 	head = copy_env_to_linked_list(envp, head);
 	env(head);
 	free_env_linked_list(head);
+	t_lexer	*lexer;
 	// executor(envp);
 
 	setup_signals();

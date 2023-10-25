@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 10:50:36 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/17 10:44:11 by cwenz            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 # include "minishell.h"
 
 /*
@@ -21,7 +9,7 @@
 static void	handle_no_pipes(t_pip_bonus *pipex);
 static void	handle_pipes(t_pip_bonus *pipex);
 
-void	executor(char **env)
+int	executor(char **env)
 {
 	char 		*tokens[] = {"ls", "-la", NULL};
 	bool		is_pipes = false;
@@ -35,6 +23,7 @@ void	executor(char **env)
 	else
 		handle_no_pipes(pipex);
 	(void)handle_pipes(pipex);
+	return (0);
 }
 
 static void	handle_no_pipes(t_pip_bonus *pipex)

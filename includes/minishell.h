@@ -33,6 +33,13 @@ typedef struct s_lexer
 	struct s_lexer	*next;
 }	t_lexer;
 
+typedef struct s_env {
+	char			*key;
+	char			*value;
+	char			*full_string;
+	struct s_env	*next;
+}	t_env;
+
 int	g_signal_received;
 
 /* --------------------------------- Lexer -------------------------------- */
@@ -48,12 +55,6 @@ int		create_less(t_lexer **head, char *str);
 int		create_greater(t_lexer **head, char *str);
 int		create_dbless(t_lexer **head, char *str);
 int		create_dbgreater(t_lexer **head, char *str);
-typedef struct s_env {
-	char			*key;
-	char			*value;
-	char			*full_string;
-	struct s_env	*next;
-}	t_env;
 
 /* --------------------------------- Signals -------------------------------- */
 

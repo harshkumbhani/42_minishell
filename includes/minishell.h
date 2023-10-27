@@ -42,14 +42,14 @@ typedef struct s_env {
 
 typedef struct s_minishell {
 	char	**cmd;
-	char	*infile;
-	t_env	*head_env;
 	char	*deli;
+	char	*infile;
 	char	*outfile;
 	int		infile_fd;
 	int		outfile_fd;
 	bool	here_doc;
 	int		exit_code;
+	t_env	*head_env;
 }	t_minishell;
 
 int	g_signal_received;

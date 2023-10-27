@@ -19,10 +19,9 @@ SRC_EXECUTOR		:= executor.c pipex.c executor_utils.c handle_pipe.c handle_error.
 						execute.c init.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
 
-SRCS                := $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
-						$(SRC_FREE) $(SRC_UTILS)
+SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
+						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER)
 
-SRCS                := $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) $(SRC_LEXER)
 OBJS                := $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
 # ----------------------------------- Rules ---------------------------------- #

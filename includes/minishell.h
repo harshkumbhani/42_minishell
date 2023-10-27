@@ -40,7 +40,7 @@ typedef struct s_env {
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_minishell {
+typedef struct s_cmd {
 	char	**cmd;
 	char	*deli;
 	char	*infile;
@@ -48,6 +48,10 @@ typedef struct s_minishell {
 	int		infile_fd;
 	int		outfile_fd;
 	bool	here_doc;
+}	t_cmd;
+
+typedef struct s_minishell {
+	t_cmd	**cmds;
 	int		exit_code;
 	t_env	*head_env;
 }	t_minishell;
@@ -73,7 +77,8 @@ int		create_dbgreater(t_lexer **head, char *str);
 void	setup_signals();
 
 /* -------------------------------- Executor -------------------------------- */
-int		executor(char **env);
+
+int		executor(t_minishell *minishell);
 
 /* ---------------------------------- Free ---------------------------------- */
 
@@ -88,6 +93,8 @@ void	env(t_env *head);
 void	echo(void);
 void	unset(t_env **head, const char *key);
 void	builtin_exit();
+void	exec_builtins(t_minishell *minishell);
+bool	is_builtin(t_minishell *minishell);
 
 /* ---------------------------------- Utils --------------------------------- */
 

@@ -6,7 +6,7 @@ int main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)envp;
 	t_env	*head;
-	head = copy_env_to_linked_list(envp, head);
+	copy_env_to_linked_list(envp, head);
 	env(head);
 	free_env_linked_list(head);
 	t_lexer	*lexer;

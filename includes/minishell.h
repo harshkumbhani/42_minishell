@@ -93,8 +93,6 @@ void	env(t_env *head);
 void	echo(void);
 void	unset(t_env **head, const char *key);
 void	builtin_exit();
-void	exec_builtins(t_minishell *minishell);
-bool	is_builtin(t_minishell *minishell);
 
 /* ---------------------------------- Utils --------------------------------- */
 

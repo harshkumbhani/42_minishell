@@ -40,6 +40,18 @@ typedef struct s_env {
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_minishell {
+	char	**cmd;
+	char	*infile;
+	t_env	*head_env;
+	char	*deli;
+	char	*outfile;
+	int		infile_fd;
+	int		outfile_fd;
+	bool	here_doc;
+	int		exit_code;
+}	t_minishell;
+
 int	g_signal_received;
 
 /* --------------------------------- Lexer -------------------------------- */

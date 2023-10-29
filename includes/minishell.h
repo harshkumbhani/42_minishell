@@ -4,7 +4,7 @@
 /* -------------------------------- Includes -------------------------------- */
 
 # include "common.h"
-# include "pipex_bonus.h"
+// # include "pipex_bonus.h"
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -47,6 +47,7 @@ typedef struct s_cmd {
 	char	*outfile;
 	int		infile_fd;
 	int		outfile_fd;
+	int		fd[2];
 	bool	here_doc;
 }	t_cmd;
 
@@ -78,12 +79,16 @@ void	setup_signals();
 
 /* -------------------------------- Executor -------------------------------- */
 
-int		executor(t_minishell *minishell);
+void	executor(t_minishell *minishell);
+void	execute_cmd(t_cmd *cmds, t_env *head_env);
+void	execute_child(t_minishell *minishell, int index);
+void	execute_last_child(t_minishell *minishell, int index);
 
 /* ---------------------------------- Free ---------------------------------- */
 
 void	free_env_linked_list(t_env	*head);
 void	free_env_node(t_env *node);
+void	free_env_array(char **envp);
 
 /* -------------------------------- Built-ins ------------------------------- */
 
@@ -91,17 +96,24 @@ int		cd(t_env **head);
 int		pwd();
 void	env(t_env *head);
 void	echo(void);
+int		export(t_env **head, char *str);
 void	unset(t_env **head, const char *key);
 void	builtin_exit();
+void	exec_builtins(t_minishell *minishell);
+bool	is_cmd_builtin(t_minishell *minishell);
 
 /* ---------------------------------- Utils --------------------------------- */
 
 char	*ft_strndup(const char *str, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
-int		export(t_env **head, char *str);
+char	*strjoin_pipex(char *s1, char *s2);
+
+/* -------------------------------- Env Utils ------------------------------- */
+
 int		copy_env_to_linked_list(char **envp, t_env **head);
 t_env	*find_env_key(t_env *head, char *key);
 int		add_env_node(t_env **head, char *key, char *full_string, char *value);
+int		count_env_variables(t_env *head);
 
 /* -------------------------------- Lst-utils ------------------------------- */
 

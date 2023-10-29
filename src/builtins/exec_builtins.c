@@ -1,24 +1,40 @@
 
 #include "minishell.h"
 
-// TODO: Pass in struct that will hold the cmds and update function parameters!!!
 // TODO: Capture exit code for $?
-void	exec_builtins()
+void	exec_builtins(t_minishell *minishell)
 {
-	char	*cmd = NULL; // change this, this is just placeholder for now
-	t_env	*head = NULL; // change this, this is just placeholder for now
-	if (ft_strcmp(cmd, "cd") == EXIT_SUCCESS)
-		cd(&head);
-	else if (ft_strcmp(cmd, "pwd") == EXIT_SUCCESS)
+	if (ft_strcmp(minishell->cmds[0]->cmd[0], "cd") == EXIT_SUCCESS)
+		cd(&minishell->head_env);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "pwd") == EXIT_SUCCESS)
 		pwd();
-	else if (ft_strcmp(cmd, "env") == EXIT_SUCCESS)
-		env(head);
-	else if (ft_strcmp(cmd, "unset") == EXIT_SUCCESS)
-		unset(&head, "VAR NAME");
-	else if (ft_strcmp(cmd, "echo") == EXIT_SUCCESS)
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "env") == EXIT_SUCCESS)
+		env(minishell->head_env);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "unset") == EXIT_SUCCESS)
+		unset(&minishell->head_env, "VAR NAME");
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "echo") == EXIT_SUCCESS)
 		echo();
-	else if (ft_strcmp(cmd, "exit") == EXIT_SUCCESS)
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "exit") == EXIT_SUCCESS)
 		builtin_exit();
-	else if (ft_strcmp(cmd, "export") == EXIT_SUCCESS)
-		export(&head, "VAR TO ADD HERE");
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "export") == EXIT_SUCCESS)
+		export(&minishell->head_env, "VAR TO ADD HERE");
+}
+
+bool	is_cmd_builtin(t_minishell *minishell)
+{
+	if (ft_strcmp(minishell->cmds[0]->cmd[0], "cd") == EXIT_SUCCESS)
+		return (true);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "pwd") == EXIT_SUCCESS)
+		return (true);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "env") == EXIT_SUCCESS)
+		return (true);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "unset") == EXIT_SUCCESS)
+		return (true);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "echo") == EXIT_SUCCESS)
+		return (true);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "exit") == EXIT_SUCCESS)
+		return (true);
+	else if (ft_strcmp(minishell->cmds[0]->cmd[0], "export") == EXIT_SUCCESS)
+		return (true);
+	return (false);
 }

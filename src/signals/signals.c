@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/18 12:48:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/10/28 09:01:04 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void handle_sigquit(int signo)
 static void	setup_termios_config()
 {
 	struct termios	termios_config;
-	
+
 	tcgetattr(0, &termios_config);
 	termios_config.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, 0, &termios_config);

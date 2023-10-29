@@ -50,6 +50,12 @@ int	add_env_node(t_env **head, char *key, char *full_string, char *value)
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Finds the node which holds the given key.
+ * @param head A pointer to the first head of the env array
+ * @param key The key to search for.
+ * @return The node which holds the given key, else NULL if not found
+ */
 t_env	*find_env_key(t_env *head, char *key)
 {
 	t_env	*temp;
@@ -62,4 +68,24 @@ t_env	*find_env_key(t_env *head, char *key)
 		temp = temp->next;
 	}
 	return (NULL);
+}
+
+/**
+ * @brief Counts the number of env variables stored in the linked list
+ * @param head A pointer to the first node in the linked list
+ * @return The amount of env variables stored in the linked list.
+ */
+int	count_env_variables(t_env *head)
+{
+	int		i;
+	t_env	*temp;
+
+	temp = head;
+	i = 0;
+	while (temp)
+	{
+		i++;
+		temp = temp->next;
+	}
+	return (i);
 }

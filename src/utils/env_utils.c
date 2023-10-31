@@ -15,11 +15,6 @@ int	copy_env_to_linked_list(char **envp, t_env **head)
 	while (envp[i])
 	{
 		export(head, envp[i]);
-		if (!(*head))
-		{
-			free_env_linked_list(*head);
-			return (EXIT_FAILURE);
-		}
 		i++;
 	}
 	return (EXIT_SUCCESS);

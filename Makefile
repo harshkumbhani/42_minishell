@@ -8,10 +8,11 @@ LIBFT_LIB           := $(LIBFT_DIR)/libft.a
 
 # --------------------------- Program Source files --------------------------- #
 OBJDIR              := ./objs
-VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/:./src/lexer:./src/free/:./src/utils/:./src/utils/
+VPATH               := .:./src/:./src/signals/:./src/builtins/:./src/executor/:./src/lexer:./src/free/:./src/utils/:./src/utils/:./src/error
 
 SRC                 := main.c
 SRC_SIGNALS         := signals.c
+SRC_ERROR			:= error_executor.c
 SRC_FREE			:= env_free.c
 SRC_UTILS			:= env_utils.c utils.c file_utils.c
 SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
@@ -19,7 +20,7 @@ SRC_EXECUTOR		:= executor.c handle_pipe.c command.c handle_pipe_utils.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
 
 SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
-						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER)
+						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER) $(SRC_ERROR)
 
 OBJS                := $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 

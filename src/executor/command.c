@@ -9,16 +9,21 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	char	*path;
 	char	**envp;
 
-	// TODO: PROTECT IF NULL??
 	path_node = find_env_key(head_env, "PATH");
 	envp = ft_split(path_node->value, ':');
 	path = find_cmd_path(cmds, envp);
+	if (!path)
+	{
+		ft_fprintf(STDERR_FILENO, "minishell: %s: command not found\n", cmds->cmd[0]);
+		free_env_array(envp);
+		exit(errno);
+	}
 	if (execve(path, cmds->cmd, envp) == -1)
 	{
-		perror("execve");
+		fprintf(stderr, "minishell: %s: %s\n", cmds->cmd[0], strerror(errno));
 		free(path);
 		free_env_array(envp);
-		exit(1);
+		exit(errno);
 	}
 }
 
@@ -27,7 +32,7 @@ static char	*find_cmd_path(t_cmd *cmd, char **envp)
 	char	*path;
 	char	*temp;
 	int		i;
-	
+
 	path = strjoin_pipex(cmd->cmd[0], "");
 	if (access(path, F_OK | X_OK) == 0)
 		return (path);

@@ -51,14 +51,11 @@ typedef struct s_cmd {
 	bool	here_doc;
 }	t_cmd;
 
-typedef struct s_minishell
-{
+typedef struct s_minishell {
 	t_cmd	**cmd_table;
 	int		exit_code;
 	t_env	*head_env;
 }	t_minishell;
-
-int	g_signal_received;
 
 /* --------------------------------- Lexer -------------------------------- */
 

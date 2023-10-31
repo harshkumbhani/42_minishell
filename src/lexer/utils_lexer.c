@@ -37,20 +37,14 @@ void	lst_del(t_lexer **head)
 void	print_list(t_lexer **head)
 {
 	t_lexer	*current;
-	int		i;
 
 	current = (*head);
 	while (current != NULL)
 	{
-		i = 0;
-		printf("Token value : ");
-		while (i < current->strlen)
-		{
-			printf("%c", current->start[i]);
-			i++;
-		}
-		printf("\nToken type: %d\nStr : %s\nToken len: %d\nSpace_Flag: %d\n\n",
-			current->token, current->start, current->strlen, current->space_flag);
+		write(1, "Token value: ", ft_strlen("Token value: "));
+		write(1, current->start, current->strlen);
+		printf("\nToken type: %d\nStr : %s\nToken len: %d\nnot_space: %d\n\n",
+			current->token, current->start, current->strlen, current->not_space);
 		current = current->next;
 	}
 }

@@ -29,11 +29,12 @@ typedef struct s_lexer
 	char			*start;
 	t_token			token;
 	int				strlen;
-	bool			space_flag;
+	bool			not_space;
 	struct s_lexer	*next;
 }	t_lexer;
 
-typedef struct s_env {
+typedef struct s_env
+{
 	char			*key;
 	char			*value;
 	char			*full_string;
@@ -50,8 +51,9 @@ typedef struct s_cmd {
 	bool	here_doc;
 }	t_cmd;
 
-typedef struct s_minishell {
-	t_cmd	**cmds;
+typedef struct s_minishell
+{
+	t_cmd	**cmd_table;
 	int		exit_code;
 	t_env	*head_env;
 }	t_minishell;
@@ -72,6 +74,13 @@ int		create_greater(t_lexer **head, char *str);
 int		create_dbless(t_lexer **head, char *str);
 int		create_dbgreater(t_lexer **head, char *str);
 
+/* --------------------------------- PARSER	 -------------------------------- */
+
+int		parser(t_lexer **lexer, t_minishell *minishell);
+int		count_pipes(t_lexer **lexer);
+void	init_t_cmd(t_cmd **cmd);
+void	free_cmd_table(t_cmd **cmd_table);
+int		count_words(t_lexer **lexer);
 /* --------------------------------- Signals -------------------------------- */
 
 void	setup_signals();

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:14 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/07/10 13:50:42 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:23:15 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new_node)
 	t_list	*end;
 
 	end = ft_lstlast(*lst);
-	if (!end)
+	if (end == NULL)
 		*lst = new_node;
 	else
 		end->next = new_node;

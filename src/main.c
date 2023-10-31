@@ -5,10 +5,9 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	t_env	*head;
-	copy_env_to_linked_list(envp, &head);
-	env(head);
-	free_env_linked_list(head);
+	t_minishell	minishell;
+	copy_env_to_linked_list(envp, &minishell.head_env);
+	//env(head);
 	t_lexer	*lexer;
 	// executor(envp);
 
@@ -20,12 +19,12 @@ int main(int argc, char **argv, char **envp)
 		if (!input)
 		{
 			printf("Ctrl+D was pressed!\n");
-			print_list(&lexer);
 			lst_del(&lexer);
 			free(input);
 			break;
 		}
 		lexer = tokenise(input);
+		parser(&lexer, &minishell);
 		//if (lexer == NULL)
 		//{
 		//	printf("Invalid input\n");
@@ -38,11 +37,13 @@ int main(int argc, char **argv, char **envp)
 		free(input);
 	}
 				
-	//lexer = tokenise("ls>filename");
+	//lexer = tokenise("ls -al");
 	//if (lexer != NULL)
 	//{
 	//	print_list(&lexer);
-	//	lst_del(&lexer);
 	//}
+	//parser(&lexer, &minishell);
+	//lst_del(&lexer);
+	free_env_linked_list(minishell.head_env);
 	return (0);
 }

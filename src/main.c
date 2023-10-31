@@ -4,42 +4,42 @@
 // GPT GENERATED FUNCTIONS FOR MOCK DATA:
 void    init_mock_data(t_minishell *minishell) {
 	int     i, j;
-	char    *cmds_arr[][4] = {
+	char    *cmd_table_arr[][4] = {
 		{"ls", "-l", NULL},
 		{"wc", "-l", NULL},
 		// {"grep", "output.txt", NULL},
 		// {"echo", "Hello, World!", NULL}
 	};
-	int num_cmds = sizeof(cmds_arr) / sizeof(cmds_arr[0]);
+	int num_cmd_table = sizeof(cmd_table_arr) / sizeof(cmd_table_arr[0]);
 
-	minishell->cmds = malloc(sizeof(t_cmd *) * (num_cmds + 1));
-	for (i = 0; i < num_cmds; i++) {
-		minishell->cmds[i] = malloc(sizeof(t_cmd));
-		minishell->cmds[i]->cmd = malloc(sizeof(char *) * 4);
-		for (j = 0; cmds_arr[i][j] != NULL; j++) {
-			minishell->cmds[i]->cmd[j] = strdup(cmds_arr[i][j]);
+	minishell->cmd_table = malloc(sizeof(t_cmd *) * (num_cmd_table + 1));
+	for (i = 0; i < num_cmd_table; i++) {
+		minishell->cmd_table[i] = malloc(sizeof(t_cmd));
+		minishell->cmd_table[i]->cmd = malloc(sizeof(char *) * 4);
+		for (j = 0; cmd_table_arr[i][j] != NULL; j++) {
+			minishell->cmd_table[i]->cmd[j] = strdup(cmd_table_arr[i][j]);
 		}
-		minishell->cmds[i]->cmd[j] = NULL;
+		minishell->cmd_table[i]->cmd[j] = NULL;
 
-		minishell->cmds[i]->deli = "|";
-		minishell->cmds[i]->infile = "input.txt";
-		minishell->cmds[i]->outfile = "output.txt";
-		minishell->cmds[i]->infile_fd = 0;
-		minishell->cmds[i]->outfile_fd = 1;
-		minishell->cmds[i]->here_doc = false;
+		minishell->cmd_table[i]->deli = "|";
+		minishell->cmd_table[i]->infile = "input.txt";
+		minishell->cmd_table[i]->outfile = "output.txt";
+		minishell->cmd_table[i]->infile_fd = 0;
+		minishell->cmd_table[i]->outfile_fd = 1;
+		minishell->cmd_table[i]->here_doc = false;
 	}
-	minishell->cmds[i] = NULL;
+	minishell->cmd_table[i] = NULL;
 }
 
 void    free_mock_data(t_minishell *minishell) {
 	int i, j;
-	for (i = 0; minishell->cmds[i] != NULL; i++) {
-		for (j = 0; minishell->cmds[i]->cmd[j] != NULL; j++) {
-			free(minishell->cmds[i]->cmd[j]);
+	for (i = 0; minishell->cmd_table[i] != NULL; i++) {
+		for (j = 0; minishell->cmd_table[i]->cmd[j] != NULL; j++) {
+			free(minishell->cmd_table[i]->cmd[j]);
 		}
-		free(minishell->cmds[i]->cmd);
+		free(minishell->cmd_table[i]->cmd);
 	}
-	free(minishell->cmds);
+	free(minishell->cmd_table);
 }
 
 int main(int argc, char **argv, char **envp)

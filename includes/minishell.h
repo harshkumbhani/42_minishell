@@ -113,6 +113,11 @@ t_env	*find_env_key(t_env *head, char *key);
 int		add_env_node(t_env **head, char *key, char *full_string, char *value);
 int		count_env_variables(t_env *head);
 
+/* ------------------------------- File Utils ------------------------------- */
+
+void	open_outfile(t_cmd *cmd);
+void	open_infile(t_cmd *cmd);
+
 /* -------------------------------- Lst-utils ------------------------------- */
 
 void	lst_add_back(t_lexer **head, t_lexer *new_node);

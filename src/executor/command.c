@@ -15,7 +15,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	path = find_cmd_path(cmds, envp);
 	if (execve(path, cmds->cmd, envp) == -1)
 	{
-		// perror("execve");
+		perror("execve");
 		free(path);
 		free_env_array(envp);
 		exit(1);

@@ -17,6 +17,7 @@ static void	execute_pipes(t_minishell *minishell)
 	i = 0;
 	while (minishell->cmd_table[i])
 	{
+		printf("CMD: %s\n", minishell->cmd_table[i]->cmd[0]);
 		if (minishell->cmd_table[i + 1])
 			execute_child(minishell, i);
 		else

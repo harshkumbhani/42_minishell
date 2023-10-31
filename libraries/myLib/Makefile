@@ -6,7 +6,7 @@
 #    By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/15 11:34:52 by hkumbhan          #+#    #+#              #
-#    Updated: 2023/10/24 11:25:10 by cwenz            ###   ########.fr        #
+#    Updated: 2023/10/31 16:42:58 by cwenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_LIST = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_bac
 
 SRC_GNL = get_next_line_utils.c get_next_line.c 
 
-SRC_PRINTF = ft_printstr.c ft_printnum.c ft_printf.c
+SRC_PRINTF = ft_printstr.c ft_printnum.c ft_printf.c ft_fprintf.c
 
 ################################################################################
 #                                  Makefile  objs                              #

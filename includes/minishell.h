@@ -103,6 +103,10 @@ void	builtin_exit();
 void	exec_builtins(t_minishell *minishell);
 bool	is_cmd_builtin(t_minishell *minishell);
 
+/* ---------------------------------- Error --------------------------------- */
+
+void	print_error_msg(char **cmd);
+
 /* ---------------------------------- Utils --------------------------------- */
 
 char	*ft_strndup(const char *str, size_t n);

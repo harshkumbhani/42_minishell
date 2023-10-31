@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 11:39:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/07/18 12:45:50 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:48:15 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define HEX_C "0123456789ABCDEF"
 # define HEX_S "0123456789abcdef"
 
+int	ft_fprintf(int fd, const char *format, ...);
 int	ft_printf(const char *format, ...);
 int	ft_formattype(char c, va_list ap, int *i);
 int	ft_putchar_printf(char c);

@@ -51,7 +51,7 @@ typedef struct s_cmd {
 }	t_cmd;
 
 typedef struct s_minishell {
-	t_cmd	**cmds;
+	t_cmd	**cmd_table;
 	int		exit_code;
 	t_env	*head_env;
 }	t_minishell;

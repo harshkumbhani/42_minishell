@@ -5,10 +5,12 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	t_env	*head;
-	copy_env_to_linked_list(envp, &head);
-	env(head);
-	free_env_linked_list(head);
+	t_minishell	minishell;
+
+	minishell = (t_minishell){};
+	copy_env_to_linked_list(envp, &minishell.head_env);
+	env(minishell.head_env);
+	free_env_linked_list(minishell.head_env);
 	t_lexer	*lexer;
 	// executor(envp);
 

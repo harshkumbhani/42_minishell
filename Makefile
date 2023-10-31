@@ -15,7 +15,7 @@ SRC_SIGNALS         := signals.c
 SRC_FREE			:= env_free.c
 SRC_UTILS			:= env_utils.c utils.c file_utils.c
 SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
-SRC_EXECUTOR		:= executor.c handle_pipe.c command.c
+SRC_EXECUTOR		:= executor.c handle_pipe.c command.c handle_pipe_utils.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
 
 SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \

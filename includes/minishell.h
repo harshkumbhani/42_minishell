@@ -9,6 +9,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# define MINISHELL "Minishell"
+
 /* -------------------------------- Typedefs -------------------------------- */
 
 typedef enum e_token
@@ -81,6 +83,7 @@ void	executor(t_minishell *minishell);
 void	execute_cmd(t_cmd *cmds, t_env *head_env);
 void	execute_child(t_minishell *minishell, int index);
 void	execute_last_child(t_minishell *minishell, int index);
+void	get_exit_status(t_minishell *minishell, int	pid);
 
 /* ---------------------------------- Free ---------------------------------- */
 

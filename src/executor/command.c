@@ -13,17 +13,12 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	path_node = find_env_key(head_env, "PATH");
 	envp = ft_split(path_node->value, ':');
 	path = find_cmd_path(cmds, envp);
-	if (!path)
+	if (execve(path, cmds->cmd, envp) == -1)
 	{
-		// TODO: FREE STUFF??
-		printf("Unable to find path.\n");
-		exit(EXIT_FAILURE);
-	}
-	if (execve(path, cmds->cmd, envp) == EXIT_FAILURE)
-	{
+		// perror("execve");
 		free(path);
 		free_env_array(envp);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 }
 

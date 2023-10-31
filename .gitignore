@@ -4,5 +4,6 @@ objs/
 a.out
 libft.a
 outfile.txt
+input.txt
 test/
 output.txt

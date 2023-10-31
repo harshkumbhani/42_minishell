@@ -1,6 +1,8 @@
 
 #include "minishell.h"
 
+// static void	open_infile(t_cmd *cmd);
+
 void	execute_child(t_minishell *minishell, int index)
 {
 	int	pid;
@@ -12,8 +14,8 @@ void	execute_child(t_minishell *minishell, int index)
 	// 	// TODO: What if it fails?
 	if (pid == 0)
 	{
-		if (index == 0) // first child
-			// open_infile(minishell->cmds[index]);
+		// if (index == 0) // first child
+		// 	open_infile(minishell->cmds[index]);
 
 		close(minishell->cmds[index]->fd[0]); // close read end of pipe
 		dup2(minishell->cmds[index]->fd[1], STDOUT_FILENO); // duplicate write end of pipe to STDIN_FILENO
@@ -46,7 +48,6 @@ void	execute_last_child(t_minishell *minishell, int index)
 		dup2(minishell->cmds[index]->fd[0], STDIN_FILENO); // duplicate write end of pipe to STDIN_FILENO
 		dup2(minishell->cmds[index]->outfile_fd, STDOUT_FILENO); // duplicate to std output
 		close(minishell->cmds[index]->fd[0]); // close read end of pipe
-
 		execute_cmd(minishell->cmds[index], minishell->head_env);
 	}
 	else
@@ -56,3 +57,13 @@ void	execute_last_child(t_minishell *minishell, int index)
 			minishell->exit_code = status;
 	}
 }
+
+// static void	open_infile(t_cmd *cmd)
+// {
+// 	cmd->infile_fd = open_file(cmd->cmd[1], 0);
+// 	if (cmd->infile_fd == -1)
+// 	{
+// 		/* do something */
+// 	}
+// 	dup2(cmd->infile_fd, STDIN_FILENO);
+// }

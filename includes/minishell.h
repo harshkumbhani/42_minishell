@@ -57,7 +57,7 @@ typedef struct s_minishell {
 	t_env	*head_env;
 }	t_minishell;
 
-int	g_signal_received;
+// int	g_signal_received;
 
 /* --------------------------------- Lexer -------------------------------- */
 

@@ -94,14 +94,14 @@ void	free_env_array(char **envp);
 /* -------------------------------- Built-ins ------------------------------- */
 
 int		cd(t_env **head);
-int		pwd();
-void	env(t_env *head);
-void	echo(void);
+int		pwd(void);
+int		env(t_env *head);
+int		echo(void);
 int		export(t_env **head, char *str);
-void	unset(t_env **head, const char *key);
+int		unset(t_env **head, const char *key);
 void	builtin_exit();
-void	exec_builtins(t_minishell *minishell);
-bool	is_cmd_builtin(t_minishell *minishell);
+void	exec_builtins(t_minishell *minishell, int i);
+bool	is_cmd_builtin(t_minishell *minishell, int i);
 
 /* ---------------------------------- Error --------------------------------- */
 

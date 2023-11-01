@@ -3,11 +3,10 @@
 
 static void	update_pwd(t_env **head, char *old_dir);
 
-int	cd(t_env **head)
+int	cd(t_env **head, char *path)
 {
 	int		len;
 	char	*old_dir;
-	char	*path = "src"; // remove this variable and use cmd struct later on
 
 	if (!path || !*path)
 	{

@@ -28,6 +28,8 @@ int	export(t_env **head, char *str)
 			free(value);
 		return (EXIT_FAILURE);
 	}
+	// If there is a duplicate key, remove the exisiting variable and replace with new
+	unset(head, key);
 	add_env_node(head, key, full_string, value);
 	return (EXIT_SUCCESS);
 }

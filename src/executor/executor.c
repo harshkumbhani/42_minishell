@@ -4,8 +4,8 @@ static void	execute_pipes(t_minishell *minishell);
 
 void	executor(t_minishell *minishell)
 {
-	if (!minishell->cmd_table[1] && is_cmd_builtin(minishell))
-		exec_builtins(minishell);
+	if (!minishell->cmd_table[1] && is_cmd_builtin(minishell, 0))
+		exec_builtins(minishell, 0);
 	else
 		execute_pipes(minishell);
 }

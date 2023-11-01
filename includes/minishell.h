@@ -93,7 +93,7 @@ void	free_env_array(char **envp);
 
 /* -------------------------------- Built-ins ------------------------------- */
 
-int		cd(t_env **head);
+int		cd(t_env **head, char *path);
 int		pwd(void);
 int		env(t_env *head);
 int		echo(void);

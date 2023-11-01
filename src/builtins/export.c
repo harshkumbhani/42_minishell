@@ -5,7 +5,7 @@
  * @brief Adds the given string to the env linked list.
  * @param head The first node of the env linked list.
  * @param str The string to be added to the end of the linked list
- * @return The head node if successful, else NULL.
+ * @return EXIT_SUCESS if everything was ok, else EXIT_FAILURE
  */
 int	export(t_env **head, char *str)
 {

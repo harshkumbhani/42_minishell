@@ -27,6 +27,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	}
 }
 
+// Todo: Check if i can access the file and handle appropraitely??
 static char	*find_cmd_path(t_cmd *cmd, char **envp)
 {
 	char	*path;

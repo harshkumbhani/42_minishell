@@ -96,7 +96,7 @@ void	free_env_array(char **envp);
 int		cd(t_env **head, char *path);
 int		pwd(void);
 int		env(t_env *head);
-int		echo(void);
+int		echo(char **cmd);
 int		export(t_env **head, char *str);
 int		unset(t_env **head, const char *key);
 void	builtin_exit();

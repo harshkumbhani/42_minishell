@@ -13,7 +13,7 @@ void	exec_builtins(t_minishell *minishell, int i)
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "unset") == EXIT_SUCCESS)
 		minishell->exit_code = unset(&minishell->head_env, minishell->cmd_table[0]->cmd[1]);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "echo") == EXIT_SUCCESS)
-		minishell->exit_code = echo();
+		minishell->exit_code = echo(minishell->cmd_table[i]->cmd);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "exit") == EXIT_SUCCESS)
 		builtin_exit();
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "export") == EXIT_SUCCESS)

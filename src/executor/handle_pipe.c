@@ -20,7 +20,10 @@ void	execute_child(t_minishell *minishell, int index)
 		dup2(minishell->cmd_table[index]->fd[1], STDOUT_FILENO);
 		close(minishell->cmd_table[index]->fd[1]);
 		if (is_cmd_builtin(minishell, index))
+		{
 			exec_builtins(minishell, index);
+			exit(minishell->exit_code);
+		}
 		else
 			execute_cmd(minishell->cmd_table[index], minishell->head_env);
 	}
@@ -46,7 +49,10 @@ void	execute_last_child(t_minishell *minishell, int index)
 			close(minishell->cmd_table[index - 1]->fd[0]);
 		}
 		if (is_cmd_builtin(minishell, index))
+		{
 			exec_builtins(minishell, index);
+			exit(minishell->exit_code);
+		}
 		else
 			execute_cmd(minishell->cmd_table[index], minishell->head_env);
 	}

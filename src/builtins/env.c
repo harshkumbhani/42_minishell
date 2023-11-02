@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:10:53 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/01 14:52:28 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/02 12:58:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	env(t_env *head)
 	temp = head;
 	while (temp)
 	{
-		printf("%s\n", temp->full_string);
+		ft_printf("%s\n", temp->full_string);
 		temp = temp->next;
 	}
 	return (EXIT_SUCCESS);

@@ -20,7 +20,7 @@ int	cd(t_env **head, char *path)
 	old_dir = getcwd(NULL, 0);
 	if (chdir(path) != EXIT_SUCCESS)
 	{
-		ft_fprintf("minishell: chdir: %s\n", strerror(errno));
+		ft_fprintf(STDERR_FILENO, "minishell: chdir: %s\n", strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	update_pwd(head, old_dir);

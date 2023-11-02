@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:56:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/01 14:53:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/01 17:47:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	echo(void)
 	if (!args[1])
 	{
 		printf("\n");
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	if (has_n_flag(args))
 		print_string(args, 2, false);

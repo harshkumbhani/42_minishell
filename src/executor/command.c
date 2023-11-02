@@ -16,7 +16,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	{
 		ft_fprintf(STDERR_FILENO, "minishell: %s: command not found\n", cmds->cmd[0]);
 		free_env_array(envp);
-		exit(errno);
+		exit(127);
 	}
 	if (execve(path, cmds->cmd, envp) == -1)
 	{

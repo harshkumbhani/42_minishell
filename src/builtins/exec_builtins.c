@@ -1,7 +1,6 @@
 
 #include "minishell.h"
 
-// TODO: Capture exit code for $?
 void	exec_builtins(t_minishell *minishell, int i)
 {
 	if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "cd") == EXIT_SUCCESS)
@@ -15,7 +14,7 @@ void	exec_builtins(t_minishell *minishell, int i)
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "echo") == EXIT_SUCCESS)
 		minishell->exit_code = echo(minishell->cmd_table[i]->cmd);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "exit") == EXIT_SUCCESS)
-		builtin_exit();
+		builtin_exit(minishell);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "export") == EXIT_SUCCESS)
 		minishell->exit_code = export(&minishell->head_env, minishell->cmd_table[i]->cmd[1]);
 }

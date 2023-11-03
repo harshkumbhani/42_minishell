@@ -1,16 +1,16 @@
 # include "minishell.h"
 
-static void	execute_pipes(t_minishell *minishell);
+static void	exec_cmd_table(t_minishell *minishell);
 
 void	executor(t_minishell *minishell)
 {
 	if (!minishell->cmd_table[1] && is_cmd_builtin(minishell, 0))
 		exec_builtins(minishell, 0);
 	else
-		execute_pipes(minishell);
+		exec_cmd_table(minishell);
 }
 
-static void	execute_pipes(t_minishell *minishell)
+static void	exec_cmd_table(t_minishell *minishell)
 {
 	int	i;
 
@@ -18,9 +18,9 @@ static void	execute_pipes(t_minishell *minishell)
 	while (minishell->cmd_table[i])
 	{
 		if (minishell->cmd_table[i + 1])
-			execute_child(minishell, i);
+			execute_cmd_with_pipe(minishell, i);
 		else
-			execute_last_child(minishell, i);
+			execute_final_cmd(minishell, i);
 		i++;
 	}
 }

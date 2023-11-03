@@ -81,8 +81,8 @@ void	setup_signals();
 
 void	executor(t_minishell *minishell);
 void	execute_cmd(t_cmd *cmds, t_env *head_env);
-void	execute_child(t_minishell *minishell, int index);
-void	execute_last_child(t_minishell *minishell, int index);
+void	execute_cmd_with_pipe(t_minishell *minishell, int index);
+void	execute_final_cmd(t_minishell *minishell, int index);
 void	get_exit_status(t_minishell *minishell, int	pid);
 
 /* ---------------------------------- Free ---------------------------------- */
@@ -99,7 +99,7 @@ int		env(t_env *head);
 int		echo(char **cmd);
 int		export(t_env **head, char *str);
 int		unset(t_env **head, const char *key);
-void	builtin_exit();
+void	builtin_exit(t_minishell *minishell);
 void	exec_builtins(t_minishell *minishell, int i);
 bool	is_cmd_builtin(t_minishell *minishell, int i);
 

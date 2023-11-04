@@ -5,12 +5,6 @@ static void	process_string(t_env **head, char *str);
 static bool	is_key_valid(char *str);
 static char	*get_key(char *str);
 
-/**
- * @brief Adds the given string to the env linked list.
- * @param head The first node of the env linked list.
- * @param str The string to be added to the end of the linked list
- * @return EXIT_SUCESS if everything was ok, else EXIT_FAILURE
- */
 int	export(t_env **head, char **str)
 {
 	int	i;
@@ -19,7 +13,7 @@ int	export(t_env **head, char **str)
 	while (str[i])
 	{
 		if (!is_key_valid(str[i]))
-			ft_fprintf(STDERR_FILENO, "minishell: export: \'%s\': is not a valid identifier.\n", str[i]);
+			ft_fprintf(STDERR_FILENO, "minishell: export: \'%s\': is not a valid identifier\n", str[i]);
 		else
 			process_string(head, str[i]);
 		i++;

@@ -16,7 +16,7 @@ void	exec_builtins(t_minishell *minishell, int i)
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "exit") == EXIT_SUCCESS)
 		builtin_exit(minishell);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "export") == EXIT_SUCCESS)
-		minishell->exit_code = export(&minishell->head_env, minishell->cmd_table[i]->cmd[1]);
+		minishell->exit_code = export(&minishell->head_env, minishell->cmd_table[i]->cmd);
 }
 
 bool	is_cmd_builtin(t_minishell *minishell, int i)

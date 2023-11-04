@@ -84,6 +84,8 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env);
 void	execute_cmd_with_pipe(t_minishell *minishell, int index);
 void	execute_final_cmd(t_minishell *minishell, int index);
 void	get_exit_status(t_minishell *minishell, int	pid);
+void	execute_child_with_pipe(t_minishell *minishell, int index);
+void	handle_cmd_execution(t_minishell *minishell, int index);
 
 /* ---------------------------------- Free ---------------------------------- */
 
@@ -97,7 +99,7 @@ int		cd(t_env **head, char *path);
 int		pwd(void);
 int		env(t_env *head);
 int		echo(char **cmd);
-int		export(t_env **head, char *str);
+int		export(t_env **head, char **str);
 int		unset(t_env **head, const char *key);
 void	builtin_exit(t_minishell *minishell);
 void	exec_builtins(t_minishell *minishell, int i);

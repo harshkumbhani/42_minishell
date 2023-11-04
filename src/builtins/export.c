@@ -1,13 +1,33 @@
 
 #include "minishell.h"
 
+static void	process_string(t_env **head, char *str);
+static bool	is_key_valid(char *str);
+static char	*get_key(char *str);
+
 /**
  * @brief Adds the given string to the env linked list.
  * @param head The first node of the env linked list.
  * @param str The string to be added to the end of the linked list
  * @return EXIT_SUCESS if everything was ok, else EXIT_FAILURE
  */
-int	export(t_env **head, char *str)
+int	export(t_env **head, char **str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (!is_key_valid(str[i]))
+			ft_fprintf(STDERR_FILENO, "minishell: export: \'%s\': is not a valid identifier.\n", str[i]);
+		else
+			process_string(head, str[i]);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static void	process_string(t_env **head, char *str)
 {
 	char	*key;
 	char	*equal_sign;
@@ -26,10 +46,47 @@ int	export(t_env **head, char *str)
 			free(full_string);
 		if (value)
 			free(value);
-		return (EXIT_FAILURE);
+		return ;
 	}
-	// If there is a duplicate key, remove the exisiting variable and replace with new
 	unset(head, key);
 	add_env_node(head, key, full_string, value);
-	return (EXIT_SUCCESS);
+}
+
+static bool	is_key_valid(char *str)
+{
+	int		i;
+	char	*key;
+
+	key = get_key(str);
+	if (!key)
+		return (false);
+	if (!ft_isalpha(key[0]) && key[0] != '_')
+		return (free(key), false);
+	i = 1;
+	while (key[i])
+	{
+		if (ft_isalnum(key[i]) == 0 && key[i] != '_')
+			return (free(key), false);
+		i++;
+	}
+	return (free(key), true);
+}
+
+char	*get_key(char *str)
+{
+	char	*key;
+	char	*equal_sign;
+	char	*full_string;
+
+	full_string = ft_strdup(str);
+	if (!full_string)
+		return (NULL);
+	equal_sign = ft_strchr(full_string, '=');
+	if (!equal_sign)
+		return (free(full_string), NULL);
+	key = ft_strndup(full_string, equal_sign - full_string);
+	if (!key)
+		return (free(full_string), NULL);
+	free(full_string);
+	return (key);
 }

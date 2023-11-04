@@ -9,8 +9,8 @@ int main(int argc, char **argv, char **envp)
 
 	minishell = (t_minishell){};
 	copy_env_to_linked_list(envp, &minishell.head_env);
-	env(minishell.head_env);
-	free_env_linked_list(minishell.head_env);
+	//env(minishell.head_env);
+	//free_env_linked_list(minishell.head_env);
 	t_lexer	*lexer;
 	// executor(envp);
 
@@ -27,7 +27,7 @@ int main(int argc, char **argv, char **envp)
 			break;
 		}
 		lexer = tokenise(input);
-		parser(&lexer, &minishell);
+		//parser(&lexer, &minishell);
 		//if (lexer == NULL)
 		//{
 		//	printf("Invalid input\n");
@@ -40,7 +40,7 @@ int main(int argc, char **argv, char **envp)
 		free(input);
 	}
 				
-	//lexer = tokenise("ls -al");
+	//lexer = tokenise("echo \"this is $VAR\"  \"String 2\"");
 	//if (lexer != NULL)
 	//{
 	//	print_list(&lexer);

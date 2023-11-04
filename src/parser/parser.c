@@ -14,7 +14,12 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_env **envp)
 	cmds->cmd = (char **)ft_calloc(words + 1, sizeof(char *));
 	while (lex != NULL && i < words)
 	{
-		if (lex->token == WORD)
+		if ((lex->token == SQUOTE || lex->token == DQUOTE) && lex->strlen == 0)
+		{
+			lex = lex->next;
+			continue ;
+		}
+		else if (lex->token == WORD)
 			cmds->cmd[i] = ft_strndup(lex->start, lex->strlen);
 		else if (lex->token == DQUOTE)
 			cmds->cmd[i] = expander(lex, envp);

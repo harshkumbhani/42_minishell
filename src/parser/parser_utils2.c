@@ -22,19 +22,19 @@ char	*expander(t_lexer *lexer, t_env **env)
 {
 	t_env	*envp;
 	char	*ret;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	ret = NULL;
 	envp = *env;
-	while (lexer->start[i] != '\0' && lexer->start[i] != '$')
+	while (i < lexer->strlen && lexer->start[i] != '$')
 		i++;
-	if (lexer->start[i] == '\0')
+	if (i == lexer->strlen)
 		ret = ft_strndup(lexer->start, i);
-	else
-	{
-		i--;
+	//else
+	//{
+	//	i--;
 		
-	}
+	//}
 	return (ret);
 }

@@ -78,6 +78,7 @@ int		count_pipes(t_lexer **lexer);
 void	init_t_cmd(t_cmd **cmd);
 void	free_cmd_table(t_cmd **cmd_table);
 int		count_words(t_lexer **lexer);
+char	*expander(t_lexer *lexer, t_env **env);
 /* --------------------------------- Signals -------------------------------- */
 
 void	setup_signals();

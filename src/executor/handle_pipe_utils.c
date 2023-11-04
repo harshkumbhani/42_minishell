@@ -1,8 +1,6 @@
 
 #include "minishell.h"
 
-static void	handle_heredoc(t_minishell *minishell, int index);
-
 void	get_exit_status(t_minishell *minishell, int	pid)
 {
 	int	status;

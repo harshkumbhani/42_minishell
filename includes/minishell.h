@@ -86,6 +86,7 @@ void	execute_final_cmd(t_minishell *minishell, int index);
 void	get_exit_status(t_minishell *minishell, int	pid);
 void	execute_child_with_pipe(t_minishell *minishell, int index);
 void	handle_cmd_execution(t_minishell *minishell, int index);
+void	handle_heredoc(t_minishell *minishell, int index);
 
 /* ---------------------------------- Free ---------------------------------- */
 

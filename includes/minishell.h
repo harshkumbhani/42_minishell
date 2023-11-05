@@ -103,8 +103,8 @@ void	builtin_exit();
 
 /* ---------------------------------- Utils --------------------------------- */
 
-char	*ft_strndup(const char *str, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
+// char	*ft_strndup(const char *str, size_t n);
+// int		ft_strcmp(const char *s1, const char *s2);
 int		export(t_env **head, char *str);
 int		copy_env_to_linked_list(char **envp, t_env **head);
 t_env	*find_env_key(t_env *head, char *key);

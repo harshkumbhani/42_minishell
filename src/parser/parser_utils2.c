@@ -18,23 +18,23 @@ int	count_words(t_lexer **lexer)
 	return (i);
 }
 
-char	*expander(t_lexer *lexer, t_env **env)
-{
-	t_env	*envp;
-	char	*ret;
-	int		i;
+// char	*expander(t_lexer *lexer, t_env **env)
+// {
+// 	t_env	*envp;
+// 	char	*ret;
+// 	int		i;
 
-	i = 0;
-	ret = NULL;
-	envp = *env;
-	while (i < lexer->strlen && lexer->start[i] != '$')
-		i++;
-	if (i == lexer->strlen)
-		ret = ft_strndup(lexer->start, i);
-	//else
-	//{
-	//	i--;
+// 	i = 0;
+// 	ret = NULL;
+// 	envp = *env;
+// 	while (i < lexer->strlen && lexer->start[i] != '$')
+// 		i++;
+// 	if (i == lexer->strlen)
+// 		ret = ft_strndup(lexer->start, i);
+// 	//else
+// 	//{
+// 	//	i--;
 		
-	//}
-	return (ret);
-}
+// 	//}
+// 	return (ret);
+// }

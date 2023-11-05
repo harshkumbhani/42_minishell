@@ -27,7 +27,8 @@ int main(int argc, char **argv, char **envp)
 			break;
 		}
 		lexer = tokenise(input);
-		//parser(&lexer, &minishell);
+		print_list(&lexer);
+		parser(&lexer, &minishell);
 		//if (lexer == NULL)
 		//{
 		//	printf("Invalid input\n");
@@ -35,18 +36,17 @@ int main(int argc, char **argv, char **envp)
 		//}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
-		print_list(&lexer);
 		lst_del(&lexer);
 		free(input);
 	}
 				
-	//lexer = tokenise("echo \"this is $VAR\"  \"String 2\"");
-	//if (lexer != NULL)
-	//{
-	//	print_list(&lexer);
-	//}
-	//parser(&lexer, &minishell);
-	//lst_del(&lexer);
+	// lexer = tokenise("echo '$USER'");
+	// if (lexer != NULL)
+	// {
+	// 	print_list(&lexer);
+	// }
+	// parser(&lexer, &minishell);
+	// lst_del(&lexer);
 	free_env_linked_list(minishell.head_env);
 	return (0);
 }

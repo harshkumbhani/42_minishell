@@ -8,7 +8,14 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 	pipe(minishell->cmd_table[index]->fd);
 	pid = fork();
 	if (pid == 0)
+	{
+		if (minishell->cmd_table[index]->here_doc)
+		{
+			handle_heredoc(minishell, index);
+			exit(EXIT_SUCCESS);
+		}
 		execute_child_with_pipe(minishell, index);
+	}
 	else
 	{
 		close(minishell->cmd_table[index]->fd[1]);

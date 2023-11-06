@@ -33,11 +33,6 @@ void	handle_cmd_execution(t_minishell *minishell, int index)
 		exec_builtins(minishell, index);
 		exit(minishell->exit_code);
 	}
-	else if (minishell->cmd_table[index]->here_doc)
-	{
-		handle_heredoc(minishell, index);
-		exit(EXIT_SUCCESS);
-	}
 	else
 		execute_cmd(minishell->cmd_table[index], minishell->head_env);
 }

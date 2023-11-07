@@ -3,29 +3,23 @@
 void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_env **envp)
 {
 	t_cmd	*cmds;
-	t_lexer	*lex;
 	int		i;
 	int		words;
-	(void)envp;
+
 	cmds = *cmd_table;
-	lex = *lexer;
-	i = 0;
+	i = -1;
 	words = count_words(lexer);
 	cmds->cmd = (char **)ft_calloc(words + 1, sizeof(char *));
-	while (lex != NULL && i < words)
+	while ((*lexer) != NULL && ++i < words && (*lexer)->token != PIPE)
 	{
-		if (lex->token == SQUOTE)
-			cmds->cmd[i] = ft_strndup(lex->start, lex->strlen);
-		else if (lex->token == WORD)
-			cmds->cmd[i] = ft_strndup(lex->start, lex->strlen);
-		// else if (lex->token == DQUOTE)
-		// 	cmds->cmd[i] = expander(lex, envp);
-		lex = lex->next;
-		i++;
+		if ((*lexer)->token == SQUOTE)
+			cmds->cmd[i] = ft_strndup((*lexer)->start, (*lexer)->strlen);
+		else if ((*lexer)->token == WORD || (*lexer)->token == DQUOTE)
+			cmds->cmd[i] = expander(*lexer, envp);
+		(*lexer) = (*lexer)->next;
 	}
-	cmds->cmd[i] = NULL;
-	for(int k = 0; k < words; k++)
-		printf("cmd[%d]: %s\n", k, cmds->cmd[k]);
+	if ((*lexer) != NULL && (*lexer)->token == PIPE)
+		(*lexer) = (*lexer)->next;
 }
 
 int	parser(t_lexer **lexer, t_minishell *minishell)
@@ -34,6 +28,8 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 	int		j;
 
 	j = 0;
+	if (syntax_checker(lexer, minishell) == FAIL)
+		return (FAIL);
 	i = count_pipes(lexer);
 	if (lexer == NULL && *lexer == NULL)
 		return (EXIT_SUCCESS);
@@ -43,8 +39,10 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, &(minishell)->head_env);
+		print_cmd_table(&(minishell)->cmd_table[j]);
 		j++;
 	}
+	minishell->cmd_table[j] = NULL;
 	free_cmd_table(minishell->cmd_table);
-	return (0);
+	return (SUCCESS);
 }

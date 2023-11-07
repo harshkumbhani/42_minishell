@@ -18,7 +18,7 @@ SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
 SRC_EXECUTOR		:= executor.c pipex.c executor_utils.c handle_pipe.c handle_error.c \
 						execute.c init.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
-SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c
+SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c syntax_error.c
 SRC_EXPANDER		:= 
 
 SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \

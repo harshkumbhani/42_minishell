@@ -30,6 +30,7 @@ void	init_t_cmd(t_cmd **cmd)
 	current->outfile = NULL;
 	current->infile_fd = -1;
 	current->outfile_fd = -1;
+	current->file_type = -1;
 	current->here_doc = FALSE;
 }
 

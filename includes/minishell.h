@@ -11,6 +11,15 @@
 
 /* -------------------------------- Typedefs -------------------------------- */
 
+#define OPEN 0
+#define TRUNC 1
+#define APPEND 2
+
+#define SUCCESS 0
+#define FAIL	1
+
+#define SYNTAX "minishell: syntax error near unexpected token "
+
 typedef enum e_token
 {
 	WORD			= 0,
@@ -48,6 +57,7 @@ typedef struct s_cmd {
 	char	*outfile;
 	int		infile_fd;
 	int		outfile_fd;
+	int		file_type;
 	bool	here_doc;
 }	t_cmd;
 
@@ -79,6 +89,10 @@ void	init_t_cmd(t_cmd **cmd);
 void	free_cmd_table(t_cmd **cmd_table);
 int		count_words(t_lexer **lexer);
 char	*expander(t_lexer *lexer, t_env **env);
+void	print_cmd_table(t_cmd **cmd_table);
+
+int	syntax_checker(t_lexer **lexer, t_minishell *minishell);
+
 /* --------------------------------- Signals -------------------------------- */
 
 void	setup_signals();

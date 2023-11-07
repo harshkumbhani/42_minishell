@@ -27,26 +27,30 @@ int main(int argc, char **argv, char **envp)
 			break;
 		}
 		lexer = tokenise(input);
-		print_list(&lexer);
-		parser(&lexer, &minishell);
+		//print_list(&lexer);
+		if (input && input[0] != '\0' && input[0] != '\n')
+			add_history(input);
+		if (parser(&lexer, &minishell) == FAIL)
+		{
+			lst_del(&lexer);
+			continue;
+		}
 		//if (lexer == NULL)
 		//{
 		//	printf("Invalid input\n");
 		//	//continue ;
 		//}
-		if (input && input[0] != '\0' && input[0] != '\n')
-			add_history(input);
 		lst_del(&lexer);
 		free(input);
 	}
 				
-	// lexer = tokenise("echo '$USER'");
-	// if (lexer != NULL)
-	// {
-	// 	print_list(&lexer);
-	// }
-	// parser(&lexer, &minishell);
-	// lst_del(&lexer);
+	//lexer = tokenise("ls -al | echo '$USER'");
+	//if (lexer != NULL)
+	//{
+	//print_list(&lexer);
+	//}
+	//parser(&lexer, &minishell);
+	//lst_del(&lexer);
 	free_env_linked_list(minishell.head_env);
 	return (0);
 }

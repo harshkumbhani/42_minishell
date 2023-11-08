@@ -10,14 +10,12 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	path_node = find_env_key(head_env, "PATH");
 	envp = ft_split(path_node->value, ':');
 	path = find_cmd_path(cmds, envp);
-	// printf("PATH: %s\n", path);
 	if (!path)
 	{
 		ft_fprintf(STDERR_FILENO, "minishell: %s: command not found\n", cmds->cmd[0]);
 		free_env_array(envp);
 		exit(127);
 	}
-
 	if (execve(path, cmds->cmd, envp) == -1)
 	{
 		fprintf(stderr, "minishell: %s: %s\n", cmds->cmd[0], strerror(errno));

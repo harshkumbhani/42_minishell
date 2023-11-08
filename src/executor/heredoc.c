@@ -15,12 +15,16 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	pipe(minishell->cmd_table[index]->fd);
 	pid = fork();
 	if (pid == 0)
+	{
+
 		execute_heredoc(minishell->cmd_table[index]);
+	}
 	else
 	{
 		close(minishell->cmd_table[index]->fd[1]);
-		if (index > 0)
-			close(minishell->cmd_table[index - 1]->fd[0]);
+		dup2(minishell->cmd_table[index]->fd[0], STDIN_FILENO);
+		close(minishell->cmd_table[index]->fd[0]);
+
 		get_exit_status(minishell, pid);
 		// Check if there is a command for heredoc
 		if (cmd_pos != -1)
@@ -61,7 +65,7 @@ static void	execute_heredoc_cmd(t_minishell *minishell, int index)
 		if (has_cmd(minishell->cmd_table[index]) == 0)
 		{
 			new_cmd.cmd = assign_new_cmd_without_heredoc(minishell->cmd_table[index]->cmd);
-			printf("newCMD: %s. %s.\n", new_cmd.cmd[0], new_cmd.cmd[1]);
+			// printf("newCMD: %s. %s.\n", new_cmd.cmd[0], new_cmd.cmd[1]);
 			execute_cmd(&new_cmd, minishell->head_env);
 		}
 		else if (has_cmd(minishell->cmd_table[index]) == 1)

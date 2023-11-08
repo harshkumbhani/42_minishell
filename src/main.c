@@ -44,10 +44,10 @@ int main(int argc, char **argv, char **envp)
 		free(input);
 	}
 				
-	//lexer = tokenise("ls -al | echo '$USER'");
+	//lexer = tokenise("echo $1234");
 	//if (lexer != NULL)
 	//{
-	//print_list(&lexer);
+	//	print_list(&lexer);
 	//}
 	//parser(&lexer, &minishell);
 	//lst_del(&lexer);

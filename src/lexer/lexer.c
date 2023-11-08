@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/30 12:43:15 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:37:54 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_input(char *input)
 	}
 	if (c == '\0')
 		return (TRUE);
+	ft_putendl_fd(QUOTES, STDERR_FILENO);
 	return (FALSE);
 }
 

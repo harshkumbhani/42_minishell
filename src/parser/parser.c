@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_env **envp)
+void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 {
 	t_cmd	*cmds;
 	int		i;
@@ -15,7 +15,7 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_env **envp)
 		if ((*lexer)->token == SQUOTE)
 			cmds->cmd[i] = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if ((*lexer)->token == WORD || (*lexer)->token == DQUOTE)
-			cmds->cmd[i] = expander(*lexer, envp);
+			cmds->cmd[i] = expander(*lexer, minishell);
 		(*lexer) = (*lexer)->next;
 	}
 	if ((*lexer) != NULL && (*lexer)->token == PIPE)
@@ -31,14 +31,14 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 	if (syntax_checker(lexer, minishell) == FAIL)
 		return (FAIL);
 	i = count_pipes(lexer);
-	if (lexer == NULL && *lexer == NULL)
+	if (*lexer == NULL)
 		return (EXIT_SUCCESS);
 	minishell->cmd_table = (t_cmd **)ft_calloc(i + 2, sizeof(t_cmd *));
 	while (j <= i)
 	{
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
-		put_args(&(minishell)->cmd_table[j], lexer, &(minishell)->head_env);
+		put_args(&(minishell)->cmd_table[j], lexer, minishell);
 		print_cmd_table(&(minishell)->cmd_table[j]);
 		j++;
 	}

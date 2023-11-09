@@ -30,6 +30,10 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 			dup2(minishell->cmd_table[index - 1]->fd[0], STDIN_FILENO);
 			close(minishell->cmd_table[index - 1]->fd[0]);
 		}
+		if (minishell->cmd_table[index]->infile)
+			open_infile(minishell->cmd_table[index]);
+		if (minishell->cmd_table[index]->outfile)
+			open_outfile(minishell->cmd_table[index]);
 		handle_cmd_execution(minishell, index);
 	}
 	else

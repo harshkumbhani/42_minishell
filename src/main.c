@@ -5,7 +5,7 @@
 void    init_mock_data(t_minishell *minishell) {
 	int     i, j;
 	char    *cmd_table_arr[][7] = {
-		{"cat", NULL},
+		{"cat", "infile.txt", NULL},
 		// {"cat", "outfile.txt", NULL},
 	};
 	int num_cmd_table = sizeof(cmd_table_arr) / sizeof(cmd_table_arr[0]);
@@ -19,13 +19,13 @@ void    init_mock_data(t_minishell *minishell) {
 		}
 		minishell->cmd_table[i]->cmd[j] = NULL;
 		minishell->cmd_table[i]->deli = "EOF";
-		minishell->cmd_table[i]->infile = NULL;
 		minishell->cmd_table[i]->infile_fd = -1;
 		minishell->cmd_table[i]->outfile_fd = -1;
-		minishell->cmd_table[0]->outfile = NULL;
+		minishell->cmd_table[0]->outfile = "outfile.txt";
+		minishell->cmd_table[0]->infile = "infile.txt";
 		minishell->cmd_table[i]->file_type = 1;
 	}
-	minishell->cmd_table[0]->here_doc = true;
+	minishell->cmd_table[0]->here_doc = false;
 	minishell->cmd_table[i] = NULL;
 }
 

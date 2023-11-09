@@ -22,20 +22,16 @@ static int	open_file(char *file, int i)
 
 void    open_infile(t_cmd *cmd)
 {
-	cmd->infile_fd = open_file(cmd->infile, 0);
-	if (cmd->infile_fd == -1)
-	{
-		perror("open");
-		exit(EXIT_FAILURE);
-	}
+	cmd->infile_fd = open_file(cmd->infile, cmd->file_type);
 	dup2(cmd->infile_fd, STDIN_FILENO);
 	close(cmd->infile_fd);
+	fprintf(stderr, "Opening in file :D\n");
 }
 
 
 void	open_outfile(t_cmd *cmd)
 {
-	cmd->outfile_fd = open_file(cmd->outfile, 1);
+	cmd->outfile_fd = open_file(cmd->outfile, cmd->file_type);
 	dup2(cmd->outfile_fd, STDOUT_FILENO);
 	close(cmd->outfile_fd);
 }

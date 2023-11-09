@@ -51,7 +51,6 @@ static void	execute_heredoc(t_cmd *cmd_table)
 static void	execute_heredoc_cmd(t_minishell *minishell, int index)
 {
 	int		pid;
-	t_cmd	new_cmd;
 
 	pid = fork();
 	if (pid == 0)
@@ -59,7 +58,7 @@ static void	execute_heredoc_cmd(t_minishell *minishell, int index)
 		dup2(minishell->cmd_table[index]->fd[0], STDIN_FILENO);
 		close(minishell->cmd_table[index]->fd[0]);
 		if (has_cmd(minishell->cmd_table[index]) == 0)
-			execute_cmd(minishell->cmd_table[index]->cmd, minishell->head_env);
+			execute_cmd(minishell->cmd_table[index], minishell->head_env);
 		else if (has_cmd(minishell->cmd_table[index]) == 1)
 			echo(minishell->cmd_table[index]->cmd);
 	}

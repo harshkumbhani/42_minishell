@@ -1,10 +1,11 @@
 # include "minishell.h"
 
 static void	exec_cmd_table(t_minishell *minishell);
+static bool	is_simple_builtin(t_minishell *minishell);
 
 void	executor(t_minishell *minishell)
 {
-	if (!minishell->cmd_table[1] && is_cmd_builtin(minishell, 0) && !minishell->cmd_table[0]->here_doc)
+	if (is_simple_builtin(minishell))
 		exec_builtins(minishell, 0);
 	else
 		exec_cmd_table(minishell);
@@ -15,6 +16,7 @@ static void	exec_cmd_table(t_minishell *minishell)
 	int	i;
 
 	i = 0;
+	printf("Inside cmd loop!\n");
 	while (minishell->cmd_table[i])
 	{
 		if (minishell->cmd_table[i]->here_doc)
@@ -25,4 +27,13 @@ static void	exec_cmd_table(t_minishell *minishell)
 			execute_final_cmd(minishell, i);
 		i++;
 	}
+}
+
+static bool	is_simple_builtin(t_minishell *minishell)
+{
+	if (!minishell->cmd_table[1] && is_cmd_builtin(minishell, 0)
+		&& !minishell->cmd_table[0]->here_doc && !minishell->cmd_table[0]->infile
+		&& !minishell->cmd_table[0]->outfile)
+		return (true);
+	return (false);
 }

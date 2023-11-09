@@ -49,6 +49,7 @@ typedef struct s_cmd {
 	char	*outfile;
 	int		infile_fd;
 	int		outfile_fd;
+	int		file_type;
 	int		fd[2];
 	bool	here_doc;
 }	t_cmd;
@@ -107,14 +108,8 @@ void	builtin_exit(t_minishell *minishell);
 void	exec_builtins(t_minishell *minishell, int i);
 bool	is_cmd_builtin(t_minishell *minishell, int i);
 
-/* ---------------------------------- Error --------------------------------- */
-
-void	print_error_msg(char **cmd);
-
 /* ---------------------------------- Utils --------------------------------- */
 
-char	*ft_strndup(const char *str, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
 char	*strjoin_pipex(char *s1, char *s2);
 
 /* -------------------------------- Env Utils ------------------------------- */

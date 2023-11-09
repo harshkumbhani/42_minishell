@@ -4,7 +4,6 @@
 static void	execute_heredoc(t_cmd *cmd);
 static int	has_cmd(t_cmd *cmd_table);
 static void	execute_heredoc_cmd(t_minishell *minishell, int index);
-static char	**assign_new_cmd_without_heredoc(char **cmd);
 
 void	handle_heredoc(t_minishell *minishell, int index)
 {
@@ -15,10 +14,7 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	pipe(minishell->cmd_table[index]->fd);
 	pid = fork();
 	if (pid == 0)
-	{
-
 		execute_heredoc(minishell->cmd_table[index]);
-	}
 	else
 	{
 		close(minishell->cmd_table[index]->fd[1]);
@@ -63,16 +59,9 @@ static void	execute_heredoc_cmd(t_minishell *minishell, int index)
 		dup2(minishell->cmd_table[index]->fd[0], STDIN_FILENO);
 		close(minishell->cmd_table[index]->fd[0]);
 		if (has_cmd(minishell->cmd_table[index]) == 0)
-		{
-			new_cmd.cmd = assign_new_cmd_without_heredoc(minishell->cmd_table[index]->cmd);
-			// printf("newCMD: %s. %s.\n", new_cmd.cmd[0], new_cmd.cmd[1]);
-			execute_cmd(&new_cmd, minishell->head_env);
-		}
+			execute_cmd(minishell->cmd_table[index]->cmd, minishell->head_env);
 		else if (has_cmd(minishell->cmd_table[index]) == 1)
-		{
-			new_cmd.cmd = assign_new_cmd_without_heredoc(minishell->cmd_table[index]->cmd);
-			echo(new_cmd.cmd);
-		}
+			echo(minishell->cmd_table[index]->cmd);
 	}
 	else
 	{
@@ -96,41 +85,3 @@ static int	has_cmd(t_cmd *cmd_table)
 	}
 	return (-1);
 }
-
-static char	**assign_new_cmd_without_heredoc(char **cmd)
-{
-	int		i;
-	int		j;
-	int		new_cmd_size;
-	char	**new_cmd;
-
-	i = 0;
-	j = 0;
-	new_cmd_size = 0;
-	while (cmd[i])
-	{
-		if (ft_strcmp(cmd[i], "<<") == 0)
-		{
-			i += 2;
-			continue ;
-		}
-		new_cmd_size++;
-		i++;
-	}
-	new_cmd = ft_calloc(1, (new_cmd_size + 1) * sizeof(char *));
-	i = 0;
-	while (cmd[i])
-	{
-		if (ft_strcmp(cmd[i], "<<") == 0)
-		{
-			i += 2;
-			continue ;
-		}
-		new_cmd[j] = cmd[i];
-		j++;
-		i++;
-	}
-	new_cmd[j] = NULL;
-	return (new_cmd);
-}
-

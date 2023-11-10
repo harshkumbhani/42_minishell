@@ -21,10 +21,10 @@ int	count_words(t_lexer **lexer)
 int	special_var(char *str, char **ret, t_minishell *minishell)
 {
 	(void)str;
-	int		i;
+	// int		i;
 	char	*tmp;
 
-	i = 0;
+	// i = 0;
 	tmp = ft_itoa(minishell->exit_code);
 	*ret = ft_strjoin(*ret, tmp);
 	free(tmp);
@@ -33,17 +33,15 @@ int	special_var(char *str, char **ret, t_minishell *minishell)
 
 char	*expander(t_lexer *lexer, t_minishell *minishell)
 {
-	t_env	*envp;
 	char	*ret;
-	char	*tmp;
+	// char	*tmp;
 	int		i;
-	int		j;
+	// int		j;
 
 	i = 0;
-	j = 0;
+	// j = 0;
 	ret = NULL;
-	tmp = NULL;
-	envp = minishell->head_env;
+	// tmp = NULL;
 	while (i < lexer->strlen && lexer->start[i] != '$')
 		i++ ;
 	if (i == lexer->strlen)

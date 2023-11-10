@@ -25,6 +25,15 @@ int	is_meta_token(t_lexer *lexer)
 	return (FALSE);
 }
 
+int	is_redirect(t_lexer *lexer)
+{
+	if (lexer->token == LESS || lexer->token == GREATER
+		|| lexer->token == DOUBLE_GREATER
+		|| lexer->token == DOUBLE_LESS)
+		return (TRUE);
+	return (FALSE);
+}
+
 int	syntax_checker(t_lexer **lexer, t_minishell *minishell)
 {
 	t_lexer	*lex;
@@ -38,8 +47,10 @@ int	syntax_checker(t_lexer **lexer, t_minishell *minishell)
 	{
 		if (is_meta_token(lex) && lex->next == NULL)
 			return (ft_error(minishell, lex->token));
-		else if (is_meta_token(lex) && is_meta_token(lex->next))
+		else if (is_redirect(lex) && is_meta_token(lex->next))
 			return (ft_error(minishell, lex->next->token));
+		else if (lex->token == PIPE && is_redirect(lex) == TRUE)
+			lex = lex->next ;
 		lex = lex->next;
 	}
 	return (SUCCESS);

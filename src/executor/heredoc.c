@@ -2,8 +2,6 @@
 #include "minishell.h"
 
 static void	execute_heredoc(t_cmd *cmd);
-// static int	has_cmd(t_cmd *cmd_table);
-static void	execute_heredoc_cmd(t_minishell *minishell, int index);
 
 void	handle_heredoc(t_minishell *minishell, int index)
 {
@@ -20,7 +18,6 @@ void	handle_heredoc(t_minishell *minishell, int index)
 		close(minishell->cmd_table[index]->fd[0]);
 		get_exit_status(minishell);
 	}
-	(void)execute_heredoc_cmd(minishell, index);
 }
 
 static void	execute_heredoc(t_cmd *cmd_table)
@@ -42,39 +39,3 @@ static void	execute_heredoc(t_cmd *cmd_table)
 	close(cmd_table->fd[1]);
 	exit(EXIT_SUCCESS);
 }
-
-static void	execute_heredoc_cmd(t_minishell *minishell, int index)
-{
-	int		pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		dup2(minishell->cmd_table[index]->fd[0], STDIN_FILENO);
-		close(minishell->cmd_table[index]->fd[0]);
-		// if (has_cmd(minishell->cmd_table[index]) == 0)
-		// 	execute_cmd(minishell->cmd_table[index], minishell->head_env);
-		// else if (has_cmd(minishell->cmd_table[index]) == 1)
-		// 	echo(minishell->cmd_table[index]->cmd);
-	}
-	else
-	{
-		close(minishell->cmd_table[index]->fd[0]);
-	}
-}
-
-// static int	has_cmd(t_cmd *cmd_table)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (cmd_table->cmd[i])
-// 	{
-// 		if (strcmp("cat", cmd_table->cmd[i]) == EXIT_SUCCESS)
-// 			return (0);
-// 		if (strcmp("echo", cmd_table->cmd[i]) == EXIT_SUCCESS)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (-1);
-// }

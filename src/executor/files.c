@@ -23,7 +23,6 @@ static int	open_file(char *file, int file_type)
 void    open_infile(t_cmd *cmd)
 {
 	cmd->infile_fd = open_file(cmd->infile, cmd->file_type);
-	fprintf(stderr, "FD: %d\n", cmd->infile_fd);
 	dup2(cmd->infile_fd, STDIN_FILENO);
 	close(cmd->infile_fd);
 }

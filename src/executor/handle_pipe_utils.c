@@ -15,6 +15,7 @@ void	get_exit_status(t_minishell *minishell)
 
 void	execute_child_with_pipe(t_minishell *minishell, int index)
 {
+	close(minishell->cmd_table[index]->fd[0]);
 	if (minishell->cmd_table[index]->infile)
 		open_infile(minishell->cmd_table[index]);
 	else if (index > 0)
@@ -22,7 +23,6 @@ void	execute_child_with_pipe(t_minishell *minishell, int index)
 		dup2(minishell->cmd_table[index - 1]->fd[0], STDIN_FILENO);
 		close(minishell->cmd_table[index - 1]->fd[0]);
 	}
-	close(minishell->cmd_table[index]->fd[0]);
 	dup2(minishell->cmd_table[index]->fd[1], STDOUT_FILENO);
 	close(minishell->cmd_table[index]->fd[1]);
 

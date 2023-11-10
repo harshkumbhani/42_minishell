@@ -5,8 +5,7 @@
 void    init_mock_data(t_minishell *minishell) {
 	int     i, j;
 	char    *cmd_table_arr[][7] = {
-		{"cat", NULL},
-		// {"cat", "-e", NULL},
+		{"cat", NULL}
 	};
 	int num_cmd_table = sizeof(cmd_table_arr) / sizeof(cmd_table_arr[0]);
 
@@ -18,26 +17,17 @@ void    init_mock_data(t_minishell *minishell) {
 			minishell->cmd_table[i]->cmd[j] = strdup(cmd_table_arr[i][j]);
 		}
 		minishell->cmd_table[i]->cmd[j] = NULL;
-		minishell->cmd_table[i]->deli = "EOF";
 
 		minishell->cmd_table[i]->infile_fd = -1;
+		minishell->cmd_table[i]->infile = NULL;
+
 		minishell->cmd_table[i]->outfile_fd = -1;
+		minishell->cmd_table[i]->outfile = "outfile.txt";
+		minishell->cmd_table[i]->file_type = 1;
 
-
-		minishell->cmd_table[i]->here_doc = false;
+		minishell->cmd_table[i]->deli = "EOF";
+		minishell->cmd_table[i]->here_doc = true;
 	}
-	minishell->cmd_table[0]->outfile = "outfile.txt";
-	minishell->cmd_table[0]->file_type = 1;
-
-	// minishell->cmd_table[1]->file_type = 0;
-	minishell->cmd_table[0]->infile = NULL;
-	// minishell->cmd_table[1]->infile = "outfile.txt";
-	// 0 for standard input (stdin)
-	// 1 for standard output (stdout)
-	// 2 for standard error (stderr)
-	// minishell->cmd_table[1]->file_type = 0;
-	// minishell->cmd_table[1]->infile = NULL;
-
 	minishell->cmd_table[i] = NULL;
 }
 
@@ -63,7 +53,7 @@ int main(int argc, char **argv, char **envp)
 	export(&minishell.head_env, envp);
 	init_mock_data(&minishell);
 	executor(&minishell);
-	printf("Exit Code: %d\n", minishell.exit_code);
+	// printf("Exit Code: %d\n", minishell.exit_code);
 	free_env_linked_list(minishell.head_env);
 	free_mock_data(&minishell);
 

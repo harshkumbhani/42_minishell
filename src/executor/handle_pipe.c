@@ -12,6 +12,7 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 	else
 	{
 		close(minishell->cmd_table[index]->fd[1]);
+		dup2(minishell->cmd_table[index]->fd[0], STDIN_FILENO);
 		if (index > 0)
 			close(minishell->cmd_table[index - 1]->fd[0]);
 	}

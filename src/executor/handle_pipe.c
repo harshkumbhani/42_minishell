@@ -14,7 +14,6 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 		close(minishell->cmd_table[index]->fd[1]);
 		if (index > 0)
 			close(minishell->cmd_table[index - 1]->fd[0]);
-		get_exit_status(minishell, pid);
 	}
 }
 
@@ -40,6 +39,5 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 	{
 		if (index > 0)
 			close(minishell->cmd_table[index - 1]->fd[0]);
-		get_exit_status(minishell, pid);
 	}
 }

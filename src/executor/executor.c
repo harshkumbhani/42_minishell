@@ -16,7 +16,6 @@ static void	exec_cmd_table(t_minishell *minishell)
 	int	i;
 
 	i = 0;
-	printf("Inside cmd loop!\n");
 	while (minishell->cmd_table[i])
 	{
 		if (minishell->cmd_table[i]->here_doc)
@@ -27,6 +26,7 @@ static void	exec_cmd_table(t_minishell *minishell)
 			execute_final_cmd(minishell, i);
 		i++;
 	}
+	get_exit_status(minishell);
 }
 
 static bool	is_simple_builtin(t_minishell *minishell)

@@ -1,11 +1,11 @@
 
 #include "minishell.h"
 
-void	get_exit_status(t_minishell *minishell, int	pid)
+void	get_exit_status(t_minishell *minishell)
 {
 	int	status;
 
-	waitpid(pid, &status, 0);
+	waitpid(0, &status, 0);
 	if (WIFEXITED(status))
 		minishell->exit_code = WEXITSTATUS(status);
 	// convention in unix operating systems to return the exit status as 128 + status when process is terminated by a signal
@@ -22,16 +22,13 @@ void	execute_child_with_pipe(t_minishell *minishell, int index)
 		dup2(minishell->cmd_table[index - 1]->fd[0], STDIN_FILENO);
 		close(minishell->cmd_table[index - 1]->fd[0]);
 	}
-	// close(minishell->cmd_table[index]->fd[0]);
-	// dup2(minishell->cmd_table[index]->fd[1], STDOUT_FILENO);
-	// close(minishell->cmd_table[index]->fd[1]);
-	// handle_cmd_execution(minishell, index);
-
+	close(minishell->cmd_table[index]->fd[0]);
 	dup2(minishell->cmd_table[index]->fd[1], STDOUT_FILENO);
 	close(minishell->cmd_table[index]->fd[1]);
 
 	if (minishell->cmd_table[index]->outfile)
 		open_outfile(minishell->cmd_table[index]);
+	handle_cmd_execution(minishell, index);
 }
 
 void	handle_cmd_execution(t_minishell *minishell, int index)

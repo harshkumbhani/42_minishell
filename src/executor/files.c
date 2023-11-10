@@ -1,16 +1,16 @@
 
 #include "minishell.h"
 
-static int	open_file(char *file, int i)
+static int	open_file(char *file, int file_type)
 {
 	int	fd;
 
 	fd = 0;
-	if (i == 0)
+	if (file_type == 0)
 		fd = open(file, O_RDONLY);
-	else if (i == 1)
+	else if (file_type == 1)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (i == 2)
+	else if (file_type == 2)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
@@ -23,9 +23,9 @@ static int	open_file(char *file, int i)
 void    open_infile(t_cmd *cmd)
 {
 	cmd->infile_fd = open_file(cmd->infile, cmd->file_type);
+	fprintf(stderr, "FD: %d\n", cmd->infile_fd);
 	dup2(cmd->infile_fd, STDIN_FILENO);
 	close(cmd->infile_fd);
-	fprintf(stderr, "Opening in file :D\n");
 }
 
 

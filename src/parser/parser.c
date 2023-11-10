@@ -20,7 +20,12 @@ void	handle_redirection(t_cmd *cmds, t_lexer **lexer)
 		cmds->outfile = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		cmds->file_type = APPEND;
 	}
-	else 
+	else if ((*lexer)->token == DOUBLE_LESS && (*lexer)->next->token == WORD)
+	{
+		(*lexer) = (*lexer)->next;
+		cmds->deli = ft_strndup((*lexer)->start, (*lexer)->strlen);
+		cmds->here_doc = TRUE;
+	}
 }
 
 void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)

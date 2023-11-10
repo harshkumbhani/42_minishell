@@ -18,6 +18,7 @@ void	handle_heredoc(t_minishell *minishell, int index)
 		close(minishell->cmd_table[index]->fd[1]);
 		dup2(minishell->cmd_table[index]->fd[0], STDIN_FILENO);
 		close(minishell->cmd_table[index]->fd[0]);
+		get_exit_status(minishell);
 	}
 	(void)execute_heredoc_cmd(minishell, index);
 }

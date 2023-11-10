@@ -19,7 +19,7 @@ SRC_EXECUTOR		:= executor.c pipex.c executor_utils.c handle_pipe.c handle_error.
 						execute.c init.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
 SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c syntax_error.c
-SRC_EXPANDER		:= 
+SRC_EXPANDER		:= expander.c
 
 SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
 						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER) $(SRC_PARSER) \

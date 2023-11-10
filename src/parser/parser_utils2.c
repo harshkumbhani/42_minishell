@@ -18,45 +18,6 @@ int	count_words(t_lexer **lexer)
 	return (i);
 }
 
-int	special_var(char *str, char **ret, t_minishell *minishell)
-{
-	(void)str;
-	// int		i;
-	char	*tmp;
-
-	// i = 0;
-	tmp = ft_itoa(minishell->exit_code);
-	*ret = ft_strjoin(*ret, tmp);
-	free(tmp);
-	return (2);
-}
-
-char	*expander(t_lexer *lexer, t_minishell *minishell)
-{
-	char	*ret;
-	// char	*tmp;
-	int		i;
-	// int		j;
-
-	i = 0;
-	// j = 0;
-	ret = NULL;
-	// tmp = NULL;
-	while (i < lexer->strlen && lexer->start[i] != '$')
-		i++ ;
-	if (i == lexer->strlen)
-		return (ft_strndup(lexer->start, i));
-	ret = ft_strndup(lexer->start, i);
-	while (i < lexer->strlen)
-	{
-		if (lexer->start[i] == '$' && lexer->start[i + 1] == '?')
-			i += special_var(&lexer->start[i], &ret, minishell);
-		else
-			i++;
-	}
-	return (ret);
-}
-
 void	print_cmd_table(t_cmd **cmd_table)
 {
 	t_cmd	*tmp;

@@ -16,41 +16,41 @@ int main(int argc, char **argv, char **envp)
 
 	setup_signals();
 	// Mock shell to check if signal functions actually get called
-	//while (1)
-	//{
-	//	char *input = readline("minishell> ");
-	//	if (!input)
-	//	{
-	//		printf("Ctrl+D was pressed!\n");
-	//		lst_del(&lexer);
-	//		free(input);
-	//		break;
-	//	}
-	//	lexer = tokenise(input);
-	//	//print_list(&lexer);
-	//	if (input && input[0] != '\0' && input[0] != '\n')
-	//		add_history(input);
-	//	if (parser(&lexer, &minishell) == FAIL)
-	//	{
-	//		lst_del(&lexer);
-	//		continue;
-	//	}
-	//	//if (lexer == NULL)
-	//	//{
-	//	//	printf("Invalid input\n");
-	//	//	//continue ;
-	//	//}
-	//	lst_del(&lexer);
-	//	free(input);
-	//}
-				
-	lexer = tokenise("\"something $? and $*123 valid\"");
-	if (lexer != NULL)
+	while (1)
 	{
-		print_list(&lexer);
+		char *input = readline("minishell> ");
+		if (!input)
+		{
+			printf("Ctrl+D was pressed!\n");
+			lst_del(&lexer);
+			free(input);
+			break;
+		}
+		lexer = tokenise(input);
+		//print_list(&lexer);
+		if (input && input[0] != '\0' && input[0] != '\n')
+			add_history(input);
+		if (parser(&lexer, &minishell) == FAIL)
+		{
+			lst_del(&lexer);
+			continue;
+		}
+		//if (lexer == NULL)
+		//{
+		//	printf("Invalid input\n");
+		//	//continue ;
+		//}
+		lst_del(&lexer);
+		free(input);
 	}
-	parser(&lexer, &minishell);
-	lst_del(&lexer);
+				
+	// lexer = tokenise("\"something $? and $+123 valid\"");
+	// if (lexer != NULL)
+	// {
+	// 	print_list(&lexer);
+	// }
+	// parser(&lexer, &minishell);
+	// lst_del(&lexer);
 	free_env_linked_list(minishell.head_env);
 	return (0);
 }

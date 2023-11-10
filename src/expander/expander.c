@@ -8,11 +8,22 @@ int	check_var(char c)
 	return (FALSE);
 }
 
-int	special_var(char c, char **ret, t_minishell *minishell)
+int	special_var(char **ret, t_minishell *minishell)
 {
 	char	*tmp;
 
 	tmp = ft_itoa(minishell->exit_code);
+	*ret = ft_strjoin(*ret, tmp);
+	free(tmp);
+	return (2);
+}
+
+int	special_char(char **ret, char *str)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	tmp = ft_strndup(str, 2);
 	*ret = ft_strjoin(*ret, tmp);
 	free(tmp);
 	return (2);
@@ -36,9 +47,9 @@ char	*expander(t_lexer *lexer, t_minishell *minishell)
 	while (i < lexer->strlen)
 	{
 		if (lexer->start[i] == '$' && lexer->start[i + 1] == '?')
-			i += special_var(&lexer->start[i], &ret, minishell);
-		if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == TRUE)
-			i = i + 2;
+			i += special_var(&ret, minishell);
+		else if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == TRUE)
+			i += special_char(&ret, &lexer->start[i]);
 		else
 		{
 			j = 0;

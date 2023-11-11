@@ -10,6 +10,11 @@ int	export(t_env **head, char **str)
 	int	i;
 
 	i = 1;
+	if (!str[1])
+	{
+		env(*head, true);
+		return (EXIT_SUCCESS);
+	}
 	while (str[i])
 	{
 		if (!is_key_valid(str[i]))

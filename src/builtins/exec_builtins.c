@@ -8,7 +8,7 @@ void	exec_builtins(t_minishell *minishell, int i)
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "pwd") == EXIT_SUCCESS)
 		minishell->exit_code = pwd();
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "env") == EXIT_SUCCESS)
-		minishell->exit_code = env(minishell->head_env);
+		minishell->exit_code = env(minishell->head_env, false);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "unset") == EXIT_SUCCESS)
 		minishell->exit_code = unset(&minishell->head_env, minishell->cmd_table[0]->cmd[1]);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "echo") == EXIT_SUCCESS)

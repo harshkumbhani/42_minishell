@@ -80,7 +80,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		return (FAIL);
 	i = count_pipes(lexer);
 	if (*lexer == NULL)
-		return (EXIT_SUCCESS);
+		return (FAIL);
 	minishell->cmd_table = (t_cmd **)ft_calloc(i + 2, sizeof(t_cmd *));
 	while (j <= i)
 	{
@@ -91,6 +91,6 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;
-	free_cmd_table(minishell->cmd_table);
+	// free_cmd_table(minishell->cmd_table);
 	return (SUCCESS);
 }

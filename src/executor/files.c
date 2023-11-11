@@ -14,7 +14,7 @@ static int	open_file(char *file, int file_type)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		perror("open");
+		ft_fprintf(STDERR_FILENO, "minishell: open: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

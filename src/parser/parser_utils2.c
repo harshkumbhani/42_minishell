@@ -14,7 +14,6 @@ int	count_words(t_lexer **lexer)
 			i++;
 		lex = lex->next;
 	}
-	printf("number of words : %d\n", i);
 	return (i);
 }
 

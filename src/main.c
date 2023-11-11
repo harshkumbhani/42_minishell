@@ -1,48 +1,7 @@
 #include "minishell.h"
 
-
-// GPT GENERATED FUNCTIONS FOR MOCK DATA:
-// void    init_mock_data(t_minishell *minishell) {
-// 	int     i, j;
-// 	char    *cmd_table_arr[][7] = {
-// 		{"cat", NULL}
-// 	};
-// 	int num_cmd_table = sizeof(cmd_table_arr) / sizeof(cmd_table_arr[0]);
-
-// 	minishell->cmd_table = malloc(sizeof(t_cmd *) * (num_cmd_table + 1));
-// 	for (i = 0; i < num_cmd_table; i++) {
-// 		minishell->cmd_table[i] = malloc(sizeof(t_cmd));
-// 		minishell->cmd_table[i]->cmd = malloc(sizeof(char *) * 7);
-// 		for (j = 0; cmd_table_arr[i][j] != NULL; j++) {
-// 			minishell->cmd_table[i]->cmd[j] = strdup(cmd_table_arr[i][j]);
-// 		}
-// 		minishell->cmd_table[i]->cmd[j] = NULL;
-
-// 		minishell->cmd_table[i]->infile_fd = -1;
-// 		minishell->cmd_table[i]->infile = NULL;
-
-// 		minishell->cmd_table[i]->outfile_fd = -1;
-// 		minishell->cmd_table[i]->outfile = "outfile.txt";
-// 		minishell->cmd_table[i]->file_type = 1;
-
-// 		minishell->cmd_table[i]->deli = "EOF";
-// 		minishell->cmd_table[i]->here_doc = true;
-// 	}
-// 	minishell->cmd_table[i] = NULL;
-// }
-
-// void    free_mock_data(t_minishell *minishell) {
-// 	int i, j;
-// 	for (i = 0; minishell->cmd_table[i] != NULL; i++) {
-// 		for (j = 0; minishell->cmd_table[i]->cmd[j] != NULL; j++) {
-// 			free(minishell->cmd_table[i]->cmd[j]);
-// 		}
-// 		free(minishell->cmd_table[i]->cmd);
-// 	}
-// 	free(minishell->cmd_table);
-// }
-
 // TODO: Implement SHLVL
+
 int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -54,17 +13,17 @@ int main(int argc, char **argv, char **envp)
 	export(&minishell.head_env, envp);
 	t_lexer	*lexer;
 
-	setup_signals();
+	// setup_signals();
 	while (1)
 	{
 		char *input = readline("minishell> ");
-		if (!input)
-		{
-			printf("Ctrl+D was pressed!\n");
-			lst_del(&lexer);
-			free(input);
-			break;
-		}
+		// if (!input)
+		// {
+		// 	printf("Ctrl+D was pressed!\n");
+		// 	lst_del(&lexer);
+		// 	free(input);
+		// 	break;
+		// }
 		lexer = tokenise(input);
 		//print_list(&lexer);
 		if (input && input[0] != '\0' && input[0] != '\n')
@@ -74,17 +33,20 @@ int main(int argc, char **argv, char **envp)
 			lst_del(&lexer);
 			continue;
 		}
+		// print_cmd_table(&minishell.cmd_table[0]);
 		executor(&minishell);
+		free_cmd_table(minishell.cmd_table);
 		lst_del(&lexer);
 		free(input);
 	}
 				
-	//lexer = tokenise("\"Current PWD: $PWD and User: $USER\"");
-	//// if (lexer != NULL)
-	//// {
-	//// 	print_list(&lexer);
-	//// }
-	//parser(&lexer, &minishell);
+	// lexer = tokenise("ls -al");
+	// if (lexer != NULL)
+	// {
+	// 	print_list(&lexer);
+	// }
+	// parser(&lexer, &minishell);
+	// executor(&minishell);
 	//lst_del(&lexer);
 	free_env_linked_list(minishell.head_env);
 	return (0);

@@ -18,7 +18,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	}
 	if (execve(path, cmds->cmd, envp) == -1)
 	{
-		fprintf(stderr, "minishell: %s: %s\n", cmds->cmd[0], strerror(errno));
+		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", cmds->cmd[0], strerror(errno));
 		free(path);
 		free_env_array(envp);
 		exit(errno);

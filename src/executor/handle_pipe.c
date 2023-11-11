@@ -22,6 +22,7 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 {
 	int	pid;
 
+	
 	pid = fork();
 	if (pid == 0)
 	{

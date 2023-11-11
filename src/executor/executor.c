@@ -32,9 +32,9 @@ static void	exec_cmd_table(t_minishell *minishell)
 
 static bool	is_simple_builtin(t_minishell *minishell)
 {
-	if (!minishell->cmd_table[1] && is_cmd_builtin(minishell, 0)
-		&& !minishell->cmd_table[0]->here_doc && !minishell->cmd_table[0]->infile
-		&& !minishell->cmd_table[0]->outfile)
-		return (true);
+	if (minishell->cmd_table[0]->cmd[0] && minishell->cmd_table[1] == NULL 
+		&& is_cmd_builtin(minishell, 0) && !minishell->cmd_table[0]->here_doc
+		&& !minishell->cmd_table[0]->infile && !minishell->cmd_table[0]->outfile)
+			return (true);
 	return (false);
 }

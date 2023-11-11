@@ -27,13 +27,14 @@ static void	execute_heredoc(t_cmd *cmd_table)
 	close(cmd_table->fd[0]);
 	while (true)
 	{
-		str = readline("> ");
-		if (ft_strcmp(cmd_table->deli, str) == EXIT_SUCCESS)
+		str = get_next_line(STDIN_FILENO);
+		// fprintf(stderr, "VALUE: %d :: %s. :: %s.\n",ft_strncmp(cmd_table->deli, str, ft_strlen(cmd_table->deli)), cmd_table->deli, str);
+		if (ft_strncmp(cmd_table->deli, str, ft_strlen(cmd_table->deli)) == 0)
 		{
 			free(str);
 			break ;
 		}
-		ft_fprintf(cmd_table->fd[1], "%s\n", str);
+		write(cmd_table->fd[1], str, ft_strlen(str));
 		free(str);
 	}
 	close(cmd_table->fd[1]);

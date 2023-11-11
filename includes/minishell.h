@@ -94,8 +94,7 @@ void	free_cmd_table(t_cmd **cmd_table);
 int		count_words(t_lexer **lexer);
 char	*expander(t_lexer *lexer, t_minishell *minishell);
 void	print_cmd_table(t_cmd **cmd_table);
-
-int	syntax_checker(t_lexer **lexer, t_minishell *minishell);
+int		syntax_checker(t_lexer **lexer, t_minishell *minishell);
 
 /* --------------------------------- Signals -------------------------------- */
 

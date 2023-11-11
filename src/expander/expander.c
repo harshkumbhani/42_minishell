@@ -84,6 +84,6 @@ char	*expander(t_lexer *lexer, t_minishell *minishell)
 			i += j;
 		}
 	}
-	printf("\nExpanded string: %s\n", ret);
+	// printf("\nExpanded string: %s\n", ret);
 	return (ret);
 }

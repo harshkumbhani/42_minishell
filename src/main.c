@@ -52,13 +52,9 @@ int main(int argc, char **argv, char **envp)
 
 	minishell = (t_minishell){};
 	export(&minishell.head_env, envp);
-	//env(minishell.head_env);
-	//free_env_linked_list(minishell.head_env);
 	t_lexer	*lexer;
-	// executor(envp);
 
 	setup_signals();
-	// Mock shell to check if signal functions actually get called
 	while (1)
 	{
 		char *input = readline("minishell> ");
@@ -78,11 +74,7 @@ int main(int argc, char **argv, char **envp)
 			lst_del(&lexer);
 			continue;
 		}
-		//if (lexer == NULL)
-		//{
-		//	printf("Invalid input\n");
-		//	//continue ;
-		//}
+		executor(&minishell);
 		lst_del(&lexer);
 		free(input);
 	}

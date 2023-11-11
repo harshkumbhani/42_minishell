@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:56:50 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/24 15:02:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/02 13:40:49 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,18 @@
 static void	print_string(char **arg, int start_index, bool new_line);
 static bool	has_n_flag(char **args);
 
-// TODO: Pass down command table to it and store exit code:
-void	echo(void)
+int	echo(char **cmd)
 {
-	// for testing:
-	char	*args[] = {"echo", "b-nnnn", "-n", "-n" , "-n ", "Hello world", NULL};
-	// char	*args[] = {"echo", NULL};
-	// char	*args[] = {"echo", "Hello world", "-n", NULL};
-	// char	*args[] = {"echo", "Helloworld", "something", NULL};
-	if (!args[1])
+	if (!cmd[1])
 	{
 		printf("\n");
-		return ;
+		return (EXIT_SUCCESS);
 	}
-	if (has_n_flag(args))
-		print_string(args, 2, false);
+	if (has_n_flag(cmd))
+		print_string(cmd, 2, false);
 	else
-		print_string(args, 1, true);
+		print_string(cmd, 1, true);
+	return (EXIT_SUCCESS);
 }
 
 static void	print_string(char **arg, int start_index, bool new_line)

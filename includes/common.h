@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   common.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 12:33:16 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/11 12:34:39 by hkumbhan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef COMMON_H
 # define COMMON_H
@@ -21,8 +10,10 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <errno.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-//# include <wait.h>
+// # include <wait.h>
 
 /* --------------------------------- Macro's -------------------------------- */
 # define SUCCESS 0

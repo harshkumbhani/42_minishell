@@ -27,3 +27,20 @@ void	free_env_node(t_env *node)
 	free(node->full_string);
 	free(node);
 }
+
+/**
+ * @brief Frees the array of env variables.
+ * @param envp The 2D array of env variables that should be freed.
+ */
+void	free_env_array(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		free(envp[i]);
+		i++;
+	}
+	free(envp);
+}

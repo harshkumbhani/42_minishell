@@ -7,24 +7,23 @@ LIBFT_DIR			:= libraries/myLib
 LIBFT_LIB			:= $(LIBFT_DIR)/libft.a
 
 # --------------------------- Program Source files --------------------------- #
-OBJDIR				:= ./objs
+OBJDIR              := ./objs
 VPATH				:= .:./src/:./src/signals/:./src/builtins/:./src/executor/:./src/lexer:./src/free/:./src/utils/:./src/parser:./src/expander/:
 
 SRC					:= main.c
 SRC_SIGNALS			:= signals.c
 SRC_FREE			:= env_free.c
-SRC_UTILS			:= env_utils.c
+SRC_UTILS			:= env_utils.c utils.c
 SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
-SRC_EXECUTOR		:= executor.c pipex.c executor_utils.c handle_pipe.c handle_error.c \
-						execute.c init.c
+SRC_EXECUTOR		:= executor.c handle_pipe.c command.c handle_pipe_utils.c heredoc.c files.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
 SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c syntax_error.c
 SRC_EXPANDER		:= expander.c
 
 SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
-						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER) $(SRC_PARSER) \
-						$(SRC_EXPANDER)
-OBJS				:= $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
+						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER) $(SRC_ERROR) $(SRC_EXPANDER) $(SRC_PARSER)
+
+OBJS                := $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
 # ----------------------------------- Rules ---------------------------------- #
 all: $(NAME)

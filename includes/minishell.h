@@ -4,10 +4,12 @@
 /* -------------------------------- Includes -------------------------------- */
 
 # include "common.h"
-# include "pipex_bonus.h"
+// # include "pipex_bonus.h"
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# define MINISHELL "Minishell"
 
 /* -------------------------------- Typedefs -------------------------------- */
 
@@ -59,6 +61,7 @@ typedef struct s_cmd {
 	int		infile_fd;
 	int		outfile_fd;
 	int		file_type;
+	int		fd[2];
 	bool	here_doc;
 }	t_cmd;
 
@@ -91,8 +94,7 @@ void	free_cmd_table(t_cmd **cmd_table);
 int		count_words(t_lexer **lexer);
 char	*expander(t_lexer *lexer, t_minishell *minishell);
 void	print_cmd_table(t_cmd **cmd_table);
-
-int	syntax_checker(t_lexer **lexer, t_minishell *minishell);
+int		syntax_checker(t_lexer **lexer, t_minishell *minishell);
 
 /* --------------------------------- Signals -------------------------------- */
 
@@ -100,30 +102,48 @@ void	setup_signals();
 
 /* -------------------------------- Executor -------------------------------- */
 
-int		executor(t_minishell *minishell);
+void	executor(t_minishell *minishell);
+void	execute_cmd(t_cmd *cmds, t_env *head_env);
+void	execute_cmd_with_pipe(t_minishell *minishell, int index);
+void	execute_final_cmd(t_minishell *minishell, int index);
+void	get_exit_status(t_minishell *minishell);
+void	execute_child_with_pipe(t_minishell *minishell, int index);
+void	handle_cmd_execution(t_minishell *minishell, int index);
+void	handle_heredoc(t_minishell *minishell, int index);
+char	*find_cmd_path(t_cmd *cmd, char **envp);
 
 /* ---------------------------------- Free ---------------------------------- */
 
 void	free_env_linked_list(t_env	*head);
 void	free_env_node(t_env *node);
+void	free_env_array(char **envp);
 
 /* -------------------------------- Built-ins ------------------------------- */
 
-int		cd(t_env **head);
-int		pwd();
-void	env(t_env *head);
-void	echo(void);
-void	unset(t_env **head, const char *key);
-void	builtin_exit();
+int		cd(t_env **head, char *path);
+int		pwd(void);
+int		env(t_env *head);
+int		echo(char **cmd);
+int		export(t_env **head, char **str);
+int		unset(t_env **head, const char *key);
+void	builtin_exit(t_minishell *minishell);
+void	exec_builtins(t_minishell *minishell, int i);
+bool	is_cmd_builtin(t_minishell *minishell, int i);
 
 /* ---------------------------------- Utils --------------------------------- */
 
-// char	*ft_strndup(const char *str, size_t n);
-// int		ft_strcmp(const char *s1, const char *s2);
-int		export(t_env **head, char *str);
-int		copy_env_to_linked_list(char **envp, t_env **head);
+char	*strjoin_pipex(char *s1, char *s2);
+
+/* -------------------------------- Env Utils ------------------------------- */
+
 t_env	*find_env_key(t_env *head, char *key);
 int		add_env_node(t_env **head, char *key, char *full_string, char *value);
+int		count_env_variables(t_env *head);
+
+/* ------------------------------- File Utils ------------------------------- */
+
+void	open_outfile(t_cmd *cmd);
+void	open_infile(t_cmd *cmd);
 
 /* -------------------------------- Lst-utils ------------------------------- */
 

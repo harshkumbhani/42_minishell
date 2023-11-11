@@ -8,8 +8,9 @@
  * 	the linked list to maintain integrity.
  * @param head A pointer to the head node.
  * @param key The key/variable to remove.
+ * @return EXIT_SUCCESS regardless if it finds the key or not
  */
-void	unset(t_env **head, const char *key)
+int	unset(t_env **head, const char *key)
 {
 	t_env	*temp;
 	t_env	*prev;
@@ -26,9 +27,10 @@ void	unset(t_env **head, const char *key)
 				prev->next = temp->next;
 			prev->next = temp->next;
 			free_env_node(temp);
-			return ;
+			return (EXIT_SUCCESS);
 		}
 		prev = temp;
 		temp = temp->next;
 	}
+	return (EXIT_SUCCESS);
 }

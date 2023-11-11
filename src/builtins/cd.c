@@ -3,11 +3,10 @@
 
 static void	update_pwd(t_env **head, char *old_dir);
 
-int	cd(t_env **head)
+int	cd(t_env **head, char *path)
 {
 	int		len;
 	char	*old_dir;
-	char	*path = "src"; // remove this variable and use cmd struct later on
 
 	if (!path || !*path)
 	{
@@ -21,7 +20,7 @@ int	cd(t_env **head)
 	old_dir = getcwd(NULL, 0);
 	if (chdir(path) != EXIT_SUCCESS)
 	{
-		perror("Chdir() failed!\n");
+		ft_fprintf(STDERR_FILENO, "minishell: chdir: %s\n", strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	update_pwd(head, old_dir);

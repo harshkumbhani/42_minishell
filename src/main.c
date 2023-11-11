@@ -13,17 +13,17 @@ int main(int argc, char **argv, char **envp)
 	export(&minishell.head_env, envp);
 	t_lexer	*lexer;
 
-	// setup_signals();
+	setup_signals();
 	while (1)
 	{
 		char *input = readline("minishell> ");
-		// if (!input)
-		// {
-		// 	printf("Ctrl+D was pressed!\n");
-		// 	lst_del(&lexer);
-		// 	free(input);
-		// 	break;
-		// }
+		if (!input)
+		{
+			printf("Ctrl+D was pressed!\n");
+			lst_del(&lexer);
+			free(input);
+			break;
+		}
 		lexer = tokenise(input);
 		//print_list(&lexer);
 		if (input && input[0] != '\0' && input[0] != '\n')
@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **envp)
 		// print_cmd_table(&minishell.cmd_table[0]);
 		executor(&minishell);
 		free_cmd_table(minishell.cmd_table);
-		lst_del(&lexer);
+		// lst_del(&lexer);
 		free(input);
 	}
 				

@@ -61,13 +61,14 @@ typedef struct s_cmd {
 	int		infile_fd;
 	int		outfile_fd;
 	int		file_type;
-	int		fd[2];
+	// int		fd[2];
 	bool	here_doc;
 }	t_cmd;
 
 typedef struct s_minishell {
 	t_cmd	**cmd_table;
 	int		exit_code;
+	int		fd[2];
 	t_env	*head_env;
 }	t_minishell;
 

@@ -20,7 +20,7 @@ static void	exec_cmd_table(t_minishell *minishell)
 	{
 		if (minishell->cmd_table[i]->here_doc) 
 			handle_heredoc(minishell, i);
-
+		printf("execure_cmd_pipe\n");
 		if (minishell->cmd_table[i + 1])
 			execute_cmd_with_pipe(minishell, i);
 		else

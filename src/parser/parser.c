@@ -34,10 +34,12 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 	int		i;
 	int		j;
 	int		words;
+	t_lexer	*lex;
 
 	cmds = *cmd_table;
 	i = -1;
 	j = -1;
+	lex = NULL;
 	words = count_words(lexer);
 	cmds->cmd = (char **)ft_calloc(words + 1, sizeof(char *));
 	while ((*lexer) != NULL && ++i < words && (*lexer)->token != PIPE)
@@ -49,10 +51,16 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 		else if ((*lexer)->token == LESS || (*lexer)->token == GREATER
 			|| (*lexer)->token == DOUBLE_GREATER || (*lexer)->token == DOUBLE_LESS)
 			handle_redirection(cmds, lexer);
+		lex = (*lexer);
 		(*lexer) = (*lexer)->next;
+		free(lex);
 	}
 	if ((*lexer) != NULL && (*lexer)->token == PIPE)
+	{
+		lex = (*lexer);
 		(*lexer) = (*lexer)->next;
+		free(lex);
+	}
 }
 
 int	parser(t_lexer **lexer, t_minishell *minishell)
@@ -72,7 +80,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
-		//print_cmd_table(&(minishell)->cmd_table[j]);
+		print_cmd_table(&(minishell)->cmd_table[j]);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

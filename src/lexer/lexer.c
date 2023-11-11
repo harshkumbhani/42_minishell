@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/10/25 15:06:30 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:37:54 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_input(char *input)
 	}
 	if (c == '\0')
 		return (TRUE);
+	ft_putendl_fd(QUOTES, STDERR_FILENO);
 	return (FALSE);
 }
 
@@ -69,17 +70,17 @@ t_lexer	*tokenise(char *input)
 	{
 		if (input[i] != '\0' && (ft_isspace(input[i]) == TRUE))
 			i++;
-		else if (input[i] != '\0' && (input[i] == '\''))
+		else if (input[i] == '\'')
 			i += token_squote(&head, &input[i]);
-		else if (input[i] != '\0' && (input[i] == '\"'))
+		else if (input[i] == '\"')
 			i += token_dquote(&head, &input[i]);
-		else if (input[i] != '\0' && (input[i] == '|'))
+		else if (input[i] == '|')
 			i += token_pipe(&head, &input[i]);
-		else if (input[i] != '\0' && (input[i] == '\\'))
+		else if (input[i] == '\\')
 			i += token_backslash(&head, &input[i]);
-		else if ((input[i] == '>' || input[i] == '<'))
+		else if (input[i] == '>' || input[i] == '<')
 			i += token_redirect(&head, &input[i]);
-		else if (input[i] != '\0' && ft_isspace(input[i]) == FALSE)
+		else if (ft_isspace(input[i]) == FALSE)
 			i += token_word(&head, &input[i]);
 	}
 	return (head);

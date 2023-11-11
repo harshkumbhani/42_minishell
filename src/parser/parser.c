@@ -1,26 +1,33 @@
 #include "minishell.h"
 
-void	handle_redirection(t_cmd *cmds, t_lexer **lexer)
+int	t_check(t_token token_type)
 {
-	if ((*lexer)->token == GREATER && (*lexer)->next->token == WORD)
+	if (token_type == WORD || token_type == DQUOTE)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	handle_redirection(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell)
+{
+	if ((*lexer)->token == GREATER && t_check((*lexer)->next->token) == TRUE)
 	{
 		(*lexer) = (*lexer)->next;
-		cmds->outfile = ft_strndup((*lexer)->start, (*lexer)->strlen);
+		cmds->outfile = expander((*lexer), minishell);
 		cmds->file_type = TRUNC;
 	}
-	else if ((*lexer)->token == LESS && (*lexer)->next->token == WORD)
+	else if ((*lexer)->token == LESS && t_check((*lexer)->next->token) == TRUE)
 	{
 		(*lexer) = (*lexer)->next;
-		cmds->infile = ft_strndup((*lexer)->start, (*lexer)->strlen);
+		cmds->infile = expander((*lexer), minishell);
 		cmds->file_type = OPEN;
 	}
-	else if ((*lexer)->token == DOUBLE_GREATER && (*lexer)->next->token == WORD)
+	else if ((*lexer)->token == DOUBLE_GREATER && t_check((*lexer)->next->token) == TRUE)
 	{
 		(*lexer) = (*lexer)->next;
-		cmds->outfile = ft_strndup((*lexer)->start, (*lexer)->strlen);
+		cmds->outfile = expander((*lexer), minishell);
 		cmds->file_type = APPEND;
 	}
-	else if ((*lexer)->token == DOUBLE_LESS && (*lexer)->next->token == WORD)
+	else if ((*lexer)->token == DOUBLE_LESS && t_check((*lexer)->next->token) == TRUE)
 	{
 		(*lexer) = (*lexer)->next;
 		cmds->deli = ft_strndup((*lexer)->start, (*lexer)->strlen);
@@ -50,7 +57,7 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 			cmds->cmd[++j] = expander(*lexer, minishell);
 		else if ((*lexer)->token == LESS || (*lexer)->token == GREATER
 			|| (*lexer)->token == DOUBLE_GREATER || (*lexer)->token == DOUBLE_LESS)
-			handle_redirection(cmds, lexer);
+			handle_redirection(cmds, lexer, minishell);
 		lex = (*lexer);
 		(*lexer) = (*lexer)->next;
 		free(lex);

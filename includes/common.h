@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:33:16 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/10 23:41:10 by harsh            ###   ########.fr       */
+/*   Updated: 2023/11/11 12:34:39 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <limits.h>
 # include <errno.h>
 
-# include <wait.h>
+//# include <wait.h>
 
 /* --------------------------------- Macro's -------------------------------- */
 # define SUCCESS 0

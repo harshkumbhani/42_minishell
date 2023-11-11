@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/28 09:01:04 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/11 15:38:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	setup_signals()
 
 static void handle_sigint(int signo)
 {
-	printf("\n");
+	ft_fprintf(STDOUT_FILENO, "\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -53,7 +53,6 @@ static void handle_sigint(int signo)
 
 static void handle_sigquit(int signo)
 {
-	printf("\nSIGQUIT executed! Ctrl-\\ pressed!\n");
 	exit(0);
 	(void)signo;
 }

@@ -18,7 +18,6 @@ int	token_word(t_lexer **head, char *str)
 	{
 		if (str[i] == '>' || str[i] == '<')
 			break ;
-		//printf("%c\n", str[i]);
 		i++;
 	}
 	new->strlen = i;
@@ -59,7 +58,7 @@ int	token_squote(t_lexer **head, char *str)
 		i++;
 	new->strlen = i++;
 	if (str[i] == '\'' || str[i] == '\"')
-		new->space_flag = TRUE;
+		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
 }
@@ -81,7 +80,7 @@ int	token_dquote(t_lexer **head, char *str)
 		i++;
 	new->strlen = i++;
 	if (str[i] == '\'' || str[i] == '\"')
-		new->space_flag = TRUE;
+		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
 }

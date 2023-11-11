@@ -11,6 +11,16 @@
 
 /* -------------------------------- Typedefs -------------------------------- */
 
+#define OPEN 0
+#define TRUNC 1
+#define APPEND 2
+
+#define SUCCESS 0
+#define FAIL	1
+
+#define SYNTAX "minishell: syntax error near unexpected token "
+#define QUOTES "minishell: unclosed quotes "
+
 typedef enum e_token
 {
 	WORD			= 0,
@@ -29,11 +39,12 @@ typedef struct s_lexer
 	char			*start;
 	t_token			token;
 	int				strlen;
-	bool			space_flag;
+	bool			not_space;
 	struct s_lexer	*next;
 }	t_lexer;
 
-typedef struct s_env {
+typedef struct s_env
+{
 	char			*key;
 	char			*value;
 	char			*full_string;
@@ -47,6 +58,7 @@ typedef struct s_cmd {
 	char	*outfile;
 	int		infile_fd;
 	int		outfile_fd;
+	int		file_type;
 	bool	here_doc;
 }	t_cmd;
 
@@ -69,6 +81,18 @@ int		create_less(t_lexer **head, char *str);
 int		create_greater(t_lexer **head, char *str);
 int		create_dbless(t_lexer **head, char *str);
 int		create_dbgreater(t_lexer **head, char *str);
+
+/* --------------------------------- PARSER	 -------------------------------- */
+
+int		parser(t_lexer **lexer, t_minishell *minishell);
+int		count_pipes(t_lexer **lexer);
+void	init_t_cmd(t_cmd **cmd);
+void	free_cmd_table(t_cmd **cmd_table);
+int		count_words(t_lexer **lexer);
+char	*expander(t_lexer *lexer, t_minishell *minishell);
+void	print_cmd_table(t_cmd **cmd_table);
+
+int	syntax_checker(t_lexer **lexer, t_minishell *minishell);
 
 /* --------------------------------- Signals -------------------------------- */
 
@@ -94,8 +118,8 @@ void	builtin_exit();
 
 /* ---------------------------------- Utils --------------------------------- */
 
-char	*ft_strndup(const char *str, size_t n);
-int		ft_strcmp(const char *s1, const char *s2);
+// char	*ft_strndup(const char *str, size_t n);
+// int		ft_strcmp(const char *s1, const char *s2);
 int		export(t_env **head, char *str);
 int		copy_env_to_linked_list(char **envp, t_env **head);
 t_env	*find_env_key(t_env *head, char *key);

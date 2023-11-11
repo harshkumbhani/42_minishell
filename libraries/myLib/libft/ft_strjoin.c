@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 11:24:10 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/04/02 23:47:16 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:45:58 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	size;
 
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!s1 && !s2)
+		return (NULL);
 	str = (char *)malloc(size);
-	if (!str || (!s1 && !s2))
+	if (!str)
 		return (NULL);
 	str = ft_memcpy(str, s1, ft_strlen(s1) + 1);
 	ft_strlcat(str, s2, size);

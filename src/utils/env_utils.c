@@ -38,7 +38,7 @@ int	add_env_node(t_env **head, char *key, char *full_string, char *value)
 	else
 	{
 		temp = *head;
-		while (temp->next)
+		while (temp->next != NULL)
 			temp = temp->next;
 		temp->next = new_node;
 	}

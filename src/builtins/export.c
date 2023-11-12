@@ -12,7 +12,7 @@ int	export(t_env **head, char **str)
 	i = 1;
 	if (!str[1])
 	{
-		env(*head, true);
+		print_env_ascending(*head);
 		return (EXIT_SUCCESS);
 	}
 	while (str[i])
@@ -71,7 +71,7 @@ static bool	is_key_valid(char *str)
 	return (free(key), true);
 }
 
-char	*get_key(char *str)
+static char	*get_key(char *str)
 {
 	char	*key;
 	char	*equal_sign;

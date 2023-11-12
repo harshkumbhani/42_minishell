@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:10:53 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/11 15:52:06 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:05:57 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,14 @@
  * plain format
  * @return EXIT_SUCESS after printing all the nodes.
  */
-int	env(t_env *head, bool format_as_export_command)
+int	env(t_env *head)
 {
 	t_env	*temp;
 
 	temp = head;
 	while (temp)
 	{
-		if (format_as_export_command)
-			ft_fprintf(STDOUT_FILENO, "declare -x %s\n", temp->full_string);
-		else
-			ft_fprintf(STDOUT_FILENO, "%s\n", temp->full_string);
+		ft_fprintf(STDOUT_FILENO, "%s\n", temp->full_string);
 		temp = temp->next;
 	}
 	return (EXIT_SUCCESS);

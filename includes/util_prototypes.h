@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:57:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:02:59 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:32:41 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	reset_fds(t_minishell *minishell);
 
 t_env	*find_env_key(t_env *head, char *key);
 int		add_env_node(t_env **head, char *key, char *full_string, char *value);
-int		count_env_variables(t_env *head);
+void	print_env_ascending(t_env *head);
 
 /* ------------------------------- File Utils ------------------------------- */
 

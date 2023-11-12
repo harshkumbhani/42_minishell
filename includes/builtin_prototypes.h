@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:54:06 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:00:48 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:06:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int		cd(t_env **head, char *path);
 int		pwd(void);
-int		env(t_env *head, bool format_as_export_command);
+int		env(t_env *head);
 int		echo(char **cmd);
 int		export(t_env **head, char **str);
 int		unset(t_env **head, const char *key);

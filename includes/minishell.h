@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:01:35 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:06:42 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,4 @@
 # include "free_prototypes.h"
 # include "util_prototypes.h"
 
-#endif /* MINISHELL_H */
+#endif

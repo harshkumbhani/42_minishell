@@ -6,12 +6,12 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 14:59:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:01:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDES_H
-#define INCLUDES_H
+# define INCLUDES_H
 
 # include "../libraries/myLib/header/library.h"
 # include <signal.h>

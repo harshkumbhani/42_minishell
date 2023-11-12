@@ -6,14 +6,14 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:57:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 14:58:44 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:02:59 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTIL_PROTOTYPES_H
 # define UTIL_PROTOTYPES_H
 
-#include "structs.h"
+# include "structs.h"
 
 /* ---------------------------------- Utils --------------------------------- */
 

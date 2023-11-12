@@ -6,14 +6,14 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:36:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 14:55:02 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:01:18 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_PROTOTYPES_H
 # define LEXER_PROTOTYPES_H
 
-#include "structs.h"
+# include "structs.h"
 
 t_lexer	*tokenise(char *input);
 int		token_word(t_lexer **head, char *str);

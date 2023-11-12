@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:54:06 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 14:55:45 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:00:48 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ int		unset(t_env **head, const char *key);
 void	builtin_exit(t_minishell *minishell);
 void	exec_builtins(t_minishell *minishell, int i);
 bool	is_cmd_builtin(t_minishell *minishell, int i);
-
 
 #endif

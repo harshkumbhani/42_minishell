@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:32:49 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 14:35:32 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 15:02:43 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef enum e_token
 	BACKSLASH		= 4,
 	LESS			= 5,
 	GREATER			= 6,
-	DOUBLE_LESS 	= 7,
+	DOUBLE_LESS		= 7,
 	DOUBLE_GREATER	= 8
 }	t_token;
 
@@ -63,11 +63,11 @@ typedef struct s_stdfds
 }	t_stdfds;
 
 typedef struct s_minishell {
-	t_cmd	**cmd_table;
-	int		exit_code;
-	int		fd[2];
-	t_stdfds stdfds;
-	t_env	*head_env;
+	t_cmd		**cmd_table;
+	int			exit_code;
+	int			fd[2];
+	t_stdfds	stdfds;
+	t_env		*head_env;
 }	t_minishell;
 
-#endif /* STRUCTS_H */
+#endif

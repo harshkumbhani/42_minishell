@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:56:18 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 16:56:25 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 17:16:13 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 void	free_env_linked_list(t_env	*head);
 void	free_env_node(t_env *node);
 void	free_env_array(char **envp);
-void	error_msg(t_error_type, char *str);
+void	error_msg(char *cmd, char *reason);
 
 #endif

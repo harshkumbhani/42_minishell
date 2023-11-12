@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 16:53:35 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 17:17:32 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define SYNTAX "minishell: syntax error near unexpected token "
 # define QUOTES "minishell: unclosed quotes "
 # define MINISHELL "minishell"
+
+/* Error macro's */
 # define IDENTIFIER "is not a valid identifier"
+# define NOT_FOUND "command not found"
 
 #endif

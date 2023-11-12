@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:32:49 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 16:54:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 17:17:38 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ typedef enum e_token
 	DOUBLE_LESS		= 7,
 	DOUBLE_GREATER	= 8
 }	t_token;
-
-typedef enum e_error_type
-{
-	ERR_INVALID_IDENTIFIER,
-}	t_error_type;
 
 typedef struct s_lexer
 {

@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 static void	execute_heredoc(t_minishell *minishell, int index);
@@ -28,8 +27,8 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 	while (true)
 	{
 		str = get_next_line(STDIN_FILENO);
-		// fprintf(stderr, "VALUE: %d :: %s. :: %s.\n",ft_strncmp(cmd_table->deli, str, ft_strlen(cmd_table->deli)), cmd_table->deli, str);
-		if (ft_strncmp(minishell->cmd_table[index]->deli, str, ft_strlen(minishell->cmd_table[index]->deli)) == 0)
+		if (ft_strncmp(minishell->cmd_table[index]->deli,
+				str, ft_strlen(minishell->cmd_table[index]->deli)) == 0)
 		{
 			free(str);
 			break ;

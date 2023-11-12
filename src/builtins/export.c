@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 16:55:22 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/12 17:16:00 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	export(t_env **head, char **str)
 	while (str[i])
 	{
 		if (!is_key_valid(str[i]))
-			error_msg(ERR_INVALID_IDENTIFIER, str[i]);
+			error_msg("export", IDENTIFIER);
 		else
 			process_string(head, str[i]);
 		i++;

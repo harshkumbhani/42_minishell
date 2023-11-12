@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 void	execute_cmd_with_pipe(t_minishell *minishell, int index)

@@ -25,7 +25,12 @@ static void	exec_cmd_table(t_minishell *minishell)
 		else
 			execute_final_cmd(minishell, i);
 		i++;
+	}
+	i = 0;
+	while (minishell->cmd_table[i])
+	{
 		get_exit_status(minishell);
+		i++;
 	}
 }
 

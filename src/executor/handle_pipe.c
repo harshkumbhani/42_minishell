@@ -33,7 +33,5 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 		handle_cmd_execution(minishell, index);
 	}
 	else
-	{
 		close(minishell->fd[0]);
-	}
 }

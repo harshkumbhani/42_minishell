@@ -28,7 +28,6 @@ static void	run_minishell(t_minishell *minishell)
 		input = readline("minishell> ");
 		if (!input)
 		{
-			printf("Ctrl+D was pressed!\n");
 			lst_del(&lexer);
 			break ;
 		}
@@ -41,8 +40,8 @@ static void	run_minishell(t_minishell *minishell)
 			continue ;
 		}
 		executor(minishell);
-		free(input);
 		lst_del(&lexer);
+		free(input);
 		free_cmd_table(minishell->cmd_table);
 		reset_fds(minishell);
 	}

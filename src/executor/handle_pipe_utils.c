@@ -38,4 +38,3 @@ void	handle_cmd_execution(t_minishell *minishell, int index)
 	else
 		execute_cmd(minishell->cmd_table[index], minishell->head_env);
 }
-

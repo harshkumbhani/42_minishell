@@ -2,24 +2,11 @@
 
 // TODO: Implement SHLVL
 
-void	copy_std_fds(t_minishell *minishell)
-{
-	minishell->stdfds.stdin = dup(STDIN_FILENO);
-	minishell->stdfds.stdout = dup(STDOUT_FILENO);
-}
-
-void	reset_fds(t_minishell *minishell)
-{
-	dup2(minishell->stdfds.stdin, STDIN_FILENO);
-	dup2(minishell->stdfds.stdout, STDOUT_FILENO);
-}
-
 int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	t_minishell minishell;
+	t_minishell	minishell;
 	char		*input;
 	t_lexer		*lexer;
 

@@ -29,12 +29,9 @@ static void	run_minishell(t_minishell *minishell)
 	while (1)
 	{
 		setup_signals();
-		input = readline("minishell> ");
+		input = readline("");
 		if (!input)
-		{
-			lst_del(&lexer);
 			break ;
-		}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
 		lexer = tokenise(input);

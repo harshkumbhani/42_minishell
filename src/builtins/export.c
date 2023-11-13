@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
+/*   Updated: 2023/11/12 17:16:00 by cwenz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -12,13 +23,13 @@ int	export(t_env **head, char **str)
 	i = 1;
 	if (!str[1])
 	{
-		env(*head, true);
+		print_env_ascending(*head);
 		return (EXIT_SUCCESS);
 	}
 	while (str[i])
 	{
 		if (!is_key_valid(str[i]))
-			ft_fprintf(STDERR_FILENO, "minishell: export: \'%s\': is not a valid identifier\n", str[i]);
+			error_msg("export", IDENTIFIER);
 		else
 			process_string(head, str[i]);
 		i++;
@@ -71,7 +82,7 @@ static bool	is_key_valid(char *str)
 	return (free(key), true);
 }
 
-char	*get_key(char *str)
+static char	*get_key(char *str)
 {
 	char	*key;
 	char	*equal_sign;

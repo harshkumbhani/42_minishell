@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 static int	open_file(char *file, int file_type)
@@ -14,19 +13,18 @@ static int	open_file(char *file, int file_type)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		ft_fprintf(STDERR_FILENO, "minishell: open: %s\n", strerror(errno));
+		error_msg("open", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
 }
 
-void    open_infile(t_cmd *cmd)
+void	open_infile(t_cmd *cmd)
 {
 	cmd->infile_fd = open_file(cmd->infile, cmd->file_type);
 	dup2(cmd->infile_fd, STDIN_FILENO);
 	close(cmd->infile_fd);
 }
-
 
 void	open_outfile(t_cmd *cmd)
 {

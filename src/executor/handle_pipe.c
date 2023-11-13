@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 void	execute_cmd_with_pipe(t_minishell *minishell, int index)
@@ -33,7 +32,5 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 		handle_cmd_execution(minishell, index);
 	}
 	else
-	{
 		close(minishell->fd[0]);
-	}
 }

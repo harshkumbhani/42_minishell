@@ -23,3 +23,15 @@ char	*strjoin_pipex(char *s1, char *s2)
 		str[i + j] = s2[j];
 	return (str);
 }
+
+void	copy_std_fds(t_minishell *minishell)
+{
+	minishell->stdfds.stdin = dup(STDIN_FILENO);
+	minishell->stdfds.stdout = dup(STDOUT_FILENO);
+}
+
+void	reset_fds(t_minishell *minishell)
+{
+	dup2(minishell->stdfds.stdin, STDIN_FILENO);
+	dup2(minishell->stdfds.stdout, STDOUT_FILENO);
+}

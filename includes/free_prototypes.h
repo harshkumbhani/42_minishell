@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   free_prototypes.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:06:42 by cwenz            ###   ########.fr       */
+/*   Created: 2023/11/12 14:56:18 by cwenz             #+#    #+#             */
+/*   Updated: 2023/11/12 17:16:13 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef FREE_PROTOTYPES_H
+# define FREE_PROTOTYPES_H
 
-# include "includes.h"
 # include "structs.h"
-# include "lexer_prototypes.h"
-# include "parser_prototypes.h"
-# include "signal_prototypes.h"
-# include "executor_prototypes.h"
-# include "builtin_prototypes.h"
-# include "free_prototypes.h"
-# include "util_prototypes.h"
+
+void	free_env_linked_list(t_env	*head);
+void	free_env_node(t_env *node);
+void	free_env_array(char **envp);
+void	error_msg(char *cmd, char *reason);
 
 #endif

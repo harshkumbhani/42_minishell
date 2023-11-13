@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:06:42 by cwenz            ###   ########.fr       */
+/*   Created: 2023/11/12 16:51:45 by cwenz             #+#    #+#             */
+/*   Updated: 2023/11/12 17:18:31 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+# include "minishell.h"
 
-# include "includes.h"
-# include "structs.h"
-# include "lexer_prototypes.h"
-# include "parser_prototypes.h"
-# include "signal_prototypes.h"
-# include "executor_prototypes.h"
-# include "builtin_prototypes.h"
-# include "free_prototypes.h"
-# include "util_prototypes.h"
-
-#endif
+void	error_msg(char *cmd, char *reason)
+{
+	if (cmd && reason)
+		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", cmd, reason);
+}

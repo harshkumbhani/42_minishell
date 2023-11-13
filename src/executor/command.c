@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 void	execute_cmd(t_cmd *cmds, t_env *head_env)
@@ -12,13 +11,13 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	path = find_cmd_path(cmds, envp);
 	if (!path)
 	{
-		ft_fprintf(STDERR_FILENO, "minishell: %s: command not found\n", cmds->cmd[0]);
+		error_msg(cmds->cmd[0], NOT_FOUND);
 		free_env_array(envp);
 		exit(127);
 	}
 	if (execve(path, cmds->cmd, envp) == -1)
 	{
-		ft_fprintf(STDERR_FILENO, "minishell: %s: %s\n", cmds->cmd[0], strerror(errno));
+		error_msg(cmds->cmd[0], strerror(errno));
 		free(path);
 		free_env_array(envp);
 		exit(errno);

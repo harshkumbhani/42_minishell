@@ -26,6 +26,7 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 	close(minishell->fd[0]);
 	while (true)
 	{
+		ft_fprintf(1, "> ");
 		str = get_next_line(STDIN_FILENO);
 		if (ft_strncmp(minishell->cmd_table[index]->deli,
 				str, ft_strlen(minishell->cmd_table[index]->deli)) == 0)

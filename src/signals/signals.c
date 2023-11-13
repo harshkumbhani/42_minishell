@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:05:12 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/13 12:35:49 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void handle_sigint(int signo);
 static void handle_sigquit(int signo);
-static void	setup_termios_config();
+static void	setup_termios_config(void);
 
 /**
  * @brief  Sets up signal handling for SIGINT (Ctrl-C) and SIGQUIT (Ctrl-\\).
@@ -24,7 +24,7 @@ static void	setup_termios_config();
  * 	behave.
  *  handlers for SIGINT and SIGQUIT.
  */
-void	setup_signals()
+void	setup_signals(void)
 {
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;
@@ -57,11 +57,17 @@ static void handle_sigquit(int signo)
 	(void)signo;
 }
 
-static void	setup_termios_config()
+static void	setup_termios_config(void)
 {
 	struct termios	termios_config;
 
 	tcgetattr(0, &termios_config);
 	termios_config.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, 0, &termios_config);
+}
+
+void	setup_child_signals(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

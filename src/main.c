@@ -3,12 +3,16 @@
 
 static void	run_minishell(t_minishell *minishell);
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	(void)argc;
-	(void)argv;
 	t_minishell	minishell;
 
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_putstr_fd("Run as ./minihsell with no args\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	minishell = (t_minishell){};
 	copy_std_fds(&minishell);
 	export(&minishell.head_env, envp);

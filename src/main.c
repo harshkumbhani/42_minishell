@@ -29,7 +29,7 @@ static void	run_minishell(t_minishell *minishell)
 	while (1)
 	{
 		setup_signals();
-		input = readline("");
+		input = readline("minishell> ");
 		if (!input)
 			break ;
 		if (input && input[0] != '\0' && input[0] != '\n')

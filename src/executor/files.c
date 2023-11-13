@@ -13,7 +13,7 @@ static int	open_file(char *file, int file_type)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		error_msg("open", strerror(errno));
+		error_msg("open", NULL, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 	return (fd);

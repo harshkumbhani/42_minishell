@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:06:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/13 10:34:20 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,12 @@
 # include "builtin_prototypes.h"
 # include "free_prototypes.h"
 # include "util_prototypes.h"
+
+void	setup_signals(void);
+
+void	free_env_linked_list(t_env	*head);
+void	free_env_node(t_env *node);
+void	free_env_array(char **envp);
+void	error_msg(char *cmd, char *reason);
 
 #endif

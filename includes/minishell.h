@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/13 10:34:20 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/13 10:44:01 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 
 # include "includes.h"
 # include "structs.h"
-# include "lexer_prototypes.h"
 # include "parser_prototypes.h"
-# include "signal_prototypes.h"
 # include "executor_prototypes.h"
 # include "builtin_prototypes.h"
-# include "free_prototypes.h"
 # include "util_prototypes.h"
 
 void	setup_signals(void);

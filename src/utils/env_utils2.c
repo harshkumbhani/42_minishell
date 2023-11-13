@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:36:49 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 15:52:44 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/13 10:29:44 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	sort_env_linked_list(t_env ***array, int count);
+static void	sort_env_linked_list(t_env **array, int count);
 static int	count_env_variables(t_env *head);
-static void	assign_array(t_env *head, t_env ***array);
+static void	assign_array(t_env *head, t_env **array);
 
 void	print_env_ascending(t_env *head)
 {
@@ -27,8 +27,8 @@ void	print_env_ascending(t_env *head)
 	array = (t_env **)ft_calloc(count, sizeof(t_env *));
 	if (!array)
 		return ;
-	assign_array(head, &array);
-	sort_env_linked_list(&array, count);
+	assign_array(head, array);
+	sort_env_linked_list(array, count);
 	while (array[i])
 	{
 		ft_fprintf(STDOUT_FILENO, "declare -x %s\n", array[i]->full_string);
@@ -57,7 +57,7 @@ static int	count_env_variables(t_env *head)
 	return (i);
 }
 
-static void	sort_env_linked_list(t_env ***array, int count)
+static void	sort_env_linked_list(t_env **array, int count)
 {
 	t_env	*temp;
 	int		i;
@@ -69,11 +69,11 @@ static void	sort_env_linked_list(t_env ***array, int count)
 		j = 0;
 		while (j < count - i - 1)
 		{
-			if (ft_strcmp((*array)[j]->key, (*array)[j + 1]->key) > 0)
+			if (ft_strcmp(array[j]->key, array[j + 1]->key) > 0)
 			{
-				temp = (*array)[j];
-				(*array)[j] = (*array)[j + 1];
-				(*array)[j + 1] = temp;
+				temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
 			}
 			j++;
 		}
@@ -81,7 +81,7 @@ static void	sort_env_linked_list(t_env ***array, int count)
 	}
 }
 
-static void	assign_array(t_env *head, t_env ***array)
+static void	assign_array(t_env *head, t_env **array)
 {
 	int		i;
 	t_env	*temp;
@@ -90,7 +90,7 @@ static void	assign_array(t_env *head, t_env ***array)
 	temp = head;
 	while (temp)
 	{
-		(*array)[i] = temp;
+		array[i] = temp;
 		temp = temp->next;
 		i++;
 	}

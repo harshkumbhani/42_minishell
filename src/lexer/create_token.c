@@ -16,9 +16,13 @@ int	token_word(t_lexer **head, char *str)
 	new->token = WORD;
 	while (str[i] != '\0' && ft_isspace(str[i]) == FALSE)
 	{
-		if (str[i] == '>' || str[i] == '<'
-			|| str[i] == '\'' || str[i] == '\"')
+		if (str[i] == '>' || str[i] == '<')
 			break ;
+		else if (str[i] == '\'' || str[i] == '\"')
+		{
+			new->not_space = TRUE;
+			break ;
+		}
 		i++;
 	}
 	new->strlen = i;
@@ -58,7 +62,8 @@ int	token_squote(t_lexer **head, char *str)
 	while (str[i] != '\0' && str[i] != '\'')
 		i++;
 	new->strlen = i++;
-	if (str[i] == '\'' || str[i] == '\"')
+	if (str[i] != '\0' && ((str[i] == '\'' || str[i] == '\"')
+		|| ft_isspace(str[i]) == FALSE))
 		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
@@ -80,7 +85,8 @@ int	token_dquote(t_lexer **head, char *str)
 	while (str[i] != '\0' && str[i] != '\"')
 		i++;
 	new->strlen = i++;
-	if (str[i] == '\'' || str[i] == '\"')
+	if (str[i] != '\0' && ((str[i] == '\'' || str[i] == '\"')
+		|| ft_isspace(str[i]) == FALSE))
 		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);

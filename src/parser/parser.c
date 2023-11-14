@@ -35,6 +35,29 @@ void	handle_redirection(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell)
 	}
 }
 
+static void	join_and_advance(t_lexer **lexer, char **cmd, t_minishell *minishell)
+{
+	char	*tmp;
+	char	*ret;
+
+	(void)cmd;
+	ret = ft_strdup("");
+	tmp = NULL;
+	while (1)
+	{
+		if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
+			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
+		else if (t_check((*lexer)->token) == TRUE)
+			tmp = expander(*lexer, minishell);
+		ret = ft_strjoin(ret, tmp);
+		free(tmp);
+		if ((*lexer)->not_space != TRUE)
+			break ;
+		(*lexer) = (*lexer)->next;
+	}
+	*cmd = ret;
+}
+
 void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 {
 	t_cmd	*cmds;
@@ -51,9 +74,11 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 	cmds->cmd = (char **)ft_calloc(words + 1, sizeof(char *));
 	while ((*lexer) != NULL && ++i < words && (*lexer)->token != PIPE)
 	{
-		if ((*lexer)->token == SQUOTE)
+		if ((*lexer)->not_space == TRUE)
+			join_and_advance(lexer, &cmds->cmd[++j], minishell);
+		else if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
 			cmds->cmd[++j] = ft_strndup((*lexer)->start, (*lexer)->strlen);
-		else if ((*lexer)->token == WORD || (*lexer)->token == DQUOTE)
+		else if (((*lexer)->token == WORD || (*lexer)->token == DQUOTE) && (*lexer)->strlen > 0)
 			cmds->cmd[++j] = expander(*lexer, minishell);
 		else if ((*lexer)->token == LESS || (*lexer)->token == GREATER
 			|| (*lexer)->token == DOUBLE_GREATER || (*lexer)->token == DOUBLE_LESS)
@@ -87,6 +112,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
+		//print_cmd_table(&minishell->cmd_table[j]);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

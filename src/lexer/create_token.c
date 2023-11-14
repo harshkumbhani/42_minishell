@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_token.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 09:32:11 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/14 09:32:14 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // && ft_isalnum(str[i] == TRUE)
@@ -18,6 +30,11 @@ int	token_word(t_lexer **head, char *str)
 	{
 		if (str[i] == '>' || str[i] == '<')
 			break ;
+		else if (str[i] == '\'' || str[i] == '\"')
+		{
+			new->not_space = TRUE;
+			break ;
+		}
 		i++;
 	}
 	new->strlen = i;
@@ -57,7 +74,8 @@ int	token_squote(t_lexer **head, char *str)
 	while (str[i] != '\0' && str[i] != '\'')
 		i++;
 	new->strlen = i++;
-	if (str[i] == '\'' || str[i] == '\"')
+	if (str[i] != '\0' && ((str[i] == '\'' || str[i] == '\"')
+			|| ft_isspace(str[i]) == FALSE))
 		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
@@ -79,7 +97,8 @@ int	token_dquote(t_lexer **head, char *str)
 	while (str[i] != '\0' && str[i] != '\"')
 		i++;
 	new->strlen = i++;
-	if (str[i] == '\'' || str[i] == '\"')
+	if (str[i] != '\0' && ((str[i] == '\'' || str[i] == '\"')
+			|| ft_isspace(str[i]) == FALSE))
 		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/13 22:18:48 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/14 13:49:13 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	exec_builtins(t_minishell *minishell, int i)
 		builtin_exit(minishell, i);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "export") == 0)
 		minishell->exit_code = export(&minishell->head_env,
-				minishell->cmd_table[i]->cmd);
+				minishell->cmd_table[i]->cmd + 1);
 }
 
 bool	is_cmd_builtin(t_minishell *minishell, int i)

@@ -16,7 +16,8 @@ int	token_word(t_lexer **head, char *str)
 	new->token = WORD;
 	while (str[i] != '\0' && ft_isspace(str[i]) == FALSE)
 	{
-		if (str[i] == '>' || str[i] == '<')
+		if (str[i] == '>' || str[i] == '<'
+			|| str[i] == '\'' || str[i] == '\"')
 			break ;
 		i++;
 	}

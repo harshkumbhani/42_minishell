@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/14 12:44:53 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:55:31 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	process_string(t_env **head, char *str);
 static bool	is_key_valid(char *str);
 static char	*get_key(char *str);
+static void	free_strings(char *key, char *value, char *full_string);
 
 int	export(t_env **head, char **str)
 {
@@ -29,7 +30,7 @@ int	export(t_env **head, char **str)
 	while (str[i])
 	{
 		if (!is_key_valid(str[i]))
-			error_msg("export", IDENTIFIER);
+			error_msg("export", str[i], IDENTIFIER);
 		else
 			process_string(head, str[i]);
 		i++;
@@ -46,20 +47,33 @@ static void	process_string(t_env **head, char *str)
 
 	full_string = ft_strdup(str);
 	equal_sign = ft_strchr(full_string, '=');
-	key = ft_strndup(full_string, equal_sign - full_string);
-	value = ft_strdup(equal_sign + 1);
-	if (!key || !equal_sign || !full_string || !value)
+	if (equal_sign)
 	{
-		if (key)
-			free(key);
-		if (full_string)
-			free(full_string);
-		if (value)
-			free(value);
-		return ;
+		key = ft_strndup(full_string, equal_sign - full_string);
+		value = ft_strdup(equal_sign + 1);
+		remove_key(key, head);
+		if (!key || !value)
+			return (free_strings(key, value, full_string));
 	}
-	unset(head, key);
+	else
+	{
+		key = strdup(full_string);
+		full_string = ft_strjoin_gnl(full_string, "=");
+		value = NULL;
+		if (!key || !full_string)
+			return (free_strings(key, NULL, full_string));
+	}
 	add_env_node(head, key, full_string, value);
+}
+
+static void	free_strings(char *key, char *value, char *full_string)
+{
+	if (key)
+		free(key);
+	if (value)
+		free(value);
+	if (full_string)
+		free(full_string);
 }
 
 static bool	is_key_valid(char *str)
@@ -93,10 +107,10 @@ static char	*get_key(char *str)
 		return (NULL);
 	equal_sign = ft_strchr(full_string, '=');
 	if (!equal_sign)
-		return (free(full_string), NULL);
+		return (full_string);
 	key = ft_strndup(full_string, equal_sign - full_string);
-	if (!key)
-		return (free(full_string), NULL);
 	free(full_string);
+	if (!key)
+		return (NULL);
 	return (key);
 }

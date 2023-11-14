@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 17:16:00 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/14 12:44:53 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	export(t_env **head, char **str)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (!str[1])
 	{
 		print_env_ascending(*head);

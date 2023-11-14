@@ -35,6 +35,7 @@ static void	run_minishell(t_minishell *minishell)
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
 		lexer = tokenise(input);
+		//print_list(&lexer);
 		if (parser(&lexer, minishell) == FAIL)
 		{
 			lst_del(&lexer);

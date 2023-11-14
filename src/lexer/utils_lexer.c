@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_lexer.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 09:32:35 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/14 09:32:36 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -44,7 +55,8 @@ void	print_list(t_lexer **head)
 		write(1, "Token value: ", ft_strlen("Token value: "));
 		write(1, current->start, current->strlen);
 		printf("\nToken type: %d\nStr : %s\nToken len: %d\nnot_space: %d\n\n",
-			current->token, current->start, current->strlen, current->not_space);
+			current->token, current->start, current->strlen,
+			current->not_space);
 		current = current->next;
 	}
 }

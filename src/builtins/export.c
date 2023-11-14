@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/14 15:55:31 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/14 16:07:25 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	export(t_env **head, char **str)
 	int	i;
 
 	i = 0;
-	if (!str[1])
+	if (!str[0])
 	{
 		print_env_ascending(*head);
 		return (EXIT_SUCCESS);

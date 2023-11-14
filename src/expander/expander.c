@@ -2,8 +2,7 @@
 
 int	check_var(char c)
 {
-	if (ft_isdigit(c) == TRUE && c != '_'
-		&& ft_isalpha(c) == FALSE)
+	if (ft_isalnum(c) == TRUE || c == '_')
 		return (TRUE);
 	return (FALSE);
 }
@@ -40,10 +39,13 @@ int	get_var(char **ret, char *str, t_minishell *minshell)
 		i++;
 	while (env != NULL)
 	{
-		if (ft_strncmp(str, env->key, i) == 0)
+		if ((size_t)i == ft_strlen(env->key))
 		{
-			*ret = ft_strjoin_gnl(*ret, env->value);
-			break ;
+			if (ft_strncmp(str, env->key, i) == 0)
+			{
+				*ret = ft_strjoin_gnl(*ret, env->value);
+				break ;
+			}
 		}
 		env = env->next;
 	}
@@ -69,9 +71,11 @@ char	*expander(t_lexer *lexer, t_minishell *minishell)
 	{
 		if (lexer->start[i] == '$' && lexer->start[i + 1] == '?')
 			i += special_var(&ret, minishell);
-		else if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == TRUE)
-			i += special_char(&ret, &lexer->start[i]);
+		else if (lexer->start[i] == '$' && ft_isdigit(lexer->start[i + 1]) == TRUE)
+			i += 2;
 		else if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == FALSE)
+			i += special_char(&ret, &lexer->start[i]);
+		else if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == TRUE)
 			i += get_var(&ret, &lexer->start[i + 1], minishell);
 		else
 		{
@@ -84,5 +88,6 @@ char	*expander(t_lexer *lexer, t_minishell *minishell)
 			i += j;
 		}
 	}
+	//printf("Expanded string: %s\n", ret);
 	return (ret);
 }

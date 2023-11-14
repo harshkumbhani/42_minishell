@@ -6,13 +6,12 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/14 16:07:25 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/14 16:27:44 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	process_string(t_env **head, char *str);
 static bool	is_key_valid(char *str);
 static char	*get_key(char *str);
 static void	free_strings(char *key, char *value, char *full_string);
@@ -38,7 +37,7 @@ int	export(t_env **head, char **str)
 	return (EXIT_SUCCESS);
 }
 
-static void	process_string(t_env **head, char *str)
+void	process_string(t_env **head, char *str)
 {
 	char	*key;
 	char	*equal_sign;

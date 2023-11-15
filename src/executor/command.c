@@ -83,7 +83,7 @@ static char	**copy_env(t_env *head)
 	i = 0;
 	while (temp)
 	{
-		env[i] = ft_strdup(temp->full_string);
+		env[i + 1] = ft_strdup(temp->full_string);
 		i++;
 		temp = temp->next;
 	}

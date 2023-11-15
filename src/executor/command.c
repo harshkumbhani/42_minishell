@@ -77,13 +77,13 @@ static char	**copy_env(t_env *head)
 
 	i = count_env_variables(head);
 	temp = head;
-	env = (char **)ft_calloc(i, sizeof(char *));
+	env = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!env)
 		return (NULL);
 	i = 0;
 	while (temp)
 	{
-		env[i + 1] = ft_strdup(temp->full_string);
+		env[i] = ft_strdup(temp->full_string);
 		i++;
 		temp = temp->next;
 	}

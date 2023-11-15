@@ -31,11 +31,13 @@ static void	run_minishell(t_minishell *minishell)
 	{
 		input = readline("minishell> ");
 		if (!input)
+		{
+			ft_printf("exit\n");
 			break ;
+		}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
 		lexer = tokenise(input);
-		//print_list(&lexer);
 		if (parser(&lexer, minishell) == FAIL)
 		{
 			lst_del(&lexer);

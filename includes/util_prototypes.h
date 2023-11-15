@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   util_prototypes.h                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 14:57:24 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/14 16:28:18 by cwenz            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef UTIL_PROTOTYPES_H
 # define UTIL_PROTOTYPES_H
@@ -29,6 +18,7 @@ void	print_env_ascending(t_env *head);
 void	remove_key(char *key, t_env **head);
 void	process_string(t_env **head, char *str);
 void	copy_env_variables(t_env **head, char **envp);
+int		count_env_variables(t_env *head);
 
 /* ------------------------------- File Utils ------------------------------- */
 

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/13 12:35:49 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/15 12:58:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	setup_signals(void)
 
 	setup_termios_config();
 	sa_int.sa_handler = handle_sigint;
-	sa_int.sa_flags = 0;
+	sa_int.sa_flags = SA_RESTART;
 	sigemptyset(&sa_int.sa_mask);
 	sigaction(SIGINT, &sa_int, NULL);
 
 	sa_quit.sa_handler = handle_sigquit;
-	sa_quit.sa_flags = 0;
+	sa_quit.sa_flags = SA_RESTART;
 	sigemptyset(&sa_quit.sa_mask);
 	sigaction(SIGQUIT, &sa_quit, NULL);
 }
@@ -53,7 +53,7 @@ static void handle_sigint(int signo)
 
 static void handle_sigquit(int signo)
 {
-	exit(0);
+	// exit(0);
 	(void)signo;
 }
 
@@ -68,6 +68,12 @@ static void	setup_termios_config(void)
 
 void	setup_child_signals(void)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	struct sigaction sa_default;
+
+	sa_default.sa_handler = SIG_DFL;
+	sa_default.sa_flags = 0;
+	sigemptyset(&sa_default.sa_mask);
+
+	sigaction(SIGINT, &sa_default, NULL);
+	sigaction(SIGQUIT, &sa_default, NULL);
 }

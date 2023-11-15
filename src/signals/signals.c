@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/15 12:58:27 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/15 16:07:43 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	setup_child_signals(void)
 	sa_default.sa_handler = SIG_DFL;
 	sa_default.sa_flags = 0;
 	sigemptyset(&sa_default.sa_mask);
-
+	
+	// fprintf(stderr, "---Child!\n");
 	sigaction(SIGINT, &sa_default, NULL);
 	sigaction(SIGQUIT, &sa_default, NULL);
 }

@@ -7,7 +7,10 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 	pipe(minishell->fd);
 	pid = fork();
 	if (pid == 0)
+	{
+		// setup_child_signals();
 		execute_child_with_pipe(minishell, index);
+	}
 	else
 	{
 		close(minishell->fd[1]);
@@ -23,6 +26,8 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 	pid = fork();
 	if (pid == 0)
 	{
+		// setup_child_signals();
+		close(minishell->fd[1]);
 		dup2(minishell->fd[0], STDIN_FILENO);
 		close(minishell->fd[0]);
 		if (minishell->cmd_table[index]->infile)
@@ -31,6 +36,4 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 			open_outfile(minishell->cmd_table[index]);
 		handle_cmd_execution(minishell, index);
 	}
-	else
-		close(minishell->fd[0]);
 }

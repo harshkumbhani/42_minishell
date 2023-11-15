@@ -9,7 +9,10 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	pipe(minishell->fd);
 	pid = fork();
 	if (pid == 0)
+	{
+		setup_child_signals();
 		execute_heredoc(minishell, index);
+	}
 	else
 	{
 		close(minishell->fd[1]);
@@ -26,8 +29,9 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 	close(minishell->fd[0]);
 	while (true)
 	{
-		ft_fprintf(1, "> ");
-		str = get_next_line(STDIN_FILENO);
+		str = readline("> ");
+		if (!str)
+			break ;
 		if (ft_strncmp(minishell->cmd_table[index]->deli,
 				str, ft_strlen(minishell->cmd_table[index]->deli)) == 0)
 		{
@@ -35,6 +39,7 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 			break ;
 		}
 		write(minishell->fd[1], str, ft_strlen(str));
+		write(minishell->fd[1], "\n", 1);
 		free(str);
 	}
 	close(minishell->fd[1]);

@@ -33,7 +33,11 @@ static char	*find_cmd_path(t_cmd *cmd, t_env *head_env)
 	char	*path;
 
 	path_node = find_env_key(head_env, "PATH");
+	if (!path_node)
+		return (NULL);
 	envp = ft_split(path_node->value, ':');
+	if (!envp)
+		return (NULL);
 	path = get_cmd(cmd, envp);
 	if (!path)
 		return (free(envp), NULL);

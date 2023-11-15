@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 15:36:49 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/13 10:29:44 by hkumbhan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	sort_env_linked_list(t_env **array, int count);
-static int	count_env_variables(t_env *head);
 static void	assign_array(t_env *head, t_env **array);
 
 void	print_env_ascending(t_env *head)
@@ -42,7 +30,7 @@ void	print_env_ascending(t_env *head)
  * @param head A pointer to the first node in the linked list
  * @return The amount of env variables stored in the linked list.
  */
-static int	count_env_variables(t_env *head)
+int	count_env_variables(t_env *head)
 {
 	int		i;
 	t_env	*temp;

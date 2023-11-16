@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 	minishell = (t_minishell){};
 	copy_std_fds(&minishell);
 	copy_env_variables(&minishell.head_env, envp);
-	setup_signals();
+	
 	run_minishell(&minishell);
 	free_env_linked_list(minishell.head_env);
 	return (0);
@@ -29,6 +29,7 @@ static void	run_minishell(t_minishell *minishell)
 
 	while (1)
 	{
+		setup_signals();
 		input = readline("minishell> ");
 		if (!input)
 		{

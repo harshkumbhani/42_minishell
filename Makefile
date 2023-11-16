@@ -13,7 +13,7 @@ VPATH				:= ./src/ ./src/signals/ ./src/builtins/ ./src/executor/ \
 						./src/expander/ ./src/error/
 
 SRC					:= main.c
-SRC_SIGNALS			:= signals.c
+SRC_SIGNALS			:= signals.c signal_utils.c
 SRC_FREE			:= env_free.c
 SRC_ERROR			:= error_msg.c
 SRC_UTILS			:= env_utils.c utils.c env_utils2.c env_utils3.c

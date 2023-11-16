@@ -7,10 +7,11 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	int		pid;
 
 	pipe(minishell->fd);
+	block_signal();
 	pid = fork();
 	if (pid == 0)
 	{
-		
+		setup_child_signals();
 		execute_heredoc(minishell, index);
 	}
 	else

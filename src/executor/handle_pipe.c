@@ -5,9 +5,13 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 	int	pid;
 
 	pipe(minishell->fd);
+	block_signal();
 	pid = fork();
 	if (pid == 0)
+	{
+		setup_child_signals();
 		execute_child_with_pipe(minishell, index);
+	}
 	else
 	{
 		close(minishell->fd[1]);
@@ -19,16 +23,15 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 void	execute_final_cmd(t_minishell *minishell, int index)
 {
 	int	pid;
-
+	block_signal();
 	pid = fork();
 	if (pid == 0)
 	{
+		setup_child_signals();
 		if (minishell->cmd_table[index]->infile)
 			open_infile(minishell->cmd_table[index]);
 		if (minishell->cmd_table[index]->outfile)
 			open_outfile(minishell->cmd_table[index]);
 		handle_cmd_execution(minishell, index);
 	}
-	else
-		close(minishell->fd[0]);
 }

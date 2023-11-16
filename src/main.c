@@ -16,7 +16,6 @@ int	main(int argc, char **argv, char **envp)
 	minishell = (t_minishell){};
 	copy_std_fds(&minishell);
 	copy_env_variables(&minishell.head_env, envp);
-	
 	run_minishell(&minishell);
 	free_env_linked_list(minishell.head_env);
 	return (0);

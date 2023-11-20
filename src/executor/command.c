@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-static char	**copy_env(t_env *head);
 static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env);
-static char	*get_cmd(t_cmd *cmd, char **envp);
 static char	*search_cmd_in_path(char *cmd, char **envp);
+static void	exit_child_with_error(t_cmd *cmds, char *path);
+static char	*check_regular_cmd(t_cmd *cmd);
 
 void	execute_cmd(t_cmd *cmds, t_env *head_env)
 {
@@ -12,18 +12,10 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 
 	path = resolve_cmd_path(cmds, head_env);
 	env = copy_env(head_env);
-	if (!path)
-	{
-		error_msg(cmds->cmd[0], NULL, NOT_FOUND);
-		free_env_array(env);
-		exit(127);
-	}
 	if (execve(path, cmds->cmd, env) == -1)
 	{
-		error_msg(cmds->cmd[0], NULL, strerror(errno));
-		free(path);
 		free_env_array(env);
-		exit(errno);
+		exit_child_with_error(cmds, path);
 	}
 }
 
@@ -33,32 +25,29 @@ static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env)
 	char	**envp;
 	char	*path;
 
+	path = check_regular_cmd(cmd);
+	if (path)
+		return (path);
 	envp = NULL;
 	path_node = find_env_key(head_env, "PATH");
 	if (path_node)
 		envp = ft_split(path_node->value, ':');
-	path = get_cmd(cmd, envp);
+	path = search_cmd_in_path(cmd->cmd[0], envp);
 	if (!path)
-		return (free(envp), NULL);
+		return (NULL);
 	free(envp);
 	return (path);
 }
 
-static char	*get_cmd(t_cmd *cmd, char **envp)
+static char	*check_regular_cmd(t_cmd *cmd)
 {
 	char	*path;
 
 	path = strjoin_pipex(cmd->cmd[0], "");
-	if (access(path, F_OK | X_OK) == 0)
+	if (access(path, F_OK) == 0)
 		return (path);
 	free(path);
-	path = search_cmd_in_path(cmd->cmd[0], envp);
-	if (!path && !envp)
-	{
-		error_msg(cmd->cmd[0], NULL, NO_DIR);
-		exit(127);
-	}
-	return (path);
+	return (NULL);
 }
 
 static char	*search_cmd_in_path(char *cmd, char **envp)
@@ -75,9 +64,11 @@ static char	*search_cmd_in_path(char *cmd, char **envp)
 			return (NULL);
 		path = strjoin_pipex(temp, cmd);
 		if (!path)
-			return (NULL);
-		free(temp);
-		if (access(path, F_OK | X_OK) == 0)
+		{
+			i++;
+			continue ;
+		}
+		if (access(path, F_OK) == 0)
 			return (path);
 		free(path);
 		i++;
@@ -85,24 +76,33 @@ static char	*search_cmd_in_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-static char	**copy_env(t_env *head)
+static void	exit_child_with_error(t_cmd *cmds, char *path)
 {
-	int		i;
-	char	**env;
-	t_env	*temp;
+	struct stat	buf;
+	int			exit_code;
 
-	i = count_env_variables(head);
-	temp = head;
-	env = (char **)ft_calloc(i + 1, sizeof(char *));
-	if (!env)
-		return (NULL);
-	i = 0;
-	while (temp)
+	exit_code = 1;
+	if (!path)
 	{
-		env[i] = ft_strdup(temp->full_string);
-		i++;
-		temp = temp->next;
+		if (strchr(cmds->cmd[0], '/'))
+			error_msg(cmds->cmd[0], NULL, NO_DIR);
+		else
+			error_msg(cmds->cmd[0], NULL, NOT_FOUND);
+		exit_code = 127;
 	}
-	env[i] = NULL;
-	return (env);
+	else if (stat(path, &buf) == 0)
+	{
+		if (S_ISDIR(buf.st_mode))
+		{
+			error_msg(path, NULL, DIR);
+			exit_code = 126;
+		}
+		else if (access(path, X_OK) == -1)
+		{
+			error_msg(path, NULL, NO_PERM);
+			exit_code = 126;
+		}
+	}
+	free(path);
+	exit(exit_code);
 }

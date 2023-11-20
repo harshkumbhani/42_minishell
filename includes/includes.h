@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/20 10:33:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/20 15:22:35 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@
 # define IDENTIFIER "is not a valid identifier"
 # define NOT_FOUND "command not found"
 # define NO_DIR "no such file or directory"
+# define DIR "is a directory"
+# define NO_PERM "permission denied"
 
 #endif

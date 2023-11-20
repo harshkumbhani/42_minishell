@@ -7,31 +7,32 @@ int	t_check(t_token token_type)
 	return (FALSE);
 }
 
-void	handle_redirection(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell)
+static void ft_redir_lst(t_lexer **lexer, t_minishell *mini, int ftype, t_redir **head)
 {
+	t_redir	*new;
+
+	new = ft_calloc(1, sizeof(t_redir));
+	(*lexer) = (*lexer)->next;
+	new->file_name = expander((*lexer), mini);
+	new->file_type = ftype;
+	new->file_fd = -1;
+	redir_add_back(head, new);
+	return ;
+}
+
+void	handle_redirection(t_lexer **lexer, t_minishell *minishell, t_redir **head, char **deli)
+{
+	static int	i = 0;
+
 	if ((*lexer)->token == GREATER && t_check((*lexer)->next->token) == TRUE)
-	{
-		(*lexer) = (*lexer)->next;
-		cmds->outfile = expander((*lexer), minishell);
-		cmds->file_type = TRUNC;
-	}
+		ft_redir_lst(lexer, minishell, TRUNC, head);
 	else if ((*lexer)->token == LESS && t_check((*lexer)->next->token) == TRUE)
-	{
-		(*lexer) = (*lexer)->next;
-		cmds->infile = expander((*lexer), minishell);
-		cmds->file_type = OPEN;
-	}
+		ft_redir_lst(lexer, minishell, OPEN, head);
 	else if ((*lexer)->token == DOUBLE_GREATER && t_check((*lexer)->next->token) == TRUE)
-	{
-		(*lexer) = (*lexer)->next;
-		cmds->outfile = expander((*lexer), minishell);
-		cmds->file_type = APPEND;
-	}
+		ft_redir_lst(lexer, minishell, APPEND, head);
 	else if ((*lexer)->token == DOUBLE_LESS && t_check((*lexer)->next->token) == TRUE)
 	{
-		(*lexer) = (*lexer)->next;
-		cmds->deli = ft_strndup((*lexer)->start, (*lexer)->strlen);
-		cmds->here_doc = TRUE;
+		
 	}
 }
 
@@ -82,7 +83,7 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 			cmds->cmd[++j] = expander(*lexer, minishell);
 		else if ((*lexer)->token == LESS || (*lexer)->token == GREATER
 			|| (*lexer)->token == DOUBLE_GREATER || (*lexer)->token == DOUBLE_LESS)
-			handle_redirection(cmds, lexer, minishell);
+			handle_redirection(lexer, minishell, &cmds->files, cmds->deli);
 		lex = (*lexer);
 		(*lexer) = (*lexer)->next;
 		free(lex);
@@ -112,7 +113,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
-		//print_cmd_table(&minishell->cmd_table[j]);
+		print_cmd_table(&minishell->cmd_table[j]);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

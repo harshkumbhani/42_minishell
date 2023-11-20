@@ -34,15 +34,23 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_redir
+{
+	char			*file_name;
+	int				file_fd;
+	int				file_type;
+	struct s_redir	*next;
+}	t_redir;
+
+typedef struct s_heredoc
+{
+	char			*str;
+	struct s_heredoc	*next;
+}
 typedef struct s_cmd {
 	char	**cmd;
-	char	*deli;
-	char	*infile;
-	char	*outfile;
-	int		infile_fd;
-	int		outfile_fd;
-	int		file_type;
-	bool	here_doc;
+	char	**deli;
+	t_redir	*files;
 }	t_cmd;
 
 typedef struct s_stdfds

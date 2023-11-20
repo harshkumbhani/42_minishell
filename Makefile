@@ -7,7 +7,7 @@ LIBFT_DIR			:= libraries/myLib
 LIBFT_LIB			:= $(LIBFT_DIR)/libft.a
 
 # --------------------------- Program Source files --------------------------- #
-OBJDIR              := ./objs
+OBJDIR				:= ./objs
 VPATH				:= ./src/ ./src/signals/ ./src/builtins/ ./src/executor/ \
 						./src/lexer ./src/free/ ./src/utils/ ./src/parser \
 						./src/expander/ ./src/error/
@@ -27,7 +27,7 @@ SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
 						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER) $(SRC_ERROR) \
 						$(SRC_EXPANDER) $(SRC_PARSER)
 
-OBJS                := $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
+OBJS				:= $(addprefix $(OBJDIR)/, ${SRCS:%.c=%.o})
 
 # ----------------------------------- Rules ---------------------------------- #
 all: $(NAME)

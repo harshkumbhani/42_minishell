@@ -45,7 +45,7 @@ static void	run_minishell(t_minishell *minishell)
 		}
 		free(input);
 		lst_del(&lexer);
-		executor(minishell);
+		//executor(minishell);
 		free_cmd_table(minishell->cmd_table);
 		reset_fds(minishell);
 	}

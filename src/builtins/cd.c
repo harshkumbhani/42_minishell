@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:37:48 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/12 16:37:50 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/20 11:17:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	cd(t_env **head, char *path)
 	old_dir = getcwd(NULL, 0);
 	if (chdir(path) != EXIT_SUCCESS)
 	{
-		ft_fprintf(STDERR_FILENO, "minishell: chdir: %s\n", strerror(errno));
+		error_msg(path, NULL, strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	update_pwd(head, old_dir);

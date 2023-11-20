@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/15 13:27:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/20 10:33:08 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@
 /* Error macro's */
 # define IDENTIFIER "is not a valid identifier"
 # define NOT_FOUND "command not found"
+# define NO_DIR "no such file or directory"
 
 #endif

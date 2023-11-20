@@ -1,9 +1,9 @@
 #include "minishell.h"
 
 static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env);
-static char	*search_cmd_in_path(char *cmd, char **envp);
-static void	exit_child_with_error(t_cmd *cmds, char *path);
-static char	*check_regular_cmd(t_cmd *cmd);
+static char	*find_command_in_path(char *cmd, char **envp);
+static void	handle_command_execution_error(t_cmd *cmds, char *path);
+static char	*check_for_file_command(t_cmd *cmd);
 
 void	execute_cmd(t_cmd *cmds, t_env *head_env)
 {
@@ -15,7 +15,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	if (execve(path, cmds->cmd, env) == -1)
 	{
 		free_env_array(env);
-		exit_child_with_error(cmds, path);
+		handle_command_execution_error(cmds, path);
 	}
 }
 
@@ -25,21 +25,21 @@ static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env)
 	char	**envp;
 	char	*path;
 
-	path = check_regular_cmd(cmd);
+	path = check_for_file_command(cmd);
 	if (path)
 		return (path);
 	envp = NULL;
 	path_node = find_env_key(head_env, "PATH");
 	if (path_node)
 		envp = ft_split(path_node->value, ':');
-	path = search_cmd_in_path(cmd->cmd[0], envp);
+	path = find_command_in_path(cmd->cmd[0], envp);
 	if (!path)
 		return (NULL);
 	free(envp);
 	return (path);
 }
 
-static char	*check_regular_cmd(t_cmd *cmd)
+static char	*check_for_file_command(t_cmd *cmd)
 {
 	char	*path;
 
@@ -50,7 +50,7 @@ static char	*check_regular_cmd(t_cmd *cmd)
 	return (NULL);
 }
 
-static char	*search_cmd_in_path(char *cmd, char **envp)
+static char	*find_command_in_path(char *cmd, char **envp)
 {
 	int		i;
 	char	*temp;
@@ -76,12 +76,10 @@ static char	*search_cmd_in_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-static void	exit_child_with_error(t_cmd *cmds, char *path)
+static void	handle_command_execution_error(t_cmd *cmds, char *path)
 {
-	struct stat	buf;
 	int			exit_code;
 
-	exit_code = 1;
 	if (!path)
 	{
 		if (strchr(cmds->cmd[0], '/'))
@@ -90,19 +88,8 @@ static void	exit_child_with_error(t_cmd *cmds, char *path)
 			error_msg(cmds->cmd[0], NULL, NOT_FOUND);
 		exit_code = 127;
 	}
-	else if (stat(path, &buf) == 0)
-	{
-		if (S_ISDIR(buf.st_mode))
-		{
-			error_msg(path, NULL, DIR);
-			exit_code = 126;
-		}
-		else if (access(path, X_OK) == -1)
-		{
-			error_msg(path, NULL, NO_PERM);
-			exit_code = 126;
-		}
-	}
+	else
+		exit_code = handle_file_execution_errors(path);
 	free(path);
 	exit(exit_code);
 }

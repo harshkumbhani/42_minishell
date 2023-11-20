@@ -19,6 +19,7 @@ void	remove_key(char *key, t_env **head);
 void	process_string(t_env **head, char *str);
 void	copy_env_variables(t_env **head, char **envp);
 int		count_env_variables(t_env *head);
+char	**copy_env(t_env *head);
 
 /* ------------------------------- File Utils ------------------------------- */
 

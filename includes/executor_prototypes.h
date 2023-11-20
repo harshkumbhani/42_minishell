@@ -10,6 +10,6 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index);
 void	execute_final_cmd(t_minishell *minishell, int index);
 void	get_exit_status(t_minishell *minishell);
 void	handle_heredoc(t_minishell *minishell, int index);
-char	**copy_env(t_env *head);
+int		handle_file_execution_errors(char *path);
 
 #endif

@@ -44,5 +44,5 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 		free(str);
 	}
 	close(minishell->fd[1]);
-	exit(EXIT_SUCCESS);
+	exit(0);
 }

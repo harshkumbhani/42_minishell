@@ -46,11 +46,12 @@ typedef struct s_heredoc
 {
 	char			*str;
 	struct s_heredoc	*next;
-}
+} t_heredoc;
+
 typedef struct s_cmd {
-	char	**cmd;
-	char	**deli;
-	t_redir	*files;
+	char		**cmd;
+	t_heredoc	*heredoc;
+	t_redir		*files;
 }	t_cmd;
 
 typedef struct s_stdfds

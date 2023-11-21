@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_prototypes.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/20 11:07:27 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/20 22:39:05 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char	*expander(t_lexer *lexer, t_minishell *minishell);
 void	print_cmd_table(t_cmd **cmd_table);
 int		syntax_checker(t_lexer **lexer, t_minishell *minishell);
 void	redir_add_back(t_redir	**head, t_redir *new_node);
+void	hd_add_back(t_heredoc **head, t_heredoc *new);
 
 #endif

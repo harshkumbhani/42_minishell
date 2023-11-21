@@ -6,42 +6,8 @@ void	init_t_cmd(t_cmd **cmd)
 
 	current = *cmd;
 	current->cmd = NULL;
-	current->deli = NULL;
+	current->heredoc = NULL;
 	current->files = NULL;
-}
-
-void	free_redir_list(t_redir **redir)
-{
-	t_redir	*tail;
-
-	tail = NULL;
-	while (*redir != NULL)
-	{
-		tail = (*redir);
-		(*redir) = (*redir)->next;
-		free(tail);
-	}
-}
-
-void	free_cmd_table(t_cmd **cmd_table)
-{
-	int	i;
-
-	i = -1;
-	while (cmd_table[++i] != NULL)
-	{
-		if (cmd_table[i] == NULL)
-			return ;
-		if (cmd_table[i]->cmd != NULL)
-			free_arr(cmd_table[i]->cmd);
-		if (cmd_table[i]->deli != NULL)
-			free(cmd_table[i]->deli);
-		if (cmd_table[i]->files != NULL)
-			free_redir_list(&cmd_table[i]->files);
-		free(cmd_table[i]);
-		cmd_table[i] = NULL;
-	}
-	free(cmd_table);
 }
 
 void	redir_add_back(t_redir	**head, t_redir *new_node)
@@ -59,34 +25,18 @@ void	redir_add_back(t_redir	**head, t_redir *new_node)
 	}
 }
 
-void	print_files(t_redir **head)
+void	hd_add_back(t_heredoc **head, t_heredoc *new)
 {
-	t_redir	*tmp;
+	t_heredoc	*tmp;
 
 	tmp = *head;
-	while(tmp != NULL)
+	if (*head == NULL)
+		(*head) = new;
+	else
 	{
-		printf("File name: %s\n", tmp->file_name);
-		printf("File type: %d\n", tmp->file_type);
-		tmp = tmp->next;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-}
-
-void	print_cmd_table(t_cmd **cmd_table)
-{
-	t_cmd	*tmp;
-	t_redir	*redir;
-	int		k;
-
-	k = -1;
-	tmp = (*cmd_table);
-	redir = tmp->files;
-	printf("\nCommand table: \n");
-	if (tmp != NULL)
-	{
-		while (tmp->cmd[++k] != NULL)
-			printf("cmd[%d]: %s\n", k, tmp->cmd[k]);
-	}
-	printf("Deli: %s\n", tmp->deli);
-	print_files(&tmp->files);
+	return ;
 }

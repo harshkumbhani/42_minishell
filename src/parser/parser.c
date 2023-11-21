@@ -10,9 +10,13 @@ int	t_check(t_token token_type)
 static void ft_redir_lst(t_lexer **lexer, t_minishell *mini, int ftype, t_redir **head)
 {
 	t_redir	*new;
+	t_lexer	*lex;
 
+	lex = (*lexer)->next;
+	free(*lexer);
+	*lexer = lex;
 	new = ft_calloc(1, sizeof(t_redir));
-	(*lexer) = (*lexer)->next;
+	// (*lexer) = (*lexer)->next;
 	new->file_name = expander((*lexer), mini);
 	new->file_type = ftype;
 	new->file_fd = -1;
@@ -20,10 +24,20 @@ static void ft_redir_lst(t_lexer **lexer, t_minishell *mini, int ftype, t_redir 
 	return ;
 }
 
-void	handle_redirection(t_lexer **lexer, t_minishell *minishell, t_redir **head, char **deli)
+static void	ft_heredoc_lst(t_lexer **lexer, t_minishell *mini, t_heredoc **head)
 {
-	static int	i = 0;
+	t_heredoc	*new;
 
+	new = ft_calloc(1, sizeof(t_heredoc));
+	(*lexer) = (*lexer)->next;
+	new->str = expander((*lexer), mini);
+	hd_add_back(head, new);
+	return ;
+}
+
+void	handle_redirection(t_lexer **lexer, t_minishell *minishell, t_redir **head, t_heredoc **hd)
+{
+	// (void)hd;
 	if ((*lexer)->token == GREATER && t_check((*lexer)->next->token) == TRUE)
 		ft_redir_lst(lexer, minishell, TRUNC, head);
 	else if ((*lexer)->token == LESS && t_check((*lexer)->next->token) == TRUE)
@@ -31,9 +45,7 @@ void	handle_redirection(t_lexer **lexer, t_minishell *minishell, t_redir **head,
 	else if ((*lexer)->token == DOUBLE_GREATER && t_check((*lexer)->next->token) == TRUE)
 		ft_redir_lst(lexer, minishell, APPEND, head);
 	else if ((*lexer)->token == DOUBLE_LESS && t_check((*lexer)->next->token) == TRUE)
-	{
-		
-	}
+		ft_heredoc_lst(lexer, minishell, hd);
 }
 
 static void	join_and_advance(t_lexer **lexer, char **cmd, t_minishell *minishell)
@@ -83,7 +95,7 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 			cmds->cmd[++j] = expander(*lexer, minishell);
 		else if ((*lexer)->token == LESS || (*lexer)->token == GREATER
 			|| (*lexer)->token == DOUBLE_GREATER || (*lexer)->token == DOUBLE_LESS)
-			handle_redirection(lexer, minishell, &cmds->files, cmds->deli);
+			handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
 		lex = (*lexer);
 		(*lexer) = (*lexer)->next;
 		free(lex);

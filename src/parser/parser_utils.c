@@ -36,37 +36,10 @@ int	count_words(t_lexer **lexer)
 	return (i);
 }
 
-void	print_files(t_redir *head)
+int	t_check(t_token token_type)
 {
-	while(head != NULL)
-	{
-		printf("File name: %s\n", head->file_name);
-		printf("File type: %d\n", head->file_type);
-		head = head->next;
-	}
-}
-
-void	print_cmd_table(t_cmd **cmd_table)
-{
-	t_cmd		*tmp;
-	t_redir		*redir;
-	t_heredoc	*hd;
-	int			k;
-
-	k = -1;
-	tmp = (*cmd_table);
-	redir = tmp->files;
-	hd = tmp->heredoc;
-	printf("\nCommand table: \n");
-	if (tmp != NULL)
-	{
-		while (tmp->cmd[++k] != NULL)
-			printf("cmd[%d]: %s\n", k, tmp->cmd[k]);
-	}
-	while (hd != NULL)
-	{
-		printf("heredoc: %s\n", hd->str);
-		hd = hd->next;
-	}
-	print_files(redir);
+	if (token_type == WORD || token_type == DQUOTE
+		|| token_type == SQUOTE)
+		return (TRUE);
+	return (FALSE);
 }

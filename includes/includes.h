@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/20 22:37:37 by harsh            ###   ########.fr       */
+/*   Updated: 2023/11/21 15:41:56 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <wait.h>
+//# include <wait.h>
 
 # define OPEN 0
 # define TRUNC 1

@@ -2,6 +2,7 @@
 #include "minishell.h"
 
 static void	run_minishell(t_minishell *minishell);
+//static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -37,7 +38,8 @@ static void	run_minishell(t_minishell *minishell)
 		}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
-		lexer = tokenise(input);
+		lexer = tokenise(input, minishell);
+		//parse_and_execute(&lexer, minishell);
 		if (parser(&lexer, minishell) == FAIL)
 		{
 			lst_del(&lexer);
@@ -46,7 +48,19 @@ static void	run_minishell(t_minishell *minishell)
 		free(input);
 		lst_del(&lexer);
 		//executor(minishell);
+		ft_fprintf(STDERR_FILENO, "exit_code : %s\n",ft_itoa(minishell->exit_code));
 		free_cmd_table(minishell->cmd_table);
 		reset_fds(minishell);
 	}
 }
+
+//static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell)
+//{
+//	if (parser(lexer, minishell) == SUCCESS)
+//	{
+//		//executor(minishell);
+//		free_cmd_table(minishell->cmd_table);
+//	}
+//	else
+//		lst_del(lexer);
+//}

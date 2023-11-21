@@ -20,8 +20,9 @@ SRC_UTILS			:= env_utils.c utils.c env_utils2.c env_utils3.c
 SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
 SRC_EXECUTOR		:= executor.c handle_pipe.c command.c heredoc.c files.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
-SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c syntax_error.c parser_free.c
-SRC_EXPANDER		:= expander.c
+SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c syntax_error.c parser_free.c \
+						parser_putargs.c
+SRC_EXPANDER		:= expander.c expander_utils.c
 
 SRCS				:= $(SRC) $(SRC_SIGNALS) $(SRC_BUILTINS) $(SRC_EXECUTOR) \
 						$(SRC_FREE) $(SRC_UTILS) $(SRC_LEXER) $(SRC_ERROR) \

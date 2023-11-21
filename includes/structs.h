@@ -44,7 +44,8 @@ typedef struct s_redir
 
 typedef struct s_heredoc
 {
-	char			*str;
+	char				*str;
+	bool				expand;
 	struct s_heredoc	*next;
 } t_heredoc;
 

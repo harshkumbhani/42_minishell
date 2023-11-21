@@ -23,7 +23,8 @@ void	free_heredoc(t_heredoc **heredoc)
 	while (*heredoc != NULL)
 	{
 		tmp = (*heredoc);
-		free((*heredoc)->str);
+		if ((*heredoc)->str)
+			free((*heredoc)->str);
 		(*heredoc) = (*heredoc)->next;
 		free(tmp);
 	}
@@ -49,4 +50,15 @@ void	free_cmd_table(t_cmd **cmd_table)
 		cmd_table[i] = NULL;
 	}
 	free(cmd_table);
+}
+
+void	move_and_free(t_lexer **lexer)
+{
+	t_lexer	*current;
+
+	current = *lexer;
+	(*lexer) = (*lexer)->next;
+	free(current);
+	current = NULL;
+	return ;
 }

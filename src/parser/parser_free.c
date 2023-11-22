@@ -8,7 +8,10 @@ void	free_redir_list(t_redir **redir)
 	while (*redir != NULL)
 	{
 		tail = (*redir);
-		free((*redir)->file_name);
+		if ((*redir)->file_name != NULL)
+			free((*redir)->file_name);
+		if ((*redir)->file_fd != -1)
+			close((*redir)->file_fd);
 		(*redir) = (*redir)->next;
 		free(tail);
 	}
@@ -23,7 +26,7 @@ void	free_heredoc(t_heredoc **heredoc)
 	while (*heredoc != NULL)
 	{
 		tmp = (*heredoc);
-		if ((*heredoc)->str)
+		if ((*heredoc)->str != NULL)
 			free((*heredoc)->str);
 		(*heredoc) = (*heredoc)->next;
 		free(tmp);

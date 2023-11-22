@@ -11,7 +11,7 @@ static void	join_and_advance(t_lexer **lexer, char **cmd, t_minishell *minishell
 		if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if (t_check((*lexer)->token) == TRUE)
-			tmp = expander(*lexer, minishell);
+			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell);
 		(*cmd) = ft_strjoin_gnl((*cmd), tmp);
 		free(tmp);
 		if ((*lexer)->not_space != TRUE)
@@ -90,7 +90,7 @@ void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 		else if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
 			cmds->cmd[++j] = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if (((*lexer)->token == WORD || (*lexer)->token == DQUOTE) && (*lexer)->strlen > 0)
-			cmds->cmd[++j] = expander(*lexer, minishell);
+			cmds->cmd[++j] = expander((*lexer)->start, (*lexer)->strlen, minishell);
 		else if ((*lexer)->token == LESS || (*lexer)->token == GREATER
 			|| (*lexer)->token == DOUBLE_GREATER || (*lexer)->token == DOUBLE_LESS)
 			handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);

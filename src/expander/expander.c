@@ -24,45 +24,45 @@ static int	get_var(char **ret, char *str, t_minishell *minshell)
 	return (i + 1);
 }
 
-static void	ft_join_rest(int *i, t_lexer *lexer, char **ret)
+static void	ft_join_rest(int *i, char *str, int strlen, char **ret)
 {
 	char	*tmp;
 	int		j;
 
 	tmp = NULL;
 	j = 0;
-	while ((*i) + j < lexer->strlen && lexer->start[*i + j] != '$')
+	while ((*i) + j < strlen && str[*i + j] != '$')
 		j++;
-	tmp = ft_strndup(&lexer->start[*i], j);
+	tmp = ft_strndup(&str[*i], j);
 	(*ret) = ft_strjoin_gnl(*ret, tmp);
 	free(tmp);
 	(*i) += j;
 }
 
-char	*expander(t_lexer *lexer, t_minishell *minishell)
+char	*expander(char *str, int strlen,t_minishell *minishell)
 {
 	char	*ret;
 	int		i;
 
 	i = 0;
 	ret = NULL;
-	while (i < lexer->strlen && lexer->start[i] != '$')
+	while (i < strlen && str[i] != '$')
 		i++ ;
-	if (i == lexer->strlen)
-		return (ft_strndup(lexer->start, i));
-	ret = ft_strndup(lexer->start, i);
-	while (i < lexer->strlen)
+	if (i == strlen)
+		return (ft_strndup(str, i));
+	ret = ft_strndup(str, i);
+	while (i < strlen)
 	{
-		if (lexer->start[i] == '$' && lexer->start[i + 1] == '?')
+		if (str[i] == '$' && str[i + 1] == '?')
 			i += special_var(&ret, minishell);
-		else if (lexer->start[i] == '$' && ft_isdigit(lexer->start[i + 1]) == TRUE)
+		else if (str[i] == '$' && ft_isdigit(str[i + 1]) == TRUE)
 			i += 2;
-		else if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == FALSE)
-			i += special_char(&ret, &lexer->start[i]);
-		else if (lexer->start[i] == '$' && check_var(lexer->start[i + 1]) == TRUE)
-			i += get_var(&ret, &lexer->start[i + 1], minishell);
+		else if (str[i] == '$' && check_var(str[i + 1]) == FALSE)
+			i += special_char(&ret, &str[i]);
+		else if (str[i] == '$' && check_var(str[i + 1]) == TRUE)
+			i += get_var(&ret, &str[i + 1], minishell);
 		else
-			ft_join_rest(&i, lexer, &ret);
+			ft_join_rest(&i, str, strlen, &ret);
 	}
 	printf("Expanded string: %s\n", ret);
 	return (ret);

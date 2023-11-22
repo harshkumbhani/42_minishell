@@ -21,11 +21,6 @@ void	copy_env_variables(t_env **head, char **envp);
 int		count_env_variables(t_env *head);
 char	**copy_env(t_env *head);
 
-/* ------------------------------- File Utils ------------------------------- */
-
-void	open_outfile(t_cmd *cmd);
-void	open_infile(t_cmd *cmd);
-
 /* -------------------------------- Lst-utils ------------------------------- */
 
 void	lst_add_back(t_lexer **head, t_lexer *new_node);

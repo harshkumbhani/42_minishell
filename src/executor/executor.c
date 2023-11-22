@@ -23,7 +23,6 @@ static void	exec_cmd_table(t_minishell *minishell)
 			reset_fds(minishell);
 			handle_heredoc(minishell, i);
 		}
-
 		if (minishell->cmd_table[i + 1])
 			execute_cmd_with_pipe(minishell, i);
 		else
@@ -42,9 +41,7 @@ static bool	is_simple_builtin(t_minishell *minishell)
 {
 	if (minishell->cmd_table[0]->cmd[0] && minishell->cmd_table[1] == NULL
 		&& is_cmd_builtin(minishell, 0)
-		&& !minishell->cmd_table[0]->here_doc
-		&& !minishell->cmd_table[0]->infile
-		&& !minishell->cmd_table[0]->outfile)
+		&& !minishell->cmd_table[0]->files)
 		return (true);
 	return (false);
 }

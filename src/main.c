@@ -49,7 +49,7 @@ static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell)
 {
 	if (parser(lexer, minishell) == SUCCESS)
 	{
-		//executor(minishell);
+		executor(minishell);
 		free_cmd_table(minishell->cmd_table);
 	}
 	else

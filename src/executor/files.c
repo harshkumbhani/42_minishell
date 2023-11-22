@@ -1,6 +1,37 @@
 #include "minishell.h"
 
-static int	open_file(char *file, int file_type)
+static void	redirect_from_file(t_redir *redir, bool is_outfile);
+static int	open_file_with_mode(char *file, int file_type);
+static t_redir	*find_last_infile(t_redir *head);
+
+void	execute_redir(t_cmd *cmds)
+{
+	t_redir	*temp;
+	t_redir	*last_infile;
+
+	temp = cmds->files;
+	last_infile = find_last_infile(cmds->files);
+	if (last_infile)
+		redirect_from_file(last_infile, false);
+	while (temp)
+	{
+		if (temp->file_type == 1 || temp->file_type == 2)
+			redirect_from_file(temp, true);
+		temp = temp->next;
+	}
+}
+
+static void	redirect_from_file(t_redir *redir, bool is_outfile)
+{
+	redir->file_fd = open_file_with_mode(redir->file_name, redir->file_type);
+	if (is_outfile)
+		dup2(redir->file_fd, STDOUT_FILENO);
+	else
+		dup2(redir->file_fd, STDIN_FILENO);
+	close(redir->file_fd);
+}
+
+static int	open_file_with_mode(char *file, int file_type)
 {
 	int	fd;
 
@@ -13,22 +44,24 @@ static int	open_file(char *file, int file_type)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		error_msg("open", NULL, strerror(errno));
-		exit(EXIT_FAILURE);
+		error_msg(file, NULL, strerror(errno));
+		exit(1);
 	}
 	return (fd);
 }
 
-void	open_infile(t_cmd *cmd)
+static t_redir	*find_last_infile(t_redir *head)
 {
-	cmd->infile_fd = open_file(cmd->infile, cmd->file_type);
-	dup2(cmd->infile_fd, STDIN_FILENO);
-	close(cmd->infile_fd);
-}
+	t_redir	*temp;
+	t_redir	*infile_node;
 
-void	open_outfile(t_cmd *cmd)
-{
-	cmd->outfile_fd = open_file(cmd->outfile, cmd->file_type);
-	dup2(cmd->outfile_fd, STDOUT_FILENO);
-	close(cmd->outfile_fd);
+	temp = head;
+	infile_node	= NULL;
+	while (temp)
+	{
+		if (temp->file_type == 0)
+			infile_node = temp;
+		temp = temp->next;
+	}
+	return (infile_node);
 }

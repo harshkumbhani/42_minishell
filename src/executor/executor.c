@@ -18,11 +18,11 @@ static void	exec_cmd_table(t_minishell *minishell)
 	i = 0;
 	while (minishell->cmd_table[i])
 	{
-		if (minishell->cmd_table[i]->here_doc)
-		{
-			reset_fds(minishell);
-			handle_heredoc(minishell, i);
-		}
+		// if (minishell->cmd_table[i]->here_doc)
+		// {
+		// 	reset_fds(minishell);
+		// 	handle_heredoc(minishell, i);
+		// }
 		if (minishell->cmd_table[i + 1])
 			execute_cmd_with_pipe(minishell, i);
 		else

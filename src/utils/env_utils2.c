@@ -83,3 +83,25 @@ static void	assign_array(t_env *head, t_env **array)
 		i++;
 	}
 }
+
+char	**copy_env(t_env *head)
+{
+	int		i;
+	char	**env;
+	t_env	*temp;
+
+	i = count_env_variables(head);
+	temp = head;
+	env = (char **)ft_calloc(i + 1, sizeof(char *));
+	if (!env)
+		return (NULL);
+	i = 0;
+	while (temp)
+	{
+		env[i] = ft_strdup(temp->full_string);
+		i++;
+		temp = temp->next;
+	}
+	env[i] = NULL;
+	return (env);
+}

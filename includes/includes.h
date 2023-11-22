@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/21 15:41:56 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:22:35 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@
 /* Error macro's */
 # define IDENTIFIER "is not a valid identifier"
 # define NOT_FOUND "command not found"
+# define NO_DIR "no such file or directory"
+# define DIR "is a directory"
+# define NO_PERM "permission denied"
 
 #endif

@@ -16,9 +16,9 @@ SRC					:= main.c
 SRC_SIGNALS			:= signals.c signal_utils.c
 SRC_FREE			:= env_free.c
 SRC_ERROR			:= error_msg.c
-SRC_UTILS			:= env_utils.c utils.c env_utils2.c env_utils3.c
+SRC_UTILS			:= env_utils.c utils.c env_utils2.c
 SRC_BUILTINS		:= cd.c pwd.c env.c echo.c unset.c exec_builtins.c exit.c export.c
-SRC_EXECUTOR		:= executor.c handle_pipe.c command.c heredoc.c files.c
+SRC_EXECUTOR		:= executor.c handle_pipe.c command.c heredoc.c files.c command_utils.c
 SRC_LEXER			:= lexer.c utils_lexer.c create_token.c create_token2.c
 SRC_PARSER			:= parser.c parser_utils.c parser_utils2.c syntax_error.c parser_free.c \
 						parser_putargs.c

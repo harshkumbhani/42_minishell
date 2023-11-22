@@ -64,6 +64,5 @@ char	*expander(char *str, int strlen,t_minishell *minishell)
 		else
 			ft_join_rest(&i, str, strlen, &ret);
 	}
-	printf("Expanded string: %s\n", ret);
 	return (ret);
 }

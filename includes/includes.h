@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:30:55 by cwenz             #+#    #+#             */
 /*   Updated: 2023/11/20 15:22:35 by cwenz            ###   ########.fr       */
@@ -25,7 +25,7 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-// # include <wait.h>
+//# include <wait.h>
 
 # define OPEN 0
 # define TRUNC 1

@@ -82,7 +82,7 @@ static void	handle_command_execution_error(t_cmd *cmds, char *path)
 
 	if (!path)
 	{
-		if (strchr(cmds->cmd[0], '/'))
+		if (ft_strchr(cmds->cmd[0], '/'))
 			error_msg(cmds->cmd[0], NULL, NO_DIR);
 		else
 			error_msg(cmds->cmd[0], NULL, NOT_FOUND);

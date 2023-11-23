@@ -31,10 +31,7 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 	if (pid == 0)
 	{
 		setup_child_signals();
-		if (minishell->cmd_table[index]->infile)
-			open_infile(minishell->cmd_table[index]);
-		if (minishell->cmd_table[index]->outfile)
-			open_outfile(minishell->cmd_table[index]);
+		execute_redir(minishell->cmd_table[index]);
 		handle_cmd_execution(minishell, index);
 	}
 }
@@ -42,14 +39,9 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 static void	execute_child_with_pipe(t_minishell *minishell, int index)
 {
 	close(minishell->fd[0]);
-	if (minishell->cmd_table[index]->infile)
-		open_infile(minishell->cmd_table[index]);
-	else
-		dup2(minishell->fd[0], STDIN_FILENO);
 	dup2(minishell->fd[1], STDOUT_FILENO);
 	close(minishell->fd[1]);
-	if (minishell->cmd_table[index]->outfile)
-		open_outfile(minishell->cmd_table[index]);
+	execute_redir(minishell->cmd_table[index]);
 	handle_cmd_execution(minishell, index);
 }
 

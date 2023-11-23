@@ -17,7 +17,6 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
-		print_cmd_table(&minishell->cmd_table[j]);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

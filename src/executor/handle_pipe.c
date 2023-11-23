@@ -34,6 +34,8 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 		execute_redir(minishell->cmd_table[index]);
 		handle_cmd_execution(minishell, index);
 	}
+	else
+		get_exit_status(minishell, pid);
 }
 
 static void	execute_child_with_pipe(t_minishell *minishell, int index)
@@ -56,11 +58,11 @@ static void	handle_cmd_execution(t_minishell *minishell, int index)
 		execute_cmd(minishell->cmd_table[index], minishell->head_env);
 }
 
-void	get_exit_status(t_minishell *minishell)
+void	get_exit_status(t_minishell *minishell, int pid)
 {
 	int	status;
 
-	waitpid(0, &status, 0);
+	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		minishell->exit_code = WEXITSTATUS(status);
 	if (WIFSIGNALED(status))

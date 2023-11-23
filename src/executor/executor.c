@@ -29,12 +29,6 @@ static void	exec_cmd_table(t_minishell *minishell)
 			execute_final_cmd(minishell, i);
 		i++;
 	}
-	i = 0;
-	while (minishell->cmd_table[i])
-	{
-		get_exit_status(minishell);
-		i++;
-	}
 }
 
 static bool	is_simple_builtin(t_minishell *minishell)

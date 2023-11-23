@@ -39,7 +39,6 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 static void	execute_child_with_pipe(t_minishell *minishell, int index)
 {
 	close(minishell->fd[0]);
-	dup2(minishell->fd[0], STDIN_FILENO);
 	dup2(minishell->fd[1], STDOUT_FILENO);
 	close(minishell->fd[1]);
 	execute_redir(minishell->cmd_table[index]);

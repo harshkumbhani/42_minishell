@@ -6,6 +6,7 @@ static t_heredoc	*get_last_heredoc(t_heredoc *heredoc);
 void	handle_heredoc(t_minishell *minishell, int index)
 {
 	int		pid;
+	// int		status;
 
 	pipe(minishell->fd);
 	block_signal();
@@ -20,7 +21,12 @@ void	handle_heredoc(t_minishell *minishell, int index)
 		close(minishell->fd[1]);
 		dup2(minishell->fd[0], STDIN_FILENO);
 		close(minishell->fd[0]);
-		get_exit_status(minishell);
+		// get_exit_status(minishell);
+		waitpid(pid, NULL, 0);
+		// if (WIFEXITED(status))
+		// 	minishell->exit_code = WEXITSTATUS(status);
+		// if (WIFSIGNALED(status))
+		// 	minishell->exit_code = 128 + WTERMSIG(status);
 	}
 }
 

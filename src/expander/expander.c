@@ -1,5 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 16:08:42 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/24 16:58:58 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
+/// @brief Function checks for the var after '$' char and replaces the var with
+///			its value
+/// @param ret address of the orginal return string 
+/// @param str string starting after $ char
+/// @param minshell stores env variable
+/// @return returns the position of next cgar after the end of var name
 static int	get_var(char **ret, char *str, t_minishell *minshell)
 {
 	int		i;
@@ -24,6 +42,11 @@ static int	get_var(char **ret, char *str, t_minishell *minshell)
 	return (i + 1);
 }
 
+/// @brief Function joining everything that doesnt need expansion
+/// @param i start position of the str
+/// @param str string 
+/// @param strlen length of the string
+/// @param ret ------
 static void	ft_join_rest(int *i, char *str, int strlen, char **ret)
 {
 	char	*tmp;
@@ -39,7 +62,13 @@ static void	ft_join_rest(int *i, char *str, int strlen, char **ret)
 	(*i) += j;
 }
 
-char	*expander(char *str, int strlen,t_minishell *minishell)
+/// @brief Expands the shell variable ($[VAR])
+/// @param str str to be containing shell var 
+/// @param strlen length of the string passed
+/// @param minishell init struct that stores shell env that
+///					contains the vars values
+/// @return retuns expanded string
+char	*expander(char *str, int strlen, t_minishell *minishell)
 {
 	char	*ret;
 	int		i;

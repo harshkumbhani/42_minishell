@@ -6,13 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 16:22:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 18:33:36 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-static void handle_parent_signal(int signo);
+static void	handle_parent_signal(int signo);
 static void	setup_termios_config(void);
 
 /**
@@ -35,7 +35,7 @@ void	setup_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static void handle_parent_signal(int signo)
+static void	handle_parent_signal(int signo)
 {
 	if (signo == SIGINT)
 	{

@@ -6,13 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 15:02:40 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/16 15:32:33 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 18:32:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	block_signal()
+void	block_signal(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);

@@ -24,7 +24,7 @@ void	handle_heredoc(t_minishell *minishell, int index)
 		close(minishell->fd[0]);
 		pid_node = find_pid(minishell, pid);
 		pid_node->has_checked = true;
-		get_exit_status(minishell, pid);
+		get_exit_status(pid);
 		if (*minishell->exit_code == 130)
 			g_signal = CTRL_C;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_prototypes.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/22 13:43:27 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:05:27 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /* ---------------------------------- Lexer --------------------------------- */
 
-t_lexer	*tokenise(char *input, t_minishell *minishell);
+t_lexer	*tokenise(char *input);
 int		token_word(t_lexer **head, char *str);
 int		token_pipe(t_lexer **head, char *str);
 int		token_squote(t_lexer **head, char *str);
@@ -40,7 +40,7 @@ int		is_redirect(t_lexer *lexer);
 int		count_words(t_lexer **lexer);
 char	*expander(char *str, int strlen,t_minishell *minishell);
 void	print_cmd_table(t_cmd **cmd_table);
-int		syntax_checker(t_lexer **lexer, t_minishell *minishell);
+int		syntax_checker(t_lexer **lexer);
 void	redir_add_back(t_redir	**head, t_redir *new_node);
 void	hd_add_back(t_heredoc **head, t_heredoc *new);
 void	move_and_free(t_lexer **lexer);

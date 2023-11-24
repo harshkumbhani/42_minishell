@@ -67,11 +67,10 @@ static void	handle_cmd_execution(t_minishell *minishell, int index)
 		execute_cmd(minishell->cmd_table[index], minishell->head_env);
 }
 
-void	get_exit_status(t_minishell *minishell, int pid)
+void	get_exit_status(int pid)
 {
 	int	status;
 
-	(void)minishell;
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		set_exit_code(WEXITSTATUS(status));

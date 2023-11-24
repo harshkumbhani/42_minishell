@@ -41,7 +41,7 @@ static void	run_minishell(t_minishell *minishell)
 		}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
-		lexer = tokenise(input, minishell);
+		lexer = tokenise(input);
 		parse_and_execute(&lexer, minishell);
 		free(input);
 		reset_fds(minishell);

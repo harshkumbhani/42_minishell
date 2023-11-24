@@ -71,5 +71,5 @@ static void	wait_for_child_processes(t_minishell *minishell)
 		temp = temp->next;
 	}
 	if (!temp->has_checked)
-		get_exit_status(minishell, temp->pid);
+		get_exit_status(temp->pid);
 }

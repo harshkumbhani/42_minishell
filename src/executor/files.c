@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-static void	redirect_from_file(t_redir *redir, bool is_outfile);
-static int	open_file_with_mode(char *file, int file_type);
+static void		redirect_from_file(t_redir *redir, bool is_outfile);
+static int		open_file_with_mode(char *file, int file_type);
 static t_redir	*find_last_infile(t_redir *head);
 
 void	execute_redir(t_cmd *cmds)
@@ -56,7 +56,7 @@ static t_redir	*find_last_infile(t_redir *head)
 	t_redir	*infile_node;
 
 	temp = head;
-	infile_node	= NULL;
+	infile_node = NULL;
 	while (temp)
 	{
 		if (temp->file_type == 0)

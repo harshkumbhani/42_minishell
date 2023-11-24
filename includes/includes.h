@@ -24,7 +24,6 @@
 # define SYNTAX "minishell: syntax error near unexpected token "
 # define QUOTES "minishell: unclosed quotes "
 # define MINISHELL "minishell"
-# define CTRL_C 1
 
 /* Error macro's */
 # define IDENTIFIER "is not a valid identifier"

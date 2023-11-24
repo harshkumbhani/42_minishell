@@ -7,6 +7,8 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 {
 	int	pid;
 
+	if (!minishell->cmd_table[index]->cmd[0])
+		return ;
 	pipe(minishell->fd);
 	block_signal();
 	pid = fork();
@@ -28,7 +30,7 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 {
 	int	pid;
 
-	if (minishell->cmd_table[index]->cmd[0] == NULL)
+	if (!minishell->cmd_table[index]->cmd[0])
 		return ;
 	block_signal();
 	pid = fork();

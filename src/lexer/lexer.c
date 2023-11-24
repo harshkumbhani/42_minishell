@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/24 18:05:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 18:45:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,33 @@ static int	check_input(char *input)
 	return (FALSE);
 }
 
-int	token_redirect(t_lexer **head, char *str)
+/// @brief Creates redirection token
+/// @param head Head node of the lexer lst
+/// @param str str from the terminal
+/// @return numbers of characters stored for redirs
+static int	token_redirect(t_lexer **head, char *str)
 {
 	int	i;
 
 	i = 0;
 	if (str[i] != '\0' && str[i] == '<'
 		&& str[i] != '\0' && str[i + 1] != '<')
-		i = create_less(head, &str[i]);
+		i = token_schar(head, &str[i], LESS);
 	if (str[i] != '\0' && str[i] == '>'
 		&& str[i] != '\0' && str[i + 1] != '>')
-		i = create_greater(head, &str[i]);
+		i = token_schar(head, &str[i], GREATER);
 	if (str[i] != '\0' && str[i] == '<'
 		&& str[i] != '\0' && str[i + 1] == '<')
-		i = create_dbless(head, &str[i]);
+		i = token_dchar(head, &str[i], DOUBLE_LESS);
 	if (str[i] != '\0' && str[i] == '>'
 		&& str[i] != '\0' && str[i + 1] == '>')
-		i = create_dbgreater(head, &str[i]);
+		i = token_dchar(head, &str[i], DOUBLE_GREATER);
 	return (i);
 }
 
 /// @brief Creates tokens and add them to a list
-/// @param input 
-/// @return 
+/// @param input string from terminal
+/// @return linked list of tokens
 t_lexer	*tokenise(char *input)
 {
 	t_lexer	*head;
@@ -72,13 +76,13 @@ t_lexer	*tokenise(char *input)
 		if (input[i] != '\0' && (ft_isspace(input[i]) == TRUE))
 			i++;
 		else if (input[i] == '\'')
-			i += token_squote(&head, &input[i]);
+			i += token_quote(&head, &input[i], SQUOTE);
 		else if (input[i] == '\"')
-			i += token_dquote(&head, &input[i]);
+			i += token_quote(&head, &input[i], DQUOTE);
 		else if (input[i] == '|')
-			i += token_pipe(&head, &input[i]);
+			i += token_schar(&head, &input[i], PIPE);
 		else if (input[i] == '\\')
-			i += token_backslash(&head, &input[i]);
+			i += token_schar(&head, &input[i], BACKSLASH);
 		else if (input[i] == '>' || input[i] == '<')
 			i += token_redirect(&head, &input[i]);
 		else if (ft_isspace(input[i]) == FALSE)

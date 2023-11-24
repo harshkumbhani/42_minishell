@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:19:39 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 19:00:11 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include "executor_prototypes.h"
 # include "builtin_prototypes.h"
 # include "util_prototypes.h"
-
-extern int	g_signal;
 
 void	setup_signals(void);
 void	block_signal(void);

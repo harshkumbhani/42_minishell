@@ -4,8 +4,6 @@
 static void	run_minishell(t_minishell *minishell);
 static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell);
 
-int	g_signal = 0;
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	minishell;

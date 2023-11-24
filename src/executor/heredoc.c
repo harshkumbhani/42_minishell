@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:30:03 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 19:00:07 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	handle_heredoc(t_minishell *minishell, int index)
 		pid_node = find_pid(minishell, pid);
 		pid_node->has_checked = true;
 		get_exit_status(pid);
-		if (*minishell->exit_code == 130)
-			g_signal = CTRL_C;
 	}
 }
 

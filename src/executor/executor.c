@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:07 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:30:08 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 18:59:59 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ static void	exec_cmd_table(t_minishell *minishell)
 			reset_fds(minishell);
 			handle_heredoc(minishell, i);
 		}
-		if (g_signal == CTRL_C)
-		{
-			g_signal = 0;
+		if (*minishell->exit_code == 130)
 			return ;
-		}
 		if (minishell->cmd_table[i + 1])
 			execute_cmd_with_pipe(minishell, i);
 		else

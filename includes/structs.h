@@ -61,8 +61,15 @@ typedef struct s_stdfds
 	int	stdout;
 }	t_stdfds;
 
+typedef	struct	s_pids
+{
+	int				pid;
+	struct s_pids	*next;
+}	t_pids;
+
 typedef struct s_minishell {
 	t_cmd		**cmd_table;
+	t_pids		*pids;
 	int			exit_code;
 	int			fd[2];
 	t_stdfds	stdfds;

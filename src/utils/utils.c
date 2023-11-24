@@ -35,3 +35,36 @@ void	reset_fds(t_minishell *minishell)
 	dup2(minishell->stdfds.stdin, STDIN_FILENO);
 	dup2(minishell->stdfds.stdout, STDOUT_FILENO);
 }
+
+void	add_pid(t_minishell *minishell, int pid)
+{
+	t_pids	*temp;
+	t_pids	*new_pid;
+
+	temp = minishell->pids;
+	new_pid = ft_calloc(1, sizeof(t_pids));
+	new_pid->pid = pid;
+	new_pid->next = NULL;
+	if (!temp)
+		minishell->pids = new_pid;
+	else
+	{
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new_pid;
+	}
+}
+
+void	free_pids(t_minishell *minishell)
+{
+	t_pids	*temp;
+	t_pids	*next;
+
+	temp = minishell->pids;
+	while (temp)
+	{
+		next = temp->next;
+		free(temp);
+		temp = next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/22 13:43:27 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:00:02 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,10 @@
 /* ---------------------------------- Lexer --------------------------------- */
 
 t_lexer	*tokenise(char *input, t_minishell *minishell);
+int		token_schar(t_lexer **head, char *str, t_token token);
+int		token_dchar(t_lexer **head, char *str, t_token token);
+int		token_quote(t_lexer **head, char *str, t_token token);
 int		token_word(t_lexer **head, char *str);
-int		token_pipe(t_lexer **head, char *str);
-int		token_squote(t_lexer **head, char *str);
-int		token_dquote(t_lexer **head, char *str);
-int		token_backslash(t_lexer **head, char *str);
-int		create_less(t_lexer **head, char *str);
-int		create_greater(t_lexer **head, char *str);
-int		create_dbless(t_lexer **head, char *str);
-int		create_dbgreater(t_lexer **head, char *str);
 
 /* --------------------------------- Parser --------------------------------- */
 

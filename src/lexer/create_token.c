@@ -6,13 +6,12 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:32:11 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/14 09:32:14 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:06:35 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// && ft_isalnum(str[i] == TRUE)
 /// @brief Creates word token
 /// @param head Head node of the token list
 /// @param str input string
@@ -42,50 +41,46 @@ int	token_word(t_lexer **head, char *str)
 	return (i);
 }
 
-/// @brief Creates PIPE token
-/// @param head Head node of the token list
-/// @param str input str
-/// @return number of characters in the token
-int	token_pipe(t_lexer **head, char *str)
+/// @brief Creates tokens with one character
+/// @param head head node of the lexer
+/// @param str input str from the terminal
+/// @param token TOKEN type
+/// @return character in the token, in this case 1
+int	token_schar(t_lexer **head, char *str, t_token token)
 {
 	t_lexer	*new;
 
 	new = ft_calloc(1, sizeof(t_lexer));
 	new->start = str;
-	new->token = PIPE;
+	new->token = token;
 	new->strlen = 1;
 	lst_add_back(head, new);
 	return (1);
 }
 
-/// @brief Creates SINGLE QUOTE token
-/// @param head head node of the lexer list
-/// @param str the input string
-/// @return number of characters in the token
-int	token_squote(t_lexer **head, char *str)
+/// @brief Creates tokens with two character
+/// @param head head node of the lexer
+/// @param str input str from the terminal
+/// @param token TOKEN type
+/// @return character in the token, in this case 2
+int	token_dchar(t_lexer **head, char *str, t_token token)
 {
 	t_lexer	*new;
-	int		i;
 
-	i = 0;
 	new = ft_calloc(1, sizeof(t_lexer));
-	new->start = ++str;
-	new->token = SQUOTE;
-	while (str[i] != '\0' && str[i] != '\'')
-		i++;
-	new->strlen = i++;
-	if (str[i] != '\0' && ((str[i] == '\'' || str[i] == '\"')
-			|| ft_isspace(str[i]) == FALSE))
-		new->not_space = TRUE;
+	new->start = str;
+	new->token = token;
+	new->strlen = 2;
 	lst_add_back(head, new);
-	return (i + 1);
+	return (2);
 }
 
-/// @brief Creates DOUBLE QUOTE token
-/// @param head head node of the lexer list
-/// @param str the input string
-/// @return number of characters in the token 
-int	token_dquote(t_lexer **head, char *str)
+/// @brief Creates the token with quotes
+/// @param head head node of the lexer
+/// @param str input str
+/// @param token SQUOTE || DQUOTE
+/// @return number of characters within the quotes
+int	token_quote(t_lexer **head, char *str, t_token token)
 {
 	t_lexer	*new;
 	int		i;
@@ -93,7 +88,7 @@ int	token_dquote(t_lexer **head, char *str)
 	i = 0;
 	new = ft_calloc(1, sizeof(t_lexer));
 	new->start = ++str;
-	new->token = DQUOTE;
+	new->token = token;
 	while (str[i] != '\0' && str[i] != '\"')
 		i++;
 	new->strlen = i++;
@@ -102,20 +97,4 @@ int	token_dquote(t_lexer **head, char *str)
 		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (i + 1);
-}
-
-/// @brief Creates BACKSLASH token
-/// @param head Head node of the lexer list
-/// @param str input string
-/// @return character in the token
-int	token_backslash(t_lexer **head, char *str)
-{
-	t_lexer	*new;
-
-	new = ft_calloc(1, sizeof(t_lexer));
-	new->start = str;
-	new->token = BACKSLASH;
-	new->strlen = 1;
-	lst_add_back(head, new);
-	return (1);
 }

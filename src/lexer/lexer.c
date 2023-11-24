@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/21 17:36:09 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:08:12 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief Checks for open Quotes, Escape characters \ and ;
 /// @param input Input string read from terminal
 /// @return FALSE if open quotes or esc char found else TRUE
-int	check_input(char *input, t_minishell *minishell)
+static int	check_input(char *input, t_minishell *minishell)
 {
 	char	c;
 
@@ -35,29 +35,34 @@ int	check_input(char *input, t_minishell *minishell)
 	return (FALSE);
 }
 
-int	token_redirect(t_lexer **head, char *str)
+/// @brief Creates redirection token
+/// @param head Head node of the lexer lst
+/// @param str str from the terminal
+/// @return numbers of characters stored for redirs
+static int	token_redirect(t_lexer **head, char *str)
 {
 	int	i;
 
 	i = 0;
 	if (str[i] != '\0' && str[i] == '<'
 		&& str[i] != '\0' && str[i + 1] != '<')
-		i = create_less(head, &str[i]);
+		i = token_schar(head, &str[i], LESS);
 	if (str[i] != '\0' && str[i] == '>'
 		&& str[i] != '\0' && str[i + 1] != '>')
-		i = create_greater(head, &str[i]);
+		i = token_schar(head, &str[i], GREATER);
 	if (str[i] != '\0' && str[i] == '<'
 		&& str[i] != '\0' && str[i + 1] == '<')
-		i = create_dbless(head, &str[i]);
+		i = token_dchar(head, &str[i], DOUBLE_LESS);
 	if (str[i] != '\0' && str[i] == '>'
 		&& str[i] != '\0' && str[i + 1] == '>')
-		i = create_dbgreater(head, &str[i]);
+		i = token_dchar(head, &str[i], DOUBLE_GREATER);
 	return (i);
 }
 
 /// @brief Creates tokens and add them to a list
-/// @param input 
-/// @return 
+/// @param input string from terminal
+/// @param minishell main lst with env
+/// @return linked list of tokens
 t_lexer	*tokenise(char *input, t_minishell *minishell)
 {
 	t_lexer	*head;
@@ -72,13 +77,13 @@ t_lexer	*tokenise(char *input, t_minishell *minishell)
 		if (input[i] != '\0' && (ft_isspace(input[i]) == TRUE))
 			i++;
 		else if (input[i] == '\'')
-			i += token_squote(&head, &input[i]);
+			i += token_quote(&head, &input[i], SQUOTE);
 		else if (input[i] == '\"')
-			i += token_dquote(&head, &input[i]);
+			i += token_quote(&head, &input[i], DQUOTE);
 		else if (input[i] == '|')
-			i += token_pipe(&head, &input[i]);
+			i += token_schar(&head, &input[i], PIPE);
 		else if (input[i] == '\\')
-			i += token_backslash(&head, &input[i]);
+			i += token_schar(&head, &input[i], BACKSLASH);
 		else if (input[i] == '>' || input[i] == '<')
 			i += token_redirect(&head, &input[i]);
 		else if (ft_isspace(input[i]) == FALSE)

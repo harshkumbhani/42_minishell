@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/16 15:44:56 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 11:04:05 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	setup_signals(void)
 	sa_int.sa_flags = SA_RESTART;
 	sigemptyset(&sa_int.sa_mask);
 	sigaction(SIGINT, &sa_int, NULL);
-	sigaction(SIGQUIT, &sa_int, NULL);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 static void handle_parent_signal(int signo)

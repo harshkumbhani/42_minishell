@@ -3,7 +3,6 @@
 static void	exec_cmd_table(t_minishell *minishell);
 static bool	is_simple_builtin(t_minishell *minishell);
 static void	wait_for_child_processes(t_minishell *minishell);
-static int	find_mode(t_minishell *minishell, int index);
 
 void	executor(t_minishell *minishell)
 {
@@ -50,34 +49,17 @@ static bool	is_simple_builtin(t_minishell *minishell)
 static void	wait_for_child_processes(t_minishell *minishell)
 {
 	t_pids	*temp;
-	int		mode;
 	int		i;
 
 	temp = minishell->pids;
 	i = 0;
-	while (temp)
+	while (true)
 	{
-		mode = find_mode(minishell, i);
-		get_exit_status(minishell, temp->pid, mode);
+		if (!temp->next)
+			break ;
+		waitpid(temp->pid, NULL, 0);
 		i++;
 		temp = temp->next;
 	}
-}
-
-static int	find_mode(t_minishell *minishell, int index)
-{
-	char	**cmds;
-	int		i;
-
-	i = 0;
-	cmds = minishell->cmd_table[index]->cmd;
-	if (!cmds)
-		return (0);
-	while (cmds[i])
-	{
-		if (ft_strcmp(cmds[i], "/dev/random") == 0 || ft_strcmp(cmds[i], "/dev/urandom") == 0)
-			return (1);
-		i++;
-	}
-	return (0);
+	get_exit_status(minishell, temp->pid);
 }

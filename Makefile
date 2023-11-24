@@ -2,7 +2,7 @@
 # ---------------------------------- Config ---------------------------------- #
 NAME				:= minishell
 CC					:= cc
-CFLAGS				:= -Wall -Wextra -Werror -I./includes -g
+CFLAGS				:=  -I./includes -g -Wall -Wextra -Werror
 LIBFT_DIR			:= libraries/myLib
 LIBFT_LIB			:= $(LIBFT_DIR)/libft.a
 

@@ -6,6 +6,7 @@ static t_heredoc	*get_last_heredoc(t_heredoc *heredoc);
 void	handle_heredoc(t_minishell *minishell, int index)
 {
 	int		pid;
+	t_pids	*pid_node;
 
 	pipe(minishell->fd);
 	block_signal();
@@ -17,10 +18,15 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	}
 	else
 	{
+		add_pid(minishell, pid);
 		close(minishell->fd[1]);
 		dup2(minishell->fd[0], STDIN_FILENO);
 		close(minishell->fd[0]);
-		waitpid(pid, NULL, 0);
+		pid_node = find_pid(minishell, pid);
+		pid_node->has_checked = true;
+		get_exit_status(minishell, pid);
+		if (*minishell->exit_code == 130)
+			g_signal = CTRL_C;
 	}
 }
 

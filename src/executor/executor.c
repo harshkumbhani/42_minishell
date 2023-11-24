@@ -25,6 +25,11 @@ static void	exec_cmd_table(t_minishell *minishell)
 			reset_fds(minishell);
 			handle_heredoc(minishell, i);
 		}
+		if (g_signal == CTRL_C)
+		{
+			g_signal = 0;
+			return ;
+		}
 		if (minishell->cmd_table[i + 1])
 			execute_cmd_with_pipe(minishell, i);
 		else
@@ -57,9 +62,14 @@ static void	wait_for_child_processes(t_minishell *minishell)
 	{
 		if (!temp->next)
 			break ;
-		waitpid(temp->pid, NULL, 0);
-		i++;
+		if (!temp->has_checked)
+		{
+			waitpid(temp->pid, NULL, 0);
+			i++;
+			temp->has_checked = true;
+		}
 		temp = temp->next;
 	}
-	get_exit_status(minishell, temp->pid);
+	if (!temp->has_checked)
+		get_exit_status(minishell, temp->pid);
 }

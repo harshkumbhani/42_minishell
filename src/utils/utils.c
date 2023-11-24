@@ -44,6 +44,7 @@ void	add_pid(t_minishell *minishell, int pid)
 	temp = minishell->pids;
 	new_pid = ft_calloc(1, sizeof(t_pids));
 	new_pid->pid = pid;
+	new_pid->has_checked = false;
 	new_pid->next = NULL;
 	if (!temp)
 		minishell->pids = new_pid;
@@ -53,6 +54,20 @@ void	add_pid(t_minishell *minishell, int pid)
 			temp = temp->next;
 		temp->next = new_pid;
 	}
+}
+
+t_pids	*find_pid(t_minishell *minishell, int pid)
+{
+	t_pids	*temp;
+
+	temp = minishell->pids;
+	while (temp)
+	{
+		if (pid == temp->pid)
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
 }
 
 void	free_pids(t_minishell *minishell)

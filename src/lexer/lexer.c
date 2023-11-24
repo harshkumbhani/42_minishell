@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/21 17:36:09 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:31:36 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	check_input(char *input, t_minishell *minishell)
 	if (c == '\0')
 		return (TRUE);
 	ft_putendl_fd(QUOTES, STDERR_FILENO);
-	minishell->exit_code = EXIT_FAILURE;
+	set_exit_code(1);
+	(void)minishell;
 	return (FALSE);
 }
 

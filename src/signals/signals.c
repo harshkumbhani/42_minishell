@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 14:46:17 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 16:22:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void handle_parent_signal(int signo)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		set_exit_code(1);
 	}
 }
 

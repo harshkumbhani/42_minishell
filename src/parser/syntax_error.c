@@ -10,7 +10,8 @@ int	ft_error(t_minishell *minishell, t_token token)
 
 	ft_putstr_fd(SYNTAX, STDERR_FILENO);
 	ft_putendl_fd(token_str[token], STDERR_FILENO);
-	minishell->exit_code = 3;
+	set_exit_code(3);
+	(void)minishell;
 	return (FAIL);
 }
 

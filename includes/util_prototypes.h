@@ -9,6 +9,9 @@
 char	*strjoin_pipex(char *s1, char *s2);
 void	copy_std_fds(t_minishell *minishell);
 void	reset_fds(t_minishell *minishell);
+void	add_pid(t_minishell *minishell, int pid);
+void	free_pids(t_minishell *minishell);
+t_pids	*find_pid(t_minishell *minishell, int pid);
 
 /* -------------------------------- Env Utils ------------------------------- */
 

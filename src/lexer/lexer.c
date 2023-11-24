@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/24 16:08:12 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:45:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /// @brief Checks for open Quotes, Escape characters \ and ;
 /// @param input Input string read from terminal
 /// @return FALSE if open quotes or esc char found else TRUE
-static int	check_input(char *input, t_minishell *minishell)
+static int	check_input(char *input)
 {
 	char	c;
 
@@ -31,7 +31,7 @@ static int	check_input(char *input, t_minishell *minishell)
 	if (c == '\0')
 		return (TRUE);
 	ft_putendl_fd(QUOTES, STDERR_FILENO);
-	minishell->exit_code = EXIT_FAILURE;
+	set_exit_code(1);
 	return (FALSE);
 }
 
@@ -61,16 +61,15 @@ static int	token_redirect(t_lexer **head, char *str)
 
 /// @brief Creates tokens and add them to a list
 /// @param input string from terminal
-/// @param minishell main lst with env
 /// @return linked list of tokens
-t_lexer	*tokenise(char *input, t_minishell *minishell)
+t_lexer	*tokenise(char *input)
 {
 	t_lexer	*head;
 	int		i;
 
 	i = 0;
 	head = NULL;
-	if (check_input(input, minishell) == FALSE)
+	if (check_input(input) == FALSE)
 		return (NULL);
 	while (input[i] != '\0')
 	{

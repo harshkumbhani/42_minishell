@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_error(t_minishell *minishell, t_token token)
+int	ft_error(t_token token)
 {
 	static char	*token_str[] = {
 		"WORD", "|", "SQUOTE", "DQUOTE",
@@ -10,7 +10,7 @@ int	ft_error(t_minishell *minishell, t_token token)
 
 	ft_putstr_fd(SYNTAX, STDERR_FILENO);
 	ft_putendl_fd(token_str[token], STDERR_FILENO);
-	minishell->exit_code = 3;
+	set_exit_code(3);
 	return (FAIL);
 }
 
@@ -34,7 +34,7 @@ int	is_redirect(t_lexer *lexer)
 	return (FALSE);
 }
 
-int	syntax_checker(t_lexer **lexer, t_minishell *minishell)
+int	syntax_checker(t_lexer **lexer)
 {
 	t_lexer	*lex;
 
@@ -42,13 +42,13 @@ int	syntax_checker(t_lexer **lexer, t_minishell *minishell)
 	if (lex == NULL)
 		return (SUCCESS);
 	if (lex->token == PIPE)
-		return (ft_error(minishell, PIPE));
+		return (ft_error(PIPE));
 	while (lex != NULL)
 	{
 		if (is_meta_token(lex) && lex->next == NULL)
-			return (ft_error(minishell, lex->token));
+			return (ft_error(lex->token));
 		else if (is_redirect(lex) && is_meta_token(lex->next))
-			return (ft_error(minishell, lex->next->token));
+			return (ft_error(lex->next->token));
 		else if (lex->token == PIPE && is_redirect(lex) == TRUE)
 			lex = lex->next ;
 		lex = lex->next;

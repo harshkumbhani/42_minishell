@@ -30,7 +30,7 @@ int	special_var(char **ret, t_minishell *minishell)
 {
 	char	*tmp;
 
-	tmp = ft_itoa(minishell->exit_code);
+	tmp = ft_itoa(*minishell->exit_code);
 	*ret = ft_strjoin(*ret, tmp);
 	free(tmp);
 	return (2);

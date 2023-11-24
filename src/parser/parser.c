@@ -8,7 +8,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 	j = 0;
 	if (*lexer == NULL)
 		return (FAIL);
-	if (syntax_checker(lexer, minishell) == FAIL)
+	if (syntax_checker(lexer) == FAIL)
 		return (FAIL);
 	i = count_pipes(lexer);
 	minishell->cmd_table = (t_cmd **)ft_calloc(i + 2, sizeof(t_cmd *));
@@ -17,6 +17,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 		minishell->cmd_table[j] = ft_calloc(1, sizeof(t_cmd));
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
+		// print_cmd_table(&minishell->cmd_table[j]);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

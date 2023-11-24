@@ -6,15 +6,14 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 11:04:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 18:33:36 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-static void handle_parent_signal(int signo);
+static void	handle_parent_signal(int signo);
 static void	setup_termios_config(void);
-static void	child_signal(int signo);
 
 /**
  * @brief  Sets up signal handling for SIGINT (Ctrl-C) and SIGQUIT (Ctrl-\\).
@@ -36,7 +35,7 @@ void	setup_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static void handle_parent_signal(int signo)
+static void	handle_parent_signal(int signo)
 {
 	if (signo == SIGINT)
 	{
@@ -44,6 +43,7 @@ static void handle_parent_signal(int signo)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		set_exit_code(1);
 	}
 }
 
@@ -58,24 +58,12 @@ static void	setup_termios_config(void)
 
 void	setup_child_signals(void)
 {
-	struct sigaction sa_default;
-
-	sa_default.sa_handler = child_signal;
-	sa_default.sa_flags = 0;
-	sigemptyset(&sa_default.sa_mask);
-
-	sigaction(SIGINT, &sa_default, NULL);
-	sigaction(SIGQUIT, &sa_default, NULL);
-	(void)child_signal;
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
-static void	child_signal(int signo)
+void	setup_heredoc_signals(void)
 {
-	if (signo == SIGINT)
-	{
-		ft_fprintf(STDOUT_FILENO, "\n");
-		exit(1);
-	}
-	else if (signo == SIGQUIT)
-		return ;
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_IGN);
 }

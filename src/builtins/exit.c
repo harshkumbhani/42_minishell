@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/13 22:49:40 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/24 16:29:07 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	builtin_exit(t_minishell *minishell, int index)
 	int	cmd_num;
 	
 	cmd_num = 1;
-	exit_code = minishell->exit_code;
+	exit_code = *minishell->exit_code;
 	while (minishell->cmd_table[index]->cmd[cmd_num])
 		cmd_num++;
 	if (!minishell->cmd_table[1])

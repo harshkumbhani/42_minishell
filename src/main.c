@@ -15,6 +15,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	minishell = (t_minishell){};
+	minishell.exit_code = get_exit_code();
 	copy_std_fds(&minishell);
 	copy_env_variables(&minishell.head_env, envp);
 	run_minishell(&minishell);
@@ -38,7 +39,7 @@ static void	run_minishell(t_minishell *minishell)
 		}
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
-		lexer = tokenise(input, minishell);
+		lexer = tokenise(input);
 		parse_and_execute(&lexer, minishell);
 		free(input);
 		reset_fds(minishell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:51:45 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 14:44:33 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:35:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	error_handler(char *str, int dst, t_minishell *mini, t_lexer **lexer)
 		free_minishell(mini);
 	if (dst & T_LEX)
 		free_lexer(lexer);
-	//set_exit_code(EXIT_FAILURE);
 	exit(EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 15:22:11 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 16:03:57 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static char	*find_command_in_path(char *cmd, char **envp)
 	char	*path;
 
 	i = 0;
-	while (envp && envp[i])
+	while (envp && envp[i] && cmd[0] != '\0')
 	{
 		temp = strjoin_pipex(envp[i], "/");
 		if (!temp)

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:07 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 12:22:15 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:35:32 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	exec_cmd_table(t_minishell *minishell)
 /// redirections, otherwise FALSE
 static bool	is_simple_builtin(t_minishell *minishell)
 {
-	if (minishell->cmd_table[0]->cmd[0]
+	if (minishell->cmd_table[0] && minishell->cmd_table[0]->cmd[0]
 		&& !minishell->cmd_table[1]
 		&& is_cmd_builtin(minishell, 0)
 		&& !minishell->cmd_table[0]->files
@@ -86,10 +86,12 @@ static void	wait_for_child_processes(t_minishell *minishell)
 	int		i;
 
 	temp = minishell->pids;
+	if (!temp)
+		return ;
 	i = 0;
 	while (true)
 	{
-		if (!temp->next)
+		if (temp && !temp->next)
 			break ;
 		if (!temp->has_checked)
 		{
@@ -99,6 +101,6 @@ static void	wait_for_child_processes(t_minishell *minishell)
 		}
 		temp = temp->next;
 	}
-	if (!temp->has_checked)
+	if (temp && !temp->has_checked)
 		get_exit_status(temp->pid);
 }

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:07 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 15:35:32 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 17:30:42 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,21 @@ void	executor(t_minishell *minishell)
 /// command table.
 static void	exec_cmd_table(t_minishell *minishell)
 {
-	int	i;
+	int		i;
+	bool	heredoc_flag;
 
+	heredoc_flag = false;
 	i = 0;
 	minishell->pids = NULL;
 	while (minishell->cmd_table[i])
 	{
 		if (minishell->cmd_table[i]->heredoc)
 		{
+			heredoc_flag = true;
 			reset_fds(minishell);
 			handle_heredoc(minishell, i);
 		}
-		if (*minishell->exit_code == 130)
+		if (*minishell->exit_code == 130 && heredoc_flag)
 			return ;
 		if (minishell->cmd_table[i + 1])
 			execute_cmd_with_pipe(minishell, i);

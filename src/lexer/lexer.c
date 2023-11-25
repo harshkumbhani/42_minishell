@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/24 18:45:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:49:55 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ t_lexer	*tokenise(char *input)
 		if (input[i] != '\0' && (ft_isspace(input[i]) == TRUE))
 			i++;
 		else if (input[i] == '\'')
-			i += token_quote(&head, &input[i], SQUOTE);
+			i += token_quote(&head, &input[i], SQUOTE, '\'');
 		else if (input[i] == '\"')
-			i += token_quote(&head, &input[i], DQUOTE);
+			i += token_quote(&head, &input[i], DQUOTE, '\"');
 		else if (input[i] == '|')
 			i += token_schar(&head, &input[i], PIPE);
 		else if (input[i] == '\\')

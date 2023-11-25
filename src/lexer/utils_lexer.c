@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:32:35 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/14 09:32:36 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:13:39 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,17 @@ void	lst_add_back(t_lexer **head, t_lexer *new_node)
 	}
 }
 
-void	lst_del(t_lexer **head)
+void	free_lexer(t_lexer **lexer)
 {
-	t_lexer	*current;
+	t_lexer	*tmp;
 
-	current = *head;
-	if (!current)
-		return ;
-	while (*head != NULL)
+	tmp = NULL;
+	while ((*lexer) != NULL)
 	{
-		*head = (*head)->next;
-		free(current);
-		current = NULL;
-		current = *head;
+		tmp = (*lexer);
+		(*lexer) = (*lexer)->next;
+		free(tmp);
 	}
-	(*head) = NULL;
 	return ;
 }
 

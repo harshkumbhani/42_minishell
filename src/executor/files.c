@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:05 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 12:40:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 13:14:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	redirect_from_file(t_redir *redir, bool is_outfile)
 /// write-only (with appending). If the file cannot be opened it displays an
 /// error message and `exit(1)`.
 /// @param file The file to open.
-/// @param file_type The type of operation to do. 0 for read, 1 for write with trunc,
-/// 2 for write with appending.
+/// @param file_type The type of operation to do. 0 for read, 1 for write with
+/// trunc, 2 for write with appending.
 /// @return The file descriptor of the opened file
 static int	open_file_with_mode(char *file, int file_type)
 {

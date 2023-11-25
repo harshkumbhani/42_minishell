@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:11 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 12:58:25 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:28:57 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 {
 	int	pid;
 
-	if (!minishell->cmd_table[index]->cmd[0])
+	if (!minishell->cmd_table[index]->cmd[0] && !minishell->cmd_table[index]->files)
 		return ;
 	pipe(minishell->fd);
 	block_signal();
@@ -58,7 +58,7 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 {
 	int	pid;
 
-	if (!minishell->cmd_table[index]->cmd[0])
+	if (!minishell->cmd_table[index]->cmd[0] && !minishell->cmd_table[index]->files)
 		return ;
 	block_signal();
 	pid = fork();

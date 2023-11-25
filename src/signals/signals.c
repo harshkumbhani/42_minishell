@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:33:36 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 14:50:36 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	setup_termios_config(void);
  *  This function initializes the given signals with the respective signal.
  *  It also sets up the termios settings (terminal config) and how it should
  * 	behave.
- *  handlers for SIGINT and SIGQUIT.
  */
 void	setup_signals(void)
 {

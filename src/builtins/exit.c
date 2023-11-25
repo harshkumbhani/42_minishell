@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 16:29:07 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 14:58:00 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 static bool	is_exit_code_digit(char *exit_code);
 static void	free_minishell_and_exit(t_minishell *minishell, int exit_code);
 
+/// @brief Exits the current process with the given exit code of the last
+/// command, or with the given code (if given).
+///
+/// The function also checks if the exit options are in the correct format
+/// and throws an applicable error if not.
+/// @param minishell The struct holding all shell data
+/// @param index The current index of the command table
 void	builtin_exit(t_minishell *minishell, int index)
 {
 	int	exit_code;
@@ -43,6 +50,9 @@ void	builtin_exit(t_minishell *minishell, int index)
 	free_minishell_and_exit(minishell, exit_code);
 }
 
+/// @brief Checks to see if the given `exit_code` is numeric
+/// @param exit_code The code to check
+/// @return FALSE if its not a numeric value, otherwise TRUE
 static bool	is_exit_code_digit(char *exit_code)
 {
 	int	i;
@@ -57,6 +67,9 @@ static bool	is_exit_code_digit(char *exit_code)
 	return (true);
 }
 
+/// @brief Frees the minishell and exits with the given `exit_code`
+/// @param minishell The struct holding all the data
+/// @param exit_code The exit code to exit with
 static void	free_minishell_and_exit(t_minishell *minishell, int exit_code)
 {
 	free_env_linked_list(minishell->head_env);

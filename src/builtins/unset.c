@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:59:19 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/13 22:05:06 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 13:23:05 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 static bool	is_key_valid(char *key);
 
-/**
- * @brief Removes a variable from the env linked list.
- * 	Loops through the linked list searching for the given
- * 	key. If the key is found, it frees the node and updates
- * 	the linked list to maintain integrity.
- * @param head A pointer to the head node.
- * @param key The key/variable to remove.
- * @return 1 if the last key was invalid, else 0 if the last key was valid.
- */
+/// @brief Removes a variable from the env linked list.
+/// 
+/// Loops through the linked list searching for the given key. If the key is
+/// found, it frees the node and updates the linked list to maintain integrity.
+/// @param head A pointer to the head node.
+/// @param key The key/variable to remove.
+/// @return 1 if the last key was invalid, else 0 if the last key was valid.
 int	unset(t_env **head, char **key)
 {
 	int	i;
@@ -46,6 +44,11 @@ int	unset(t_env **head, char **key)
 	return (ret);
 }
 
+/// @brief Checks if the given key is valid.
+///
+/// A valid key contains alphanumeric characters or '_'.
+/// @param key The key to be checked
+/// @return TRUE if the key is valid, otherwise FALSE.
 static bool	is_key_valid(char *key)
 {
 	int	i;
@@ -60,6 +63,9 @@ static bool	is_key_valid(char *key)
 	return (true);
 }
 
+/// @brief Removes the given key (vairable) from the env list
+/// @param key The key/variable to be removed
+/// @param head A pointer to the head node of the env linked list.
 void	remove_key(char *key, t_env **head)
 {
 	t_env *temp;

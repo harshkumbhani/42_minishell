@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_prototypes.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:43:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:50:13 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 t_lexer	*tokenise(char *input);
 int		token_schar(t_lexer **head, char *str, t_token token);
 int		token_dchar(t_lexer **head, char *str, t_token token);
-int		token_quote(t_lexer **head, char *str, t_token token);
+int		token_quote(t_lexer **head, char *str, t_token token, char quote);
 int		token_word(t_lexer **head, char *str);
 
 /* --------------------------------- Parser --------------------------------- */
@@ -39,6 +39,7 @@ int		syntax_checker(t_lexer **lexer);
 void	redir_add_back(t_redir	**head, t_redir *new_node);
 void	hd_add_back(t_heredoc **head, t_heredoc *new);
 void	move_and_free(t_lexer **lexer);
+int		is_redirect(t_lexer *lexer);
 
 /* EXPANDER */
 

@@ -4,6 +4,19 @@
 
 # include "includes.h"
 
+typedef enum e_error
+{
+	ERR_MEMORY	= 0,
+	ERR_PIPE	= 1,
+	ERR_FORK	= 2,
+}	t_error;
+
+typedef enum e_dstruct
+{
+	T_LEX		= 1 << 0,
+	T_MINI	= 1 << 1
+}	t_dstruct;
+
 typedef enum e_token
 {
 	WORD			= 0,

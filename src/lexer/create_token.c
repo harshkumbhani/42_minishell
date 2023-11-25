@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:32:11 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/24 16:06:35 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:49:03 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	token_word(t_lexer **head, char *str)
 
 	i = 0;
 	new = ft_calloc(1, sizeof(t_lexer));
+	if (new == NULL)
+		error_handler(strerror(errno), T_LEX, NULL, head);
 	new->start = str;
 	new->token = WORD;
 	while (str[i] != '\0' && ft_isspace(str[i]) == FALSE)
@@ -51,6 +53,8 @@ int	token_schar(t_lexer **head, char *str, t_token token)
 	t_lexer	*new;
 
 	new = ft_calloc(1, sizeof(t_lexer));
+	if (new == NULL)
+		error_handler(strerror(errno), T_LEX, NULL, head);
 	new->start = str;
 	new->token = token;
 	new->strlen = 1;
@@ -68,6 +72,8 @@ int	token_dchar(t_lexer **head, char *str, t_token token)
 	t_lexer	*new;
 
 	new = ft_calloc(1, sizeof(t_lexer));
+	if (new == NULL)
+		error_handler(strerror(errno), T_LEX, NULL, head);
 	new->start = str;
 	new->token = token;
 	new->strlen = 2;
@@ -80,16 +86,18 @@ int	token_dchar(t_lexer **head, char *str, t_token token)
 /// @param str input str
 /// @param token SQUOTE || DQUOTE
 /// @return number of characters within the quotes
-int	token_quote(t_lexer **head, char *str, t_token token)
+int	token_quote(t_lexer **head, char *str, t_token token, char quote)
 {
 	t_lexer	*new;
 	int		i;
 
 	i = 0;
 	new = ft_calloc(1, sizeof(t_lexer));
+	if (new == NULL)
+		error_handler(strerror(errno), T_LEX, NULL, head);
 	new->start = ++str;
 	new->token = token;
-	while (str[i] != '\0' && str[i] != '\"')
+	while (str[i] != '\0' && (str[i] != quote))
 		i++;
 	new->strlen = i++;
 	if (str[i] != '\0' && ((str[i] == '\'' || str[i] == '\"')

@@ -16,16 +16,19 @@
 # include <readline/history.h>
 //# include <wait.h>
 
+/* FILE TYPE macro's*/
 # define OPEN 0
 # define TRUNC 1
 # define APPEND 2
+
+/* RETURN macro's*/
 # define SUCCESS 0
 # define FAIL	1
-# define SYNTAX "minishell: syntax error near unexpected token "
-# define QUOTES "minishell: unclosed quotes "
-# define MINISHELL "minishell"
 
 /* Error macro's */
+# define SYNTAX "minishell: syntax error near unexpected token"
+# define QUOTES "minishell: unclosed quotes"
+# define MINISHELL "minishell"
 # define IDENTIFIER "is not a valid identifier"
 # define NOT_FOUND "command not found"
 # define NO_DIR "no such file or directory"

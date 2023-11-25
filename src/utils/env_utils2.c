@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/25 17:14:58 by cwenz             #+#    #+#             */
+/*   Updated: 2023/11/25 17:22:23 by cwenz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	sort_env_linked_list(t_env **array, int count);
 static void	assign_array(t_env *head, t_env **array);
 
+/// @brief Prints the env linked list in ascending order and with the export
+/// format.
+/// @param head The head node of the env linked list.
 void	print_env_ascending(t_env *head)
 {
 	t_env	**array;
@@ -25,11 +39,9 @@ void	print_env_ascending(t_env *head)
 	free(array);
 }
 
-/**
- * @brief Counts the number of env variables stored in the linked list
- * @param head A pointer to the first node in the linked list
- * @return The amount of env variables stored in the linked list.
- */
+/// @brief Counts the number of env variables stored in the linked list
+/// @param head A pointer to the first node in the linked list
+/// @return The amount of env variables stored in the linked list.
 int	count_env_variables(t_env *head)
 {
 	int		i;
@@ -45,6 +57,9 @@ int	count_env_variables(t_env *head)
 	return (i);
 }
 
+/// @brief Sorts the given linked list in by ascii values
+/// @param array The array to sort
+/// @param count The length of the array
 static void	sort_env_linked_list(t_env **array, int count)
 {
 	t_env	*temp;
@@ -69,6 +84,9 @@ static void	sort_env_linked_list(t_env **array, int count)
 	}
 }
 
+/// @brief Converts the given env linked list into an array
+/// @param head The head pointer
+/// @param array The array to assign data to
 static void	assign_array(t_env *head, t_env **array)
 {
 	int		i;
@@ -84,6 +102,9 @@ static void	assign_array(t_env *head, t_env **array)
 	}
 }
 
+/// @brief Copies the env linked list into a `char** array`
+/// @param head The head pointer to the env linked list
+/// @return The `char** array`or NULL if failed.
 char	**copy_env(t_env *head)
 {
 	int		i;

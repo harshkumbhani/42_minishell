@@ -6,12 +6,18 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:15:35 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/22 13:15:29 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 10:08:19 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/// @brief Checks what error message to display and what error code to exit
+///	with. It checks if the path is a directory, if its an executable, or if
+/// the command is found.
+/// @param path The filesystem path to the file or command to be executed.
+/// @return An integer representing the exit code. Returns 126 for a directory
+/// or if no permission and 127 if the command is not found.
 int	handle_file_execution_errors(char *path)
 {
 	struct stat	buf;

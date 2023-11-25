@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 19:00:07 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 13:13:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ static t_heredoc	*get_last_heredoc(t_heredoc *heredoc);
 static bool			execute_individual_heredoc(t_minishell *minishell,
 						char *str, t_heredoc *heredoc);
 
+/// @brief Executes a heredoc command.
+///
+/// The function sets up a `pipe`, `forks` a child process to handle heredoc
+/// input. In the child it executes the heredoc logic. In the parent it closes
+/// the write-end of the pipe and duplicates the read-end to standard input.
+/// It then waits for the child process to end.
+/// @param minishell 
+/// @param index 
 void	handle_heredoc(t_minishell *minishell, int index)
 {
 	int		pid;
@@ -42,6 +50,12 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	}
 }
 
+/// @brief Executes the heredoc reading process for the command.
+///
+/// It loops until each heredoc's deliminator is reached. The read
+/// content is sent to the read-end of the pipe.
+/// @param minishell The struct containing the shell information.
+/// @param index The current index of the command table to execute.
 static void	execute_heredoc(t_minishell *minishell, int index)
 {
 	char		*str;
@@ -66,6 +80,9 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 	exit(0);
 }
 
+/// @brief Gets the last heredoc command in the linked list.
+/// @param heredoc The head node of the heredoc linked list
+/// @return The last heredoc command. 
 static t_heredoc	*get_last_heredoc(t_heredoc *heredoc)
 {
 	while (heredoc->next)
@@ -73,6 +90,15 @@ static t_heredoc	*get_last_heredoc(t_heredoc *heredoc)
 	return (heredoc);
 }
 
+/// @brief Executes an individual heredoc within the loop.
+///
+/// The function checks whether it should exit the loop or not, based
+/// on the heredoc deliminator. If the given heredoc is the last heredoc it
+/// writes to the pipe.
+/// @param minishell The struct containing shell information
+/// @param str The str thats read from the command line
+/// @param heredoc The current heredoc
+/// @return TRUE if the process should continue, otherwise FALSE.
 static bool	execute_individual_heredoc(t_minishell *minishell,
 				char *str, t_heredoc *heredoc)
 {

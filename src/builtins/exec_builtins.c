@@ -6,16 +6,19 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 16:28:40 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:06:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/// @brief Executes the current builtin.
+/// @param minishell The struct holding all shell data
+/// @param i The current index of the command table
 void	exec_builtins(t_minishell *minishell, int i)
 {
 	int	code;
-	
+
 	code = 0;
 	if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "cd") == 0)
 		code = cd(&minishell->head_env,
@@ -37,6 +40,10 @@ void	exec_builtins(t_minishell *minishell, int i)
 	set_exit_code(code);
 }
 
+/// @brief Checks to see if the given command is a builtin
+/// @param minishell The struct holding all shell data
+/// @param i The current index of the command table
+/// @return TRUE if its a builtin, otherwise FALSE.
 bool	is_cmd_builtin(t_minishell *minishell, int i)
 {
 	if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "cd") == 0)

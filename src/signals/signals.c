@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:33:36 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 16:05:19 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	setup_termios_config(void);
  *  This function initializes the given signals with the respective signal.
  *  It also sets up the termios settings (terminal config) and how it should
  * 	behave.
- *  handlers for SIGINT and SIGQUIT.
  */
 void	setup_signals(void)
 {
@@ -35,6 +34,8 @@ void	setup_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+/// @brief Handles the SIGINT signal
+/// @param signo The signal number
 static void	handle_parent_signal(int signo)
 {
 	if (signo == SIGINT)
@@ -47,6 +48,7 @@ static void	handle_parent_signal(int signo)
 	}
 }
 
+/// @brief Sets up the terminal config.
 static void	setup_termios_config(void)
 {
 	struct termios	termios_config;

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/14 16:27:44 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:04:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ static bool	is_key_valid(char *str);
 static char	*get_key(char *str);
 static void	free_strings(char *key, char *value, char *full_string);
 
+/// @brief Executes the export command with the provided arguments
+/// 
+/// The function adds new env variables or modifies exiting env variables.
+/// If no arguments are provided, it prints the env list sorted by ascii.
+/// @param head A pointer to the head env node
+/// @param str An array of strings representing the env variables to add
+/// @return EXIT_SUCCESS after execution
 int	export(t_env **head, char **str)
 {
 	int	i;
@@ -37,6 +44,11 @@ int	export(t_env **head, char **str)
 	return (EXIT_SUCCESS);
 }
 
+/// @brief Processes a string to add/modify the env list
+/// 
+/// This function splits the strings into: key, value and full string.
+/// @param head A pointer to the head env node
+/// @param str The string to process.
 void	process_string(t_env **head, char *str)
 {
 	char	*key;
@@ -65,6 +77,10 @@ void	process_string(t_env **head, char *str)
 	add_env_node(head, key, full_string, value);
 }
 
+/// @brief Frees the allocated memory for key, value and full_string.
+/// @param key A pointer to the allocated memory for key
+/// @param value A pointer to the allocated memory for value
+/// @param full_string A pointer to the allocated memory for full string
 static void	free_strings(char *key, char *value, char *full_string)
 {
 	if (key)
@@ -75,6 +91,9 @@ static void	free_strings(char *key, char *value, char *full_string)
 		free(full_string);
 }
 
+/// @brief Checks if the given str has a valid key
+/// @param str The string to check
+/// @return TRUE if the key is valid, else FALSE
 static bool	is_key_valid(char *str)
 {
 	int		i;
@@ -95,6 +114,9 @@ static bool	is_key_valid(char *str)
 	return (free(key), true);
 }
 
+/// @brief Finds the key in a given string
+/// @param str The string to extract the key from
+/// @return The key if found, otherwise NULL 
 static char	*get_key(char *str)
 {
 	char	*key;

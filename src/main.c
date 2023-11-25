@@ -54,5 +54,5 @@ static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell)
 		free_cmd_table(minishell->cmd_table);
 	}
 	else
-		lst_del(lexer);
+		free_lexer(lexer);
 }

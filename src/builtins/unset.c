@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:59:19 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 13:23:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:06:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ static bool	is_key_valid(char *key)
 /// @param head A pointer to the head node of the env linked list.
 void	remove_key(char *key, t_env **head)
 {
-	t_env *temp;
-	t_env *prev;
+	t_env	*temp;
+	t_env	*prev;
 
 	prev = NULL;
 	temp = *head;

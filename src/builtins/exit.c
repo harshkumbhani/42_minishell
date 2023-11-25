@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 14:58:00 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:06:34 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	builtin_exit(t_minishell *minishell, int index)
 {
 	int	exit_code;
 	int	cmd_num;
-	
+
 	cmd_num = 1;
 	exit_code = *minishell->exit_code;
 	while (minishell->cmd_table[index]->cmd[cmd_num])
@@ -37,7 +37,8 @@ void	builtin_exit(t_minishell *minishell, int index)
 	{
 		if (!is_exit_code_digit(minishell->cmd_table[index]->cmd[1]))
 		{
-			error_msg("exit", minishell->cmd_table[index]->cmd[1], "numeric argument required");
+			error_msg("exit", minishell->cmd_table[index]->cmd[1],
+				"numeric argument required");
 			free_minishell_and_exit(minishell, 1);
 		}
 		exit_code = ft_atoi(minishell->cmd_table[index]->cmd[1]);
@@ -56,7 +57,7 @@ void	builtin_exit(t_minishell *minishell, int index)
 static bool	is_exit_code_digit(char *exit_code)
 {
 	int	i;
-	
+
 	i = 0;
 	while (exit_code[i])
 	{

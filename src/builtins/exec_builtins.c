@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 14:54:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:06:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	exec_builtins(t_minishell *minishell, int i)
 {
 	int	code;
-	
+
 	code = 0;
 	if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "cd") == 0)
 		code = cd(&minishell->head_env,

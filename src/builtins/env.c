@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:10:53 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 13:15:49 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:05:53 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 /// @brief Prints out all the env variables to standard output.
 /// 
-/// This function iterates over the environment variables provided in `env` and
-/// prints each one to standard output.
-/// @param env And array of strings where each string is an environment variable.
+/// This function iterates over the environment variables provided in `env`
+/// and prints each one to standard output.
+/// @param env And array of strings where each string is an environment
+/// variable.
 /// @return EXIT_SUCESS after printing all the nodes.
 int	env(t_env *head)
 {

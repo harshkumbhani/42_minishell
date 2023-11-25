@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:07:48 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 15:07:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 17:34:58 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	free_env_linked_list(t_env	*head)
 {
 	t_env	*temp;
+
 	while (head)
 	{
 		temp = head;

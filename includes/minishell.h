@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:01:33 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 19:00:11 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 14:43:15 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	free_env_linked_list(t_env	*head);
 void	free_env_node(t_env *node);
 void	free_env_array(char **envp);
 void	error_msg(char *cmd, char *cmd2, char *reason);
+void	error_handler(char *str, int dst, t_minishell *mini, t_lexer **lexer);
 
 #endif

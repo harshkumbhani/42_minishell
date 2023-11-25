@@ -27,7 +27,7 @@ char	**copy_env(t_env *head);
 /* -------------------------------- Lst-utils ------------------------------- */
 
 void	lst_add_back(t_lexer **head, t_lexer *new_node);
-void	lst_del(t_lexer **head);
+void	free_lexer(t_lexer **lexer);
 void	print_list(t_lexer **head);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/24 18:30:14 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/25 12:05:58 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ static char	*find_command_in_path(char *cmd, char **envp);
 static void	handle_command_execution_error(t_cmd *cmds, char *path);
 static char	*check_for_file_command(t_cmd *cmd);
 
+/// @brief Executes a command in `execve`. This function gets the filesystem
+/// path for the command stored in `cmds`. It also copies the env linked list
+/// to a `char**` format to pass to `execve. If `execve` fails, it frees the
+/// `char** env` and returns an appropriate error message and exit code.
+/// @param cmds A pointer which holds the command to execute and potentially
+/// its options.
+/// @param head_env A pointer to the linked list which stores all env
+/// variables.
+/// @note See `src/executor/command.c` for more details.
 void	execute_cmd(t_cmd *cmds, t_env *head_env)
 {
 	char	*path;
@@ -31,6 +40,10 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	}
 }
 
+/// @brief Finds the filesystem path for the given command.
+/// @param cmd The command to search for.
+/// @param head_env A linked list that contains the `env` variables
+/// @return If the path is found it returns a pointer to it, else NULL.
 static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env)
 {
 	t_env	*path_node;
@@ -51,6 +64,9 @@ static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env)
 	return (path);
 }
 
+/// @brief Checks if the given command is an absolute path.
+/// @param cmd The command to check.
+/// @return The path if found, else NULL.
 static char	*check_for_file_command(t_cmd *cmd)
 {
 	char	*path;
@@ -62,6 +78,11 @@ static char	*check_for_file_command(t_cmd *cmd)
 	return (NULL);
 }
 
+/// @brief Finds the system file path for the given command.
+/// It gets the `PATH env` variable and splits it
+/// @param cmd The command to search for.
+/// @param envp The `char **` that holds the PATH variable
+/// @return The path (if found) or NULL.
 static char	*find_command_in_path(char *cmd, char **envp)
 {
 	int		i;
@@ -88,6 +109,12 @@ static char	*find_command_in_path(char *cmd, char **envp)
 	return (NULL);
 }
 
+/// @brief This function decides the appropriate error message to
+/// display and the exit code to use based on whether the command's
+/// path is valid and if specific conditions are met. 
+/// @param cmds The command structure containing the command
+/// @param path The filesystem path to the command to be executed. if 'NULL`
+/// the command is treated as not found or a directory error.
 static void	handle_command_execution_error(t_cmd *cmds, char *path)
 {
 	int			exit_code;

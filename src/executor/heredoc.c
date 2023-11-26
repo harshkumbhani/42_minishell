@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 13:13:53 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 11:14:43 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ void	handle_heredoc(t_minishell *minishell, int index)
 	int		pid;
 	t_pids	*pid_node;
 
-	pipe(minishell->fd);
+	if (pipe(minishell->fd) == -1)
+		error_handler(strerror(errno), T_MINI, minishell, NULL);
 	block_signal();
 	pid = fork();
+	if (pid == -1)
+		error_handler(strerror(errno), T_MINI, minishell, NULL);
 	if (pid == 0)
 	{
 		setup_heredoc_signals();

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:38:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 13:17:54 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 13:47:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	execute_final_cmd(t_minishell *minishell, int index);
 void	get_exit_status(int pid);
 void	handle_heredoc(t_minishell *minishell, int index);
 int		handle_file_execution_errors(char *path);
-void	execute_redir(t_cmd *cmds);
+void	execute_redir(t_cmd *cmds, t_minishell *minishell);
 
 #endif

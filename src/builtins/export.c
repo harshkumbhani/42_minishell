@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:26 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 15:04:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 11:29:09 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	process_string(t_env **head, char *str)
 	else
 	{
 		key = strdup(full_string);
+		remove_key(key, head);
 		full_string = ft_strjoin_gnl(full_string, "=");
 		value = NULL;
 		if (!key || !full_string)

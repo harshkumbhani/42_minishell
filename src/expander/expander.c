@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:08:42 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/25 14:57:57 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 12:18:30 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ static void	ft_join_rest(int *i, char *str, int strlen, char **ret)
 	(*i) += j;
 }
 
+static char	*initial_expansion(char *str, int *i, int strlen)
+{
+	while ((*i) < strlen && str[(*i)] != '$')
+		(*i)++ ;
+	if ((*i) == strlen)
+		return (ft_strndup(str, (*i)));
+	return (ft_strndup(str, (*i)));
+}
+
 /// @brief Expands the shell variable ($[VAR])
 /// @param str str to be containing shell var 
 /// @param strlen length of the string passed
@@ -74,15 +83,14 @@ char	*expander(char *str, int strlen, t_minishell *minishell)
 	int		i;
 
 	i = 0;
-	ret = NULL;
-	while (i < strlen && str[i] != '$')
-		i++ ;
-	if (i == strlen)
-		return (ft_strndup(str, i));
-	ret = ft_strndup(str, i);
+	ret = initial_expansion(str, &i, strlen);
 	while (i < strlen)
 	{
-		if (str[i] == '$' && str[i + 1] == '?')
+		if (ret == NULL)
+			break ;
+		else if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] == '\"'))
+			i++;
+		else if (str[i] == '$' && str[i + 1] == '?')
 			i += special_var(&ret, minishell);
 		else if (str[i] == '$' && ft_isdigit(str[i + 1]) == TRUE)
 			i += 2;

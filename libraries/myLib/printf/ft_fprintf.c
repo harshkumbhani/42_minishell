@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:42:34 by cwenz             #+#    #+#             */
-/*   Updated: 2023/10/31 16:55:41 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 12:51:10 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	fput_string(char *s, int fd)
 	len += f_strlen(s);
 	return (len);
 }
-
 
 static int	format_type(char c, va_list ap, int *len, int fd)
 {

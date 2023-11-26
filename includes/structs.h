@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/26 12:36:59 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/26 12:37:33 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -14,7 +25,7 @@ typedef enum e_error
 typedef enum e_dstruct
 {
 	T_LEX		= 1 << 0,
-	T_MINI	= 1 << 1
+	T_MINI		= 1 << 1
 }	t_dstruct;
 
 typedef enum e_token
@@ -60,7 +71,7 @@ typedef struct s_heredoc
 	char				*str;
 	bool				expand;
 	struct s_heredoc	*next;
-} t_heredoc;
+}	t_heredoc;
 
 typedef struct s_cmd {
 	char		**cmd;
@@ -74,7 +85,7 @@ typedef struct s_stdfds
 	int	stdout;
 }	t_stdfds;
 
-typedef	struct	s_pids
+typedef struct s_pids
 {
 	int				pid;
 	bool			has_checked;

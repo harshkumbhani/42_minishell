@@ -1,4 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/26 11:31:50 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/26 12:53:18 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+static void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
+{
+	t_cmd	*cmds;
+	int		i;
+	int		j;
+	int		words;
+
+	cmds = *cmd_table;
+	i = -1;
+	j = -1;
+	words = count_words(lexer);
+	cmds->cmd = (char **)ft_calloc(words + 1, sizeof(char *));
+	while ((*lexer) != NULL && ++i < words && (*lexer)->token != PIPE)
+	{
+		add_arg(cmds, lexer, minishell, &j);
+		move_and_free(lexer);
+	}
+	if ((*lexer) != NULL && (*lexer)->token == PIPE)
+		move_and_free(lexer);
+}
 
 int	parser(t_lexer **lexer, t_minishell *minishell)
 {

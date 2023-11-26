@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 12:50:11 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 12:52:52 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		token_word(t_lexer **head, char *str);
 /* --------------------------------- Parser --------------------------------- */
 
 int		parser(t_lexer **lexer, t_minishell *minishell);
-//void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell);
 void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j);
 int		count_pipes(t_lexer **lexer);
 int		t_check(t_token token_type);

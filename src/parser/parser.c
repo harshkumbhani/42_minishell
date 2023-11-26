@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 12:53:18 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:33:04 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
+		// print_cmd_table(minishell->cmd_table);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

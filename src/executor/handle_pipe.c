@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:11 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 17:35:38 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 11:11:47 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ void	execute_cmd_with_pipe(t_minishell *minishell, int index)
 	if (!minishell->cmd_table[index]->cmd[0]
 		&& !minishell->cmd_table[index]->files)
 		return ;
-	pipe(minishell->fd);
+	if (pipe(minishell->fd) == -1)
+		error_handler(strerror(errno), T_MINI, minishell, NULL);
 	block_signal();
 	pid = fork();
+	if (pid == -1)
+		error_handler(strerror(errno), T_MINI, minishell, NULL);
 	if (pid == 0)
 	{
 		setup_child_signals();
@@ -64,6 +67,8 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 		return ;
 	block_signal();
 	pid = fork();
+	if (pid == -1)
+		error_handler(strerror(errno), T_MINI, minishell, NULL);
 	if (pid == 0)
 	{
 		setup_child_signals();

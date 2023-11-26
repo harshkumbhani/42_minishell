@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 14:33:04 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 15:12:48 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ static void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
 	{
 		add_arg(cmds, lexer, minishell, &j);
 		move_and_free(lexer);
+	}
+	i = -1;
+	while (cmd_table[++i] != NULL)
+	{
+		if (cmd_table[i]->cmd == NULL && cmd_table[i]->files == NULL
+			&& cmd_table[i]->heredoc == NULL)
+			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 	}
 	if ((*lexer) != NULL && (*lexer)->token == PIPE)
 		move_and_free(lexer);

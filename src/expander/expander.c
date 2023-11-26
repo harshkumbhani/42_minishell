@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:08:42 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 16:12:11 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:24:25 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ char	*expander(char *str, int strlen, t_minishell *minishell, t_token tok)
 	{
 		if (ret == NULL)
 			break ;
+		else if (str[i] == '$' && str[i + 1] == '?')
+			i += special_var(&ret, minishell);
 		else if (check_expansion(str, i, tok) == FALSE)
 			i++;
 		else if (check_expansion(str, i, tok) == TRUE)
 			i += no_expansion(&ret, &str[i]);
-		else if (str[i] == '$' && str[i + 1] == '?')
-			i += special_var(&ret, minishell);
 		else if (str[i] == '$' && ft_isdigit(str[i + 1]) == TRUE)
 			i += 2;
 		else if (str[i] == '$' && check_var(str[i + 1]) == FALSE)

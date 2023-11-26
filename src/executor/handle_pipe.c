@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:11 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 11:11:47 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 13:47:33 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	execute_final_cmd(t_minishell *minishell, int index)
 	if (pid == 0)
 	{
 		setup_child_signals();
-		execute_redir(minishell->cmd_table[index]);
+		execute_redir(minishell->cmd_table[index], minishell);
 		handle_cmd_execution(minishell, index);
 	}
 	else
@@ -95,7 +95,7 @@ static void	execute_child_with_pipe(t_minishell *minishell, int index)
 	close(minishell->fd[0]);
 	dup2(minishell->fd[1], STDOUT_FILENO);
 	close(minishell->fd[1]);
-	execute_redir(minishell->cmd_table[index]);
+	execute_redir(minishell->cmd_table[index], minishell);
 	handle_cmd_execution(minishell, index);
 }
 
@@ -112,10 +112,11 @@ static void	handle_cmd_execution(t_minishell *minishell, int index)
 	if (is_cmd_builtin(minishell, index))
 	{
 		exec_builtins(minishell, index);
+		free_cmd_table(minishell->cmd_table);
 		exit(*minishell->exit_code);
 	}
 	else
-		execute_cmd(minishell->cmd_table[index], minishell->head_env);
+		execute_cmd(minishell->cmd_table[index], minishell->head_env, minishell);
 }
 
 /// @brief Gets the exit code for the given `pid`. It waits for the

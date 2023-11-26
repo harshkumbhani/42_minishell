@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 12:50:49 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:48:21 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,4 @@ void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 				(*lexer)->strlen, minishell);
 	else if (is_redirect(*lexer))
 		handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
-	if (cmds->cmd[(*j)] == NULL)
-		error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 }

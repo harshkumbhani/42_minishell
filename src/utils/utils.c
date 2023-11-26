@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:16:21 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 17:23:26 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:27:03 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,11 @@ t_pids	*find_pid(t_minishell *minishell, int pid)
 void	free_pids(t_minishell *minishell)
 {
 	t_pids	*temp;
-	t_pids	*next;
 
-	temp = minishell->pids;
-	while (temp)
+	while (minishell->pids != NULL)
 	{
-		next = temp->next;
+		temp = minishell->pids;
+		minishell->pids = minishell->pids->next;
 		free(temp);
-		temp = next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:37:48 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 14:46:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 12:39:18 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,23 @@ static void	update_pwd(t_env **head, char *old_dir);
 /// @return EXIT_SUCCESS if it succeeds, else EXIT_FAILURE
 int	cd(t_env **head, char *path)
 {
-	int		len;
+	t_env	*key;
 	char	*old_dir;
 
 	if (!path || !*path)
 	{
-		path = getenv("HOME");
+		key = find_env_key(*head, "HOME");
+		if (!key)
+			return (EXIT_FAILURE);
+		path = key->value;
 		if (!path)
 			return (EXIT_FAILURE);
 	}
-	len = ft_strlen(path);
-	if (len > 0 && path[len - 1] == '\n')
-		path[len - 1] = '\0';
 	old_dir = getcwd(NULL, 0);
 	if (chdir(path) != EXIT_SUCCESS)
 	{
 		error_msg(path, NULL, strerror(errno));
+		free(old_dir);
 		return (EXIT_FAILURE);
 	}
 	update_pwd(head, old_dir);

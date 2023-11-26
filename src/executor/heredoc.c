@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 11:14:43 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:08:05 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 				break ;
 			if (!execute_individual_heredoc(minishell, str, temp))
 				break ;
-			free(str);
+			if (str)
+				str = NULL;
 		}
 		temp = temp->next;
 	}
@@ -119,6 +120,7 @@ static bool	execute_individual_heredoc(t_minishell *minishell,
 			str = expander(str, ft_strlen(str), minishell);
 		write(minishell->fd[1], str, ft_strlen(str));
 		write(minishell->fd[1], "\n", 1);
+		free(str);
 	}
 	return (true);
 }

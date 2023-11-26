@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:11 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 13:17:41 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 13:24:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static void	handle_cmd_execution(t_minishell *minishell, int index)
 	if (is_cmd_builtin(minishell, index))
 	{
 		exec_builtins(minishell, index);
+		free_cmd_table(minishell->cmd_table);
 		exit(*minishell->exit_code);
 	}
 	else

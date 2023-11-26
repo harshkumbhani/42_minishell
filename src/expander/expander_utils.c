@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:08:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 16:12:55 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:43:06 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ int	check_expansion(char *str, int i, t_token tok)
 	if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] == '\"')
 		&& tok == DQUOTE)
 		return (TRUE);
-	return (TRUE);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:50 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 15:12:48 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 15:26:55 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	parser(t_lexer **lexer, t_minishell *minishell)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		init_t_cmd(&(minishell->cmd_table[j]));
 		put_args(&(minishell)->cmd_table[j], lexer, minishell);
-		// print_cmd_table(minishell->cmd_table);
 		j++;
 	}
 	minishell->cmd_table[j] = NULL;

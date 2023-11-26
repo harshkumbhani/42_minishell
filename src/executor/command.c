@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 13:18:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 15:28:23 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env);
 static char	*find_command_in_path(char *cmd, char **envp);
-static void	handle_command_execution_error(t_cmd *cmds, char *path, t_minishell *minishell);
+static void	handle_command_execution_error(t_cmd *cmds, char *path,
+				t_minishell *minishell);
 static char	*check_for_file_command(t_cmd *cmd);
 
 /// @brief Executes a command in `execve`. This function gets the filesystem
@@ -117,7 +118,8 @@ static char	*find_command_in_path(char *cmd, char **envp)
 /// @param cmds The command structure containing the command
 /// @param path The filesystem path to the command to be executed. if 'NULL`
 /// the command is treated as not found or a directory error.
-static void	handle_command_execution_error(t_cmd *cmds, char *path, t_minishell *minishell)
+static void	handle_command_execution_error(t_cmd *cmds, char *path,
+		t_minishell *minishell)
 {
 	int			exit_code;
 

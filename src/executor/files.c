@@ -6,15 +6,16 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:05 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 14:15:52 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 15:29:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		redirect_from_file(t_redir *redir, bool is_outfile, t_minishell *minishell);
+static void		redirect_from_file(t_redir *redir, bool is_outfile,
+					t_minishell *minishell);
 static int		open_file_with_mode(char *file, int file_type,
-			t_minishell *minishell);
+					t_minishell *minishell);
 
 /// @brief Executes file redirecitons for a specific command.
 /// 
@@ -46,7 +47,8 @@ void	execute_redir(t_cmd *cmds, t_minishell *minishell)
 static void	redirect_from_file(t_redir *redir, bool is_outfile,
 			t_minishell *minishell)
 {
-	redir->file_fd = open_file_with_mode(redir->file_name, redir->file_type, minishell);
+	redir->file_fd = open_file_with_mode(redir->file_name, redir->file_type,
+			minishell);
 	if (is_outfile)
 		dup2(redir->file_fd, STDOUT_FILENO);
 	else

@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:37:48 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 14:46:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 12:27:00 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	cd(t_env **head, char *path)
 	if (chdir(path) != EXIT_SUCCESS)
 	{
 		error_msg(path, NULL, strerror(errno));
+		free(old_dir);
 		return (EXIT_FAILURE);
 	}
 	update_pwd(head, old_dir);

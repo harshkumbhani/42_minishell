@@ -6,15 +6,15 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:05 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 12:17:39 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 13:49:02 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		redirect_from_file(t_redir *redir, bool is_outfile);
-static int		open_file_with_mode(char *file, int file_type);
-static t_redir	*find_last_infile(t_redir *head);
+static void		redirect_from_file(t_redir *redir, bool is_outfile, t_minishell *minishell);
+static int		open_file_with_mode(char *file, int file_type,
+			t_minishell *minishell);
 
 /// @brief Executes file redirecitons for a specific command.
 /// 
@@ -22,20 +22,17 @@ static t_redir	*find_last_infile(t_redir *head);
 /// command redireciton. It first finds and redirects the last input file
 /// (if any), and then iterates through all output file redirections.
 /// @param cmds The given command that holds the file redirection information.
-void	execute_redir(t_cmd *cmds)
+void	execute_redir(t_cmd *cmds, t_minishell *minishell)
 {
 	t_redir	*temp;
-	t_redir	*last_infile;
 
 	temp = cmds->files;
-	last_infile = find_last_infile(cmds->files);
-	(void)last_infile;
 	while (temp)
 	{
 		if (temp->file_type == 0)
-			redirect_from_file(temp, false);
+			redirect_from_file(temp, false, minishell);
 		if (temp->file_type == 1 || temp->file_type == 2)
-			redirect_from_file(temp, true);
+			redirect_from_file(temp, true, minishell);
 		temp = temp->next;
 	}
 }
@@ -46,9 +43,10 @@ void	execute_redir(t_cmd *cmds)
 /// @param redir The struct containing the file name and type.
 /// @param is_outfile Boolean flag to indicate if the file is an outfile
 /// (true) or and infile (false).
-static void	redirect_from_file(t_redir *redir, bool is_outfile)
+static void	redirect_from_file(t_redir *redir, bool is_outfile,
+			t_minishell *minishell)
 {
-	redir->file_fd = open_file_with_mode(redir->file_name, redir->file_type);
+	redir->file_fd = open_file_with_mode(redir->file_name, redir->file_type, minishell);
 	if (is_outfile)
 		dup2(redir->file_fd, STDOUT_FILENO);
 	else
@@ -66,7 +64,8 @@ static void	redirect_from_file(t_redir *redir, bool is_outfile)
 /// @param file_type The type of operation to do. 0 for read, 1 for write with
 /// trunc, 2 for write with appending.
 /// @return The file descriptor of the opened file
-static int	open_file_with_mode(char *file, int file_type)
+static int	open_file_with_mode(char *file, int file_type,
+		t_minishell *minishell)
 {
 	int	fd;
 
@@ -80,27 +79,8 @@ static int	open_file_with_mode(char *file, int file_type)
 	if (fd == -1)
 	{
 		error_msg(file, NULL, strerror(errno));
+		free_cmd_table(minishell->cmd_table);
 		exit(1);
 	}
 	return (fd);
-}
-
-/// @brief Gets the last infile that stored in the linked list.
-/// @param head The head of the linked list that stores all redireciton
-/// information.
-/// @return The last infile, or `NULL` if no infile is found.
-static t_redir	*find_last_infile(t_redir *head)
-{
-	t_redir	*temp;
-	t_redir	*infile_node;
-
-	temp = head;
-	infile_node = NULL;
-	while (temp)
-	{
-		if (temp->file_type == 0)
-			infile_node = temp;
-		temp = temp->next;
-	}
-	return (infile_node);
 }

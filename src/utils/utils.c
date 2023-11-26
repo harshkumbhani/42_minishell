@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:16:21 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 17:23:26 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 14:12:01 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	free_pids(t_minishell *minishell)
 	while (temp)
 	{
 		next = temp->next;
-		free(temp);
+		if (temp)
+			free(temp);
 		temp = next;
 	}
 }

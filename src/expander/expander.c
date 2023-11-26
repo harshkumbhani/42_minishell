@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:08:42 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 12:18:30 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:12:11 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,24 @@ static char	*initial_expansion(char *str, int *i, int strlen)
 	return (ft_strndup(str, (*i)));
 }
 
+static int	no_expansion(char **ret, char *str)
+{
+	char	*tmp;
+
+	tmp = NULL;
+	tmp = ft_strndup(str, 1);
+	*ret = ft_strjoin_gnl(*ret, tmp);
+	free(tmp);
+	return (1);
+}
+
 /// @brief Expands the shell variable ($[VAR])
 /// @param str str to be containing shell var 
 /// @param strlen length of the string passed
 /// @param minishell init struct that stores shell env that
 ///					contains the vars values
 /// @return retuns expanded string
-char	*expander(char *str, int strlen, t_minishell *minishell)
+char	*expander(char *str, int strlen, t_minishell *minishell, t_token tok)
 {
 	char	*ret;
 	int		i;
@@ -88,8 +99,10 @@ char	*expander(char *str, int strlen, t_minishell *minishell)
 	{
 		if (ret == NULL)
 			break ;
-		else if (str[i] == '$' && (str[i + 1] == '\'' || str[i + 1] == '\"'))
+		else if (check_expansion(str, i, tok) == FALSE)
 			i++;
+		else if (check_expansion(str, i, tok) == TRUE)
+			i += no_expansion(&ret, &str[i]);
 		else if (str[i] == '$' && str[i + 1] == '?')
 			i += special_var(&ret, minishell);
 		else if (str[i] == '$' && ft_isdigit(str[i + 1]) == TRUE)

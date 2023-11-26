@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 14:08:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 16:07:11 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static bool	execute_individual_heredoc(t_minishell *minishell,
 	if (last_heredoc == heredoc)
 	{
 		if (heredoc->expand)
-			str = expander(str, ft_strlen(str), minishell);
+			str = expander(str, ft_strlen(str), minishell, -1);
 		write(minishell->fd[1], str, ft_strlen(str));
 		write(minishell->fd[1], "\n", 1);
 		free(str);

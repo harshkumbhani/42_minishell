@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 14:48:21 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 16:06:23 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 	{
 		if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
-		else if (t_check((*lexer)->token) == TRUE)
-			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell);
+		else if ((*lexer)->token == WORD)
+			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell, WORD);
+		else if ((*lexer)->token == DQUOTE)
+			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell,
+					DQUOTE);
 		if (tmp == NULL)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		(*cmd) = ft_strjoin_gnl((*cmd), tmp);
@@ -101,9 +104,12 @@ void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 		join_and_advance(lexer, &cmds->cmd[++(*j)], minishell);
 	else if ((*lexer)->token == SQUOTE)
 		cmds->cmd[++(*j)] = ft_strndup((*lexer)->start, (*lexer)->strlen);
-	else if (((*lexer)->token == WORD || (*lexer)->token == DQUOTE))
+	else if ((*lexer)->token == WORD)
 		cmds->cmd[++(*j)] = expander((*lexer)->start,
-				(*lexer)->strlen, minishell);
+				(*lexer)->strlen, minishell, WORD);
+	else if ((*lexer)->token == DQUOTE)
+		cmds->cmd[++(*j)] = expander((*lexer)->start,
+				(*lexer)->strlen, minishell, DQUOTE);
 	else if (is_redirect(*lexer))
 		handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
 }

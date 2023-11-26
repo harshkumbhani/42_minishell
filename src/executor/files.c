@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:05 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 13:14:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 12:17:39 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void	execute_redir(t_cmd *cmds)
 
 	temp = cmds->files;
 	last_infile = find_last_infile(cmds->files);
-	if (last_infile)
-		redirect_from_file(last_infile, false);
+	(void)last_infile;
 	while (temp)
 	{
+		if (temp->file_type == 0)
+			redirect_from_file(temp, false);
 		if (temp->file_type == 1 || temp->file_type == 2)
 			redirect_from_file(temp, true);
 		temp = temp->next;

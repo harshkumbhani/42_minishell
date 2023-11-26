@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 11:13:58 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 11:57:05 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env)
 	if (path_node)
 		envp = ft_split(path_node->value, ':');
 	path = find_command_in_path(cmd->cmd[0], envp);
+	if (envp)
+		free_arr(envp);
 	if (!path)
 		return (NULL);
-	free(envp);
 	return (path);
 }
 
@@ -96,6 +97,7 @@ static char	*find_command_in_path(char *cmd, char **envp)
 		if (!temp)
 			return (NULL);
 		path = strjoin_pipex(temp, cmd);
+		free(temp);
 		if (!path)
 		{
 			i++;

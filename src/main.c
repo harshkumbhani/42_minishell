@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/26 12:35:11 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/26 12:35:14 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -54,5 +65,8 @@ static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell)
 		free_cmd_table(minishell->cmd_table);
 	}
 	else
+	{
+		set_exit_code(3);
 		free_lexer(lexer);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/25 15:49:55 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 11:33:47 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	check_input(char *input)
 	if (c == '\0')
 		return (TRUE);
 	ft_putendl_fd(QUOTES, STDERR_FILENO);
-	set_exit_code(1);
+	set_exit_code(3);
 	return (FALSE);
 }
 

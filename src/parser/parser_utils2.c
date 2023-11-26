@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/26 11:31:46 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/26 11:36:05 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	init_t_cmd(t_cmd **cmd)
@@ -43,7 +55,7 @@ void	hd_add_back(t_heredoc **head, t_heredoc *new)
 
 void	print_files(t_redir *head)
 {
-	while(head != NULL)
+	while (head != NULL)
 	{
 		printf("File name: %s\n", head->file_name);
 		printf("File type: %d\n", head->file_type);
@@ -71,7 +83,10 @@ void	print_cmd_table(t_cmd **cmd_table)
 	while (hd != NULL)
 	{
 		printf("heredoc: %s\n", hd->str);
-		printf("Expand: %s\n", hd->expand ? "TRUE" : "FALSE");
+		if (hd->expand == TRUE)
+			printf("Expand: %s\n", "TRUE");
+		else
+			printf("Expand: %s\n", "FALSE");
 		hd = hd->next;
 	}
 	print_files(redir);

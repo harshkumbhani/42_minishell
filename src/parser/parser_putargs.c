@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_putargs.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/26 12:50:49 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	join_and_advance(t_lexer **lexer, char **cmd, t_minishell *minishell)
+static void	join_and_advance(t_lexer **lexer, char **cmd,
+														t_minishell *minishell)
 {
 	char	*tmp;
 
@@ -12,8 +24,8 @@ static void	join_and_advance(t_lexer **lexer, char **cmd, t_minishell *minishell
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if (t_check((*lexer)->token) == TRUE)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell);
-		//if (tmp == NULL)
-		//	error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
+		if (tmp == NULL)
+			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		(*cmd) = ft_strjoin_gnl((*cmd), tmp);
 		free(tmp);
 		if ((*cmd) == NULL)
@@ -24,14 +36,15 @@ static void	join_and_advance(t_lexer **lexer, char **cmd, t_minishell *minishell
 	}
 }
 
-static void	ft_redir_lst(t_lexer **lexer, t_minishell *mini, int ftype, t_redir **head)
+static void	ft_redir_lst(t_lexer **lexer, t_minishell *mini,
+												int ftype, t_redir **head)
 {
 	t_redir	*new;
 
 	move_and_free(lexer);
 	new = ft_calloc(1, sizeof(t_redir));
-	//if (new == NULL)
-	//		error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
+	if (new == NULL)
+		error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
 	join_and_advance(lexer, &new->file_name, mini);
 	new->file_type = ftype;
 	new->file_fd = -1;
@@ -43,65 +56,56 @@ static void	ft_heredoc_lst(t_lexer **lexer, t_minishell *mini, t_heredoc **head)
 {
 	t_heredoc	*new;
 	char		*tmp;
-	(void)mini;
 
 	tmp = NULL;
 	move_and_free(lexer);
 	new = ft_calloc(1, sizeof(t_heredoc));
 	if (new == NULL)
-			error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
+		error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
 	new->expand = TRUE;
 	while (1)
 	{
 		tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		new->str = ft_strjoin_gnl(new->str, tmp);
 		free(tmp);
+		if (tmp == NULL || new->str == NULL)
+			error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
 		if ((*lexer)->token == SQUOTE || (*lexer)->token == DQUOTE)
 			new->expand = FALSE;
 		if ((*lexer)->not_space == FALSE)
-			break;
+			break ;
 		move_and_free(lexer);
 	}
 	hd_add_back(head, new);
 	return ;
 }
 
-static void	handle_redirection(t_lexer **lexer, t_minishell *minishell, t_redir **head, t_heredoc **hd)
+static void	handle_redirection(t_lexer **lexer, t_minishell *minishell,
+											t_redir **head, t_heredoc **hd)
 {
 	if ((*lexer)->token == GREATER && t_check((*lexer)->next->token) == TRUE)
 		ft_redir_lst(lexer, minishell, TRUNC, head);
 	else if ((*lexer)->token == LESS && t_check((*lexer)->next->token) == TRUE)
 		ft_redir_lst(lexer, minishell, OPEN, head);
-	else if ((*lexer)->token == DOUBLE_GREATER && t_check((*lexer)->next->token) == TRUE)
+	else if ((*lexer)->token == DOUBLE_GREATER
+		&& t_check((*lexer)->next->token) == TRUE)
 		ft_redir_lst(lexer, minishell, APPEND, head);
-	else if ((*lexer)->token == DOUBLE_LESS && t_check((*lexer)->next->token) == TRUE)
+	else if ((*lexer)->token == DOUBLE_LESS
+		&& t_check((*lexer)->next->token) == TRUE)
 		ft_heredoc_lst(lexer, minishell, hd);
 }
 
-void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell)
+void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 {
-	t_cmd	*cmds;
-	int		i;
-	int		j;
-	int		words;
-
-	cmds = *cmd_table;
-	i = -1;
-	j = -1;
-	words = count_words(lexer);
-	cmds->cmd = (char **)ft_calloc(words + 1, sizeof(char *));
-	while ((*lexer) != NULL && ++i < words && (*lexer)->token != PIPE)
-	{
-		if ((*lexer)->not_space == TRUE)
-			join_and_advance(lexer, &cmds->cmd[++j], minishell);
-		else if ((*lexer)->token == SQUOTE)
-			cmds->cmd[++j] = ft_strndup((*lexer)->start, (*lexer)->strlen);
-		else if (((*lexer)->token == WORD || (*lexer)->token == DQUOTE))
-			cmds->cmd[++j] = expander((*lexer)->start, (*lexer)->strlen, minishell);
-		else if (is_redirect(*lexer))
-			handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
-		move_and_free(lexer);
-	}
-	if ((*lexer) != NULL && (*lexer)->token == PIPE)
-		move_and_free(lexer);
+	if ((*lexer)->not_space == TRUE)
+		join_and_advance(lexer, &cmds->cmd[++(*j)], minishell);
+	else if ((*lexer)->token == SQUOTE)
+		cmds->cmd[++(*j)] = ft_strndup((*lexer)->start, (*lexer)->strlen);
+	else if (((*lexer)->token == WORD || (*lexer)->token == DQUOTE))
+		cmds->cmd[++(*j)] = expander((*lexer)->start,
+				(*lexer)->strlen, minishell);
+	else if (is_redirect(*lexer))
+		handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
+	if (cmds->cmd[(*j)] == NULL)
+		error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 }

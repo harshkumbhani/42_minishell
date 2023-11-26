@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/26 11:31:40 by hkumbhan          #+#    #+#             */
+/*   Updated: 2023/11/26 12:23:10 by hkumbhan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -29,7 +40,7 @@ int	count_words(t_lexer **lexer)
 	while (lex != NULL && lex->token != PIPE)
 	{
 		if (lex->token == WORD || lex->token == SQUOTE
-				|| lex->token == DQUOTE)
+			|| lex->token == DQUOTE)
 			i++;
 		lex = lex->next;
 	}

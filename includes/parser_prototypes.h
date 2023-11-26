@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 15:50:13 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 12:50:11 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ int		token_word(t_lexer **head, char *str);
 /* --------------------------------- Parser --------------------------------- */
 
 int		parser(t_lexer **lexer, t_minishell *minishell);
-void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell);
+//void	put_args(t_cmd **cmd_table, t_lexer **lexer, t_minishell *minishell);
+void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j);
 int		count_pipes(t_lexer **lexer);
 int		t_check(t_token token_type);
 void	init_t_cmd(t_cmd **cmd);
 void	free_cmd_table(t_cmd **cmd_table);
 int		is_redirect(t_lexer *lexer);
 int		count_words(t_lexer **lexer);
-char	*expander(char *str, int strlen,t_minishell *minishell);
+char	*expander(char *str, int strlen, t_minishell *minishell);
 void	print_cmd_table(t_cmd **cmd_table);
 int		syntax_checker(t_lexer **lexer);
 void	redir_add_back(t_redir	**head, t_redir *new_node);
@@ -43,8 +44,8 @@ int		is_redirect(t_lexer *lexer);
 
 /* EXPANDER */
 
-int	check_var(char c);
-int	special_var(char **ret, t_minishell *minishell);
-int	special_char(char **ret, char *str);
+int		check_var(char c);
+int		special_var(char **ret, t_minishell *minishell);
+int		special_char(char **ret, char *str);
 
 #endif

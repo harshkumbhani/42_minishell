@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_prototypes.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:38:45 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 12:38:47 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/26 13:17:54 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "structs.h"
 
 void	executor(t_minishell *minishell);
-void	execute_cmd(t_cmd *cmds, t_env *head_env);
+void	execute_cmd(t_cmd *cmds, t_env *head_env, t_minishell *minishell);
 void	execute_cmd_with_pipe(t_minishell *minishell, int index);
 void	execute_final_cmd(t_minishell *minishell, int index);
 void	get_exit_status(int pid);

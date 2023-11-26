@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 11:57:05 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/26 13:18:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*resolve_cmd_path(t_cmd *cmd, t_env *head_env);
 static char	*find_command_in_path(char *cmd, char **envp);
-static void	handle_command_execution_error(t_cmd *cmds, char *path);
+static void	handle_command_execution_error(t_cmd *cmds, char *path, t_minishell *minishell);
 static char	*check_for_file_command(t_cmd *cmd);
 
 /// @brief Executes a command in `execve`. This function gets the filesystem
@@ -26,7 +26,7 @@ static char	*check_for_file_command(t_cmd *cmd);
 /// @param head_env A pointer to the linked list which stores all env
 /// variables.
 /// @note See `src/executor/command.c` for more details.
-void	execute_cmd(t_cmd *cmds, t_env *head_env)
+void	execute_cmd(t_cmd *cmds, t_env *head_env, t_minishell *minishell)
 {
 	char	*path;
 	char	**env;
@@ -36,7 +36,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env)
 	if (execve(path, cmds->cmd, env) == -1)
 	{
 		free_env_array(env);
-		handle_command_execution_error(cmds, path);
+		handle_command_execution_error(cmds, path, minishell);
 	}
 }
 
@@ -117,7 +117,7 @@ static char	*find_command_in_path(char *cmd, char **envp)
 /// @param cmds The command structure containing the command
 /// @param path The filesystem path to the command to be executed. if 'NULL`
 /// the command is treated as not found or a directory error.
-static void	handle_command_execution_error(t_cmd *cmds, char *path)
+static void	handle_command_execution_error(t_cmd *cmds, char *path, t_minishell *minishell)
 {
 	int			exit_code;
 
@@ -132,5 +132,6 @@ static void	handle_command_execution_error(t_cmd *cmds, char *path)
 	else
 		exit_code = handle_file_execution_errors(path);
 	free(path);
+	free_cmd_table(minishell->cmd_table);
 	exit(exit_code);
 }

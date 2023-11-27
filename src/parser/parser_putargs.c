@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 16:06:23 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/27 10:34:24 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 		else if ((*lexer)->token == DQUOTE)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell,
 					DQUOTE);
-		if (tmp == NULL)
+		if (tmp == NULL && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		(*cmd) = ft_strjoin_gnl((*cmd), tmp);
 		free(tmp);
-		if ((*cmd) == NULL)
+		if ((*cmd) == NULL && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		if ((*lexer)->not_space != TRUE)
 			break ;

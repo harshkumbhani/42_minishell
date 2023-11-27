@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 10:39:38 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/27 10:44:16 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,4 @@ void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 				(*lexer)->strlen, minishell, DQUOTE);
 	else if (is_redirect(*lexer))
 		handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
-	if (cmds->cmd[(*j)] == NULL && (*lexer)->strlen > 0)
-		error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 }

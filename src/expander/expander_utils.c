@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:08:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 17:43:06 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:13:37 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	special_var(char **ret, t_minishell *minishell)
 	char	*tmp;
 
 	tmp = ft_itoa(*minishell->exit_code);
-	*ret = ft_strjoin(*ret, tmp);
+	*ret = ft_strjoin_gnl(*ret, tmp);
 	free(tmp);
 	return (2);
 }

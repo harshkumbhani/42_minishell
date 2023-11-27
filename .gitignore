@@ -9,3 +9,12 @@ input.txt
 test/
 output.txt
 .vscode
+
+out|cd
+out0|
+tmp_err_bash
+tmp_err_minishell
+tmp_out_bash
+tmp_out_minishell
+tmp_redir_out_file1
+Info.plist

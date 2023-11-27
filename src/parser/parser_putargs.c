@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 12:35:33 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:09:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 	while (1)
 	{
 		tmp = NULL;
-		if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
+		if ((*lexer)->token == SQUOTE)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if ((*lexer)->token == WORD)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell, WORD);

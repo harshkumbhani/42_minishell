@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:46 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 11:36:05 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:04:42 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	print_cmd_table(t_cmd **cmd_table)
 	tmp = (*cmd_table);
 	redir = tmp->files;
 	hd = tmp->heredoc;
-	printf("\nCommand table: \n");
+	printf("\nCommand table: %s\n", tmp->cmd[0]);
 	if (tmp != NULL)
 	{
 		while (tmp->cmd[++k] != NULL)

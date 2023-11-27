@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 10:44:16 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/27 12:35:33 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 {
 	char	*tmp;
 
-	tmp = NULL;
 	while (1)
 	{
+		tmp = NULL;
 		if ((*lexer)->token == SQUOTE && (*lexer)->strlen > 0)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if ((*lexer)->token == WORD)
@@ -30,7 +30,8 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 		if (tmp == NULL && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		(*cmd) = ft_strjoin_gnl((*cmd), tmp);
-		free(tmp);
+		if (tmp != NULL)
+			free(tmp);
 		if ((*cmd) == NULL && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 		if ((*lexer)->not_space != TRUE)
@@ -60,7 +61,6 @@ static void	ft_heredoc_lst(t_lexer **lexer, t_minishell *mini, t_heredoc **head)
 	t_heredoc	*new;
 	char		*tmp;
 
-	tmp = NULL;
 	move_and_free(lexer);
 	new = ft_calloc(1, sizeof(t_heredoc));
 	if (new == NULL)
@@ -68,13 +68,15 @@ static void	ft_heredoc_lst(t_lexer **lexer, t_minishell *mini, t_heredoc **head)
 	new->expand = TRUE;
 	while (1)
 	{
+		tmp = NULL;
 		tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		new->str = ft_strjoin_gnl(new->str, tmp);
-		free(tmp);
 		if ((tmp == NULL || new->str == NULL) && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
 		if ((*lexer)->token == SQUOTE || (*lexer)->token == DQUOTE)
 			new->expand = FALSE;
+		if (tmp != NULL)
+			free(tmp);
 		if ((*lexer)->not_space == FALSE)
 			break ;
 		move_and_free(lexer);

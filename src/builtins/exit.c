@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:39:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 15:06:34 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/27 13:55:46 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	builtin_exit(t_minishell *minishell, int index)
 		{
 			error_msg("exit", minishell->cmd_table[index]->cmd[1],
 				"numeric argument required");
-			free_minishell_and_exit(minishell, 1);
+			free_minishell_and_exit(minishell, 255);
 		}
 		exit_code = ft_atoi(minishell->cmd_table[index]->cmd[1]);
 	}

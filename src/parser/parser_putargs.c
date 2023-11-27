@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 13:09:46 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/27 14:25:39 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 		tmp = NULL;
 		if ((*lexer)->token == SQUOTE)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
-		else if ((*lexer)->token == WORD)
+		else if ((*lexer)->token == WORD || (*lexer)->token == BACKSLASH)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell, WORD);
 		else if ((*lexer)->token == DQUOTE)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell,
@@ -106,7 +106,7 @@ void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 		join_and_advance(lexer, &cmds->cmd[++(*j)], minishell);
 	else if ((*lexer)->token == SQUOTE)
 		cmds->cmd[++(*j)] = ft_strndup((*lexer)->start, (*lexer)->strlen);
-	else if ((*lexer)->token == WORD)
+	else if ((*lexer)->token == WORD || (*lexer)->token == BACKSLASH)
 		cmds->cmd[++(*j)] = expander((*lexer)->start,
 				(*lexer)->strlen, minishell, WORD);
 	else if ((*lexer)->token == DQUOTE)

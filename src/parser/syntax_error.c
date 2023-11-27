@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:54 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 11:31:55 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:00:50 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_error(t_token token)
 
 	ft_putstr_fd(SYNTAX, STDERR_FILENO);
 	ft_putendl_fd(token_str[token], STDERR_FILENO);
-	set_exit_code(3);
+	// set_exit_code(2);
 	return (FAIL);
 }
 

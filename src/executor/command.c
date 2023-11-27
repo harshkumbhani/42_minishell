@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 15:28:23 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/27 15:09:24 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ static char	*check_for_file_command(t_cmd *cmd)
 {
 	char	*path;
 
+	if (cmd->cmd[0][0] == '.')
+	{
+		path = strjoin_pipex(cmd->cmd[0], "");
+		return (path);
+	}
 	path = strjoin_pipex(cmd->cmd[0], "");
 	if (access(path, F_OK) == 0)
 		return (path);
@@ -123,7 +128,12 @@ static void	handle_command_execution_error(t_cmd *cmds, char *path,
 {
 	int			exit_code;
 
-	if (!path)
+	if (ft_strchr(cmds->cmd[0], '/') && access(path, F_OK) != 0)
+	{
+		exit_code = 127;
+		error_msg(cmds->cmd[0], NULL, NO_DIR);
+	}
+	else if (!path)
 	{
 		if (ft_strchr(cmds->cmd[0], '/'))
 			error_msg(cmds->cmd[0], NULL, NO_DIR);

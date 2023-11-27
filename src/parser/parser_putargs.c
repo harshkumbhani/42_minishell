@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 10:34:24 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/27 10:39:38 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	ft_heredoc_lst(t_lexer **lexer, t_minishell *mini, t_heredoc **head)
 		tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		new->str = ft_strjoin_gnl(new->str, tmp);
 		free(tmp);
-		if (tmp == NULL || new->str == NULL)
+		if ((tmp == NULL || new->str == NULL) && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, mini, lexer);
 		if ((*lexer)->token == SQUOTE || (*lexer)->token == DQUOTE)
 			new->expand = FALSE;
@@ -112,4 +112,6 @@ void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 				(*lexer)->strlen, minishell, DQUOTE);
 	else if (is_redirect(*lexer))
 		handle_redirection(lexer, minishell, &cmds->files, &cmds->heredoc);
+	if (cmds->cmd[(*j)] == NULL && (*lexer)->strlen > 0)
+		error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
 }

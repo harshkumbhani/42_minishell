@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:35:11 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/28 10:27:37 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:23:39 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	parse_and_execute(t_lexer **lexer, t_minishell *minishell)
 	}
 	else
 	{
-		set_exit_code(3);
+		set_exit_code(2);
 		free_lexer(lexer);
 	}
 }

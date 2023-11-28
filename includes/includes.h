@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:38:38 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/28 11:02:48 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:25:29 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define FAIL	1
 
 /* Error macro's */
-# define SYNTAX "minishell: syntax error near unexpected token"
-# define QUOTES "minishell: unclosed quotes"
+# define SYNTAX "minishell: syntax error near unexpected token "
+# define QUOTES "minishell: unclosed quotes "
 # define MINISHELL "minishell"
 # define IDENTIFIER "is not a valid identifier"
 # define NOT_FOUND "command not found"

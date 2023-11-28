@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/27 15:09:24 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 08:08:22 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env, t_minishell *minishell)
 	char	*path;
 	char	**env;
 
+	if(cmds->cmd[0] == NULL)
+		return ;
+	ft_fprintf(STDERR_FILENO, "CMDS->CMD: %s\n", cmds->cmd[0]);
 	path = resolve_cmd_path(cmds, head_env);
 	env = copy_env(head_env);
 	if (execve(path, cmds->cmd, env) == -1)
@@ -73,7 +76,7 @@ static char	*check_for_file_command(t_cmd *cmd)
 {
 	char	*path;
 
-	if (cmd->cmd[0][0] == '.')
+	if (cmd->cmd && cmd->cmd[0] && cmd->cmd[0][0] == '.')
 	{
 		path = strjoin_pipex(cmd->cmd[0], "");
 		return (path);

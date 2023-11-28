@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:26:47 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/26 11:33:47 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:51:13 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ t_lexer	*tokenise(char *input)
 			i += token_quote(&head, &input[i], DQUOTE, '\"');
 		else if (input[i] == '|')
 			i += token_schar(&head, &input[i], PIPE);
-		else if (input[i] == '\\')
-			i += token_schar(&head, &input[i], BACKSLASH);
 		else if (input[i] == '>' || input[i] == '<')
 			i += token_redirect(&head, &input[i]);
 		else if (ft_isspace(input[i]) == FALSE)

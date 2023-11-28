@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 14:47:43 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 16:11:28 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:11:53 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_cmd_table(t_cmd **cmd_table);
 int		is_redirect(t_lexer *lexer);
 int		count_words(t_lexer **lexer);
 char	*expander(char *str, int strlen, t_minishell *minishell, t_token tok);
-void	print_cmd_table(t_cmd **cmd_table);
+void	print_cmd_table(t_cmd *cmd_table);
 int		syntax_checker(t_lexer **lexer);
 void	redir_add_back(t_redir	**head, t_redir *new_node);
 void	hd_add_back(t_heredoc **head, t_heredoc *new);

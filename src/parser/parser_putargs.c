@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/28 00:30:16 by harsh            ###   ########.fr       */
+/*   Updated: 2023/11/28 10:51:39 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 	while (1)
 	{
 		tmp = NULL;
-		if ((*lexer)->token == BACKSLASH)
-		{
-			move_and_free(lexer);
-			// continue;
-		}
 		if ((*lexer)->token == SQUOTE)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
 		else if ((*lexer)->token == WORD)
@@ -39,7 +34,7 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 			free(tmp);
 		if ((*cmd) == NULL && (*lexer)->strlen > 0)
 			error_handler(strerror(errno), T_LEX | T_MINI, minishell, lexer);
-		if ((*lexer)->not_space != TRUE)
+		if ((*lexer)->not_space != TRUE && (*lexer)->token != PIPE)
 			break ;
 		move_and_free(lexer);
 	}
@@ -107,8 +102,6 @@ static void	handle_redirection(t_lexer **lexer, t_minishell *minishell,
 
 void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 {
-	while ((*lexer)->token == BACKSLASH)
-		move_and_free(lexer);
 	if ((*lexer)->not_space == TRUE)
 		join_and_advance(lexer, &cmds->cmd[++(*j)], minishell);
 	else if ((*lexer)->token == SQUOTE)

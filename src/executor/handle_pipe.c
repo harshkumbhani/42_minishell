@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:11 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 15:28:40 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/28 10:56:45 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static void	handle_cmd_execution(t_minishell *minishell, int index)
 	{
 		exec_builtins(minishell, index);
 		free_cmd_table(minishell->cmd_table);
+		free_env_linked_list(minishell->head_env);
 		exit(*minishell->exit_code);
 	}
 	else

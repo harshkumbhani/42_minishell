@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/28 08:08:22 by harsh            ###   ########.fr       */
+/*   Updated: 2023/11/28 10:58:05 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env, t_minishell *minishell)
 	char	**env;
 
 	if(cmds->cmd[0] == NULL)
-		return ;
-	ft_fprintf(STDERR_FILENO, "CMDS->CMD: %s\n", cmds->cmd[0]);
+	{
+		free_cmd_table(minishell->cmd_table);
+		free_env_linked_list(minishell->head_env);
+		exit(EXIT_SUCCESS);
+	}
 	path = resolve_cmd_path(cmds, head_env);
 	env = copy_env(head_env);
 	if (execve(path, cmds->cmd, env) == -1)
@@ -148,5 +151,6 @@ static void	handle_command_execution_error(t_cmd *cmds, char *path,
 		exit_code = handle_file_execution_errors(path);
 	free(path);
 	free_cmd_table(minishell->cmd_table);
+	free_env_linked_list(minishell->head_env);
 	exit(exit_code);
 }

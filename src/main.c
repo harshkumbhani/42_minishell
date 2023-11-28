@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:35:11 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 12:32:33 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:27:37 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	run_minishell(t_minishell *minishell)
 		if (input && input[0] != '\0' && input[0] != '\n')
 			add_history(input);
 		lexer = tokenise(input);
+		print_list(&lexer);
 		parse_and_execute(&lexer, minishell);
 		free(input);
 		reset_fds(minishell);

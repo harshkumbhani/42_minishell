@@ -6,7 +6,7 @@
 /*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:02 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/26 16:07:11 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:00:21 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,15 @@ static void	execute_heredoc(t_minishell *minishell, int index)
 				break ;
 			if (!execute_individual_heredoc(minishell, str, temp))
 				break ;
+			free(str);
 			if (str)
 				str = NULL;
 		}
 		temp = temp->next;
 	}
 	close(minishell->fd[1]);
+	free_env_linked_list(minishell->head_env);
+	free_cmd_table(minishell->cmd_table);
 	exit(0);
 }
 

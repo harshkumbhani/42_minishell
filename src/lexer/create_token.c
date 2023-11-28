@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:32:11 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/28 00:49:16 by harsh            ###   ########.fr       */
+/*   Updated: 2023/11/28 10:51:21 by hkumbhan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	token_schar(t_lexer **head, char *str, t_token token)
 	new->start = str;
 	new->token = token;
 	new->strlen = 1;
-	if (token == BACKSLASH && ft_isspace(str[1]) == FALSE)
-		new->not_space = TRUE;
 	lst_add_back(head, new);
 	return (1);
 }

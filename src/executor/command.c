@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkumbhan <hkumbhan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:13 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/28 10:58:05 by hkumbhan         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:11:20 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute_cmd(t_cmd *cmds, t_env *head_env, t_minishell *minishell)
 	char	*path;
 	char	**env;
 
-	if(cmds->cmd[0] == NULL)
+	if (cmds->cmd[0] == NULL)
 	{
 		free_cmd_table(minishell->cmd_table);
 		free_env_linked_list(minishell->head_env);

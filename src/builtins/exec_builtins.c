@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/28 00:56:13 by harsh            ###   ########.fr       */
+/*   Updated: 2023/11/28 11:11:12 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	exec_builtins(t_minishell *minishell, int i)
 /// @return TRUE if its a builtin, otherwise FALSE.
 bool	is_cmd_builtin(t_minishell *minishell, int i)
 {
-	if(minishell->cmd_table == NULL)
-		return(false);
+	if (minishell->cmd_table == NULL)
+		return (false);
 	if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "cd") == 0)
 		return (true);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "pwd") == 0)

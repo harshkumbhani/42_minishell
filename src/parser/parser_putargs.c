@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_putargs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:31:24 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 14:25:39 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/28 00:30:16 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ static void	join_and_advance(t_lexer **lexer, char **cmd,
 	while (1)
 	{
 		tmp = NULL;
+		if ((*lexer)->token == BACKSLASH)
+		{
+			move_and_free(lexer);
+			// continue;
+		}
 		if ((*lexer)->token == SQUOTE)
 			tmp = ft_strndup((*lexer)->start, (*lexer)->strlen);
-		else if ((*lexer)->token == WORD || (*lexer)->token == BACKSLASH)
+		else if ((*lexer)->token == WORD)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell, WORD);
 		else if ((*lexer)->token == DQUOTE)
 			tmp = expander((*lexer)->start, (*lexer)->strlen, minishell,
@@ -102,11 +107,13 @@ static void	handle_redirection(t_lexer **lexer, t_minishell *minishell,
 
 void	add_arg(t_cmd *cmds, t_lexer **lexer, t_minishell *minishell, int *j)
 {
+	while ((*lexer)->token == BACKSLASH)
+		move_and_free(lexer);
 	if ((*lexer)->not_space == TRUE)
 		join_and_advance(lexer, &cmds->cmd[++(*j)], minishell);
 	else if ((*lexer)->token == SQUOTE)
 		cmds->cmd[++(*j)] = ft_strndup((*lexer)->start, (*lexer)->strlen);
-	else if ((*lexer)->token == WORD || (*lexer)->token == BACKSLASH)
+	else if ((*lexer)->token == WORD)
 		cmds->cmd[++(*j)] = expander((*lexer)->start,
 				(*lexer)->strlen, minishell, WORD);
 	else if ((*lexer)->token == DQUOTE)

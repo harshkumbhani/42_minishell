@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:32:11 by hkumbhan          #+#    #+#             */
-/*   Updated: 2023/11/27 14:28:28 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/28 00:49:16 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	token_word(t_lexer **head, char *str)
 	new->token = WORD;
 	while (str[i] != '\0' && ft_isspace(str[i]) == FALSE)
 	{
-		if (str[i] == '>' || str[i] == '<')
+		if (str[i] == '>' || str[i] == '<' || str[i] == '|')
 			break ;
 		else if (str[i] == '\'' || str[i] == '\"')
 		{

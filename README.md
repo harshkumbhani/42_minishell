@@ -58,8 +58,8 @@ make
 4. Happy shell scripting :)
 
 ## Contributors
-[RealConrad](https://github.com/RealConrad)
-[harshkumbhani](https://github.com/harshkumbhani)
+- [RealConrad](https://github.com/RealConrad) \
+- [harshkumbhani](https://github.com/harshkumbhani)
 
 ## Liencse
 [MIT](https://choosealicense.com/licenses/mit/)

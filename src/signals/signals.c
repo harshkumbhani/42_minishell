@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 16:05:19 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 18:02:45 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 static void	handle_parent_signal(int signo);
 static void	setup_termios_config(void);
 
-/**
- * @brief  Sets up signal handling for SIGINT (Ctrl-C) and SIGQUIT (Ctrl-\\).
- * 
- *  This function initializes the given signals with the respective signal.
- *  It also sets up the termios settings (terminal config) and how it should
- * 	behave.
- */
+/// @brief  Sets up signal handling for SIGINT (Ctrl-C) and SIGQUIT (Ctrl-\\).
+///
+/// This function initializes the given signals with the respective signal.
+/// It also sets up the termios settings (terminal config) and how it should
+/// behave.
 void	setup_signals(void)
 {
 	struct sigaction	sa_int;

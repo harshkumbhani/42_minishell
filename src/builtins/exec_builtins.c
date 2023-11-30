@@ -6,11 +6,13 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/28 11:11:12 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:54:15 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	convert_cmd_to_lower(char *cmd);
 
 /// @brief Executes the current builtin.
 /// @param minishell The struct holding all shell data
@@ -48,6 +50,7 @@ bool	is_cmd_builtin(t_minishell *minishell, int i)
 {
 	if (minishell->cmd_table == NULL)
 		return (false);
+	convert_cmd_to_lower(minishell->cmd_table[i]->cmd[0]);
 	if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "cd") == 0)
 		return (true);
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "pwd") == 0)
@@ -63,4 +66,18 @@ bool	is_cmd_builtin(t_minishell *minishell, int i)
 	else if (ft_strcmp(minishell->cmd_table[i]->cmd[0], "export") == 0)
 		return (true);
 	return (false);
+}
+
+static void	convert_cmd_to_lower(char *cmd)
+{
+	int		i;
+	
+	i = 0;
+	if (!cmd)
+		return ;
+	while (cmd[i])
+	{
+		cmd[i] = ft_tolower(cmd[i]);
+		i++;
+	}
 }

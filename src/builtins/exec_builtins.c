@@ -6,7 +6,7 @@
 /*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/30 17:54:15 by cwenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 18:00:51 by cwenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ bool	is_cmd_builtin(t_minishell *minishell, int i)
 	return (false);
 }
 
+/// @brief Converts the given command to lower case
+/// @param cmd The command to convert
 static void	convert_cmd_to_lower(char *cmd)
 {
 	int		i;

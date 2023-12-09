@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (argc != 1)
 	{
-		ft_putstr_fd("Run as ./minihsell with no args\n", 2);
+		ft_putstr_fd("Run as ./minishell with no args\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	minishell = (t_minishell){};

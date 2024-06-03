@@ -17,4 +17,13 @@ jobs:
       run: make
 
     - name: Run executable
-      run: ./minishell
+      run: |
+        echo '
+        spawn ./minishell
+        expect "minishell>"
+        send "echo Hello, world!\r"
+        expect "minishell>"
+        send "exit\r"
+        expect eof
+        ' > test_minishell.exp
+        expect -f test_minishell.exp

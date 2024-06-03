@@ -17,4 +17,4 @@ jobs:
       run: make
 
     - name: Run executable
-      run: ./minishell & sleep 1000
+      run: ./minishell

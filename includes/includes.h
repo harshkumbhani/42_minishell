@@ -25,7 +25,7 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-//# include <wait.h>
+# include <wait.h>
 
 /* FILE TYPE macro's*/
 # define OPEN 0

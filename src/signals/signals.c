@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 12:32:52 by cwenz             #+#    #+#             */
-/*   Updated: 2024/07/04 20:14:12 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/04 20:18:42 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	handle_parent_signal(int signo)
 	if (signo == SIGINT)
 	{
 		ft_fprintf(STDOUT_FILENO, "\n");
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 		set_exit_code(1);

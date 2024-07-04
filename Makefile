@@ -2,9 +2,16 @@
 # ---------------------------------- Config ---------------------------------- #
 NAME				:= minishell
 CC					:= cc
-CFLAGS				:=  -I./includes -g -Wall -Wextra -Werror
+CFLAGS				:= -g -Wall -Wextra -Werror
+INCLUDES			:= -I./includes -I/usr/local/Cellar/readline/8.2.10/include
 LIBFT_DIR			:= libraries/myLib
 LIBFT_LIB			:= $(LIBFT_DIR)/libft.a
+
+ifeq ($(shell uname), Darwin)
+	LD_LIB = -L /usr/local/Cellar/readline/8.2.10/lib -lreadline
+else ifeq ($(shell uname), Linux)
+	LD_LIB = -L/usr/include -lreadline
+endif
 
 # --------------------------- Program Source files --------------------------- #
 OBJDIR				:= ./objs
@@ -35,11 +42,11 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -L/usr/include -lreadline -o $@
+	$(CC) $(INCLUDES) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(LD_LIB) -o $@
 
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@ 
 
 clean:
 	@rm -rf objs

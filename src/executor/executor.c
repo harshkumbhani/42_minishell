@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:30:07 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/25 17:30:42 by cwenz            ###   ########.fr       */
+/*   Updated: 2024/07/04 20:13:15 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,10 @@ static bool	is_simple_builtin(t_minishell *minishell)
 static void	wait_for_child_processes(t_minishell *minishell)
 {
 	t_pids	*temp;
-	int		i;
 
 	temp = minishell->pids;
 	if (!temp)
 		return ;
-	i = 0;
 	while (true)
 	{
 		if (temp && !temp->next)
@@ -99,7 +97,6 @@ static void	wait_for_child_processes(t_minishell *minishell)
 		if (!temp->has_checked)
 		{
 			waitpid(temp->pid, NULL, 0);
-			i++;
 			temp->has_checked = true;
 		}
 		temp = temp->next;

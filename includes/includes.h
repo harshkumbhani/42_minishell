@@ -6,7 +6,7 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:38:38 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/04 20:11:40 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/04 20:16:20 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libraries/myLib/header/library.h"
 # include <signal.h>
 # include <stdio.h>
+# include <string.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <limits.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwenz <cwenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:38:01 by cwenz             #+#    #+#             */
-/*   Updated: 2023/11/30 18:00:51 by cwenz            ###   ########.fr       */
+/*   Updated: 2024/07/04 21:03:51 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ bool	is_cmd_builtin(t_minishell *minishell, int i)
 /// @param cmd The command to convert
 static void	convert_cmd_to_lower(char *cmd)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
 	if (!cmd)
 		return ;

@@ -17,4 +17,7 @@ jobs:
       run: make
 
     - name: Run executable
-      run: exec ./minishell
+      run: ./minishell
+
+    - name: test
+      run: ls -al | wc -l

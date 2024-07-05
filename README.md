@@ -43,7 +43,7 @@
 ## Installation
 1. Clone the repository
 ```bash
-git clone https://github.com/RealConrad/42minishell.git
+git clone https://github.com/harshkumbhani/42minishell.git
 ```
 2. Enter the directory and run make
 ```bash

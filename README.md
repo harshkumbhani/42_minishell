@@ -16,10 +16,10 @@
 <br />
 
 ## Table Of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Contributors](#contributors)
-- [License](#license)
+- [Features](#Features)
+- [Installation](#Installation)
+- [Contributors](#Contributors)
+- [License](#License)
 
 ## Features
 - **Command Execution:** Ability to execute standard Unix/Bash commands.

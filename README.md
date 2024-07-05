@@ -51,7 +51,6 @@ cd 42minishell
 make
 ```
 3. Run the program
-> NOTE: If you are on Linux you must un-comment the `#include <wait.h>` library located: `./includes/includes.h`
 ```
 ./minishell
 ```

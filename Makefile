@@ -68,7 +68,7 @@ all: submodule ft_lib $(NAME)
 
 $(NAME): $(OBJS)
 	@$(LOG) "Linking object files to $@"
-	@$(CC) $(CFLAGS) $^ $(LIBFT_LIB) $(LD_LIB) -o $@
+	@$(CC) $(CFLAGS) $(LIBFT_LIB) $(LD_LIB) $^ -o $@
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@$(LOG) "Compiling $(notdir $@)"
@@ -84,7 +84,7 @@ submodule:
 ft_lib:
 	@if [ ! -f $(LIBFT_LIB) ]; then \
 		$(LOG) "Creating ft_lib"; \
-		make re -C $(LIBFT_DIR); \
+		make -C $(LIBFT_DIR); \
 	else \
 		$(LOG) "ft_lib already created"; \
 	fi

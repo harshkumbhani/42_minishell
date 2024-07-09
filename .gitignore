@@ -1,6 +1,6 @@
 *.o
 minishell
-objs/
+_obj/
 a.out
 libft.a
 outfile.txt

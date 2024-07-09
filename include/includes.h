@@ -6,14 +6,14 @@
 /*   By: harsh <harsh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 12:38:38 by hkumbhan          #+#    #+#             */
-/*   Updated: 2024/07/04 20:16:20 by harsh            ###   ########.fr       */
+/*   Updated: 2024/07/09 15:53:24 by harsh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INCLUDES_H
 # define INCLUDES_H
 
-# include "../libraries/myLib/header/library.h"
+# include "ft_lib.h"
 # include <signal.h>
 # include <stdio.h>
 # include <string.h>
